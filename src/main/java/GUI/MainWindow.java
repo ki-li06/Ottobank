@@ -13,7 +13,14 @@ public class MainWindow {
         f.setSize(500, 500);
         JLayeredPane pages = new JLayeredPane();
         pages.setPreferredSize(new Dimension(400, 400));
-
+        BetterTextField a = new BetterTextField(new UITextFieldMethod() {
+            @Override
+            public void performMethod(String data) {
+                System.out.println(data);
+            }
+        });
+        pages.add(a, 2);
+        a.setBounds(0,0,200,20);
         JPanel backgroundPanel = new JPanel();
         backgroundPanel.setBackground(Color.RED);
         backgroundPanel.setBounds(0, 0, 400, 400);

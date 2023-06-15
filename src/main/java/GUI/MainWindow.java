@@ -2,6 +2,7 @@ package GUI;
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class MainWindow {
@@ -9,15 +10,29 @@ public class MainWindow {
     MainWindow(){
         FlatDarkLaf.setup();
         f=new JFrame();//creating instance of JFrame
+        f.setSize(500, 500);
+        JLayeredPane pages = new JLayeredPane();
+        pages.setPreferredSize(new Dimension(400, 400));
 
-        JButton b=new JButton("click");//creating instance of JButton
-        b.setBounds(130,100,100, 40);
+        JPanel backgroundPanel = new JPanel();
+        backgroundPanel.setBackground(Color.RED);
+        backgroundPanel.setBounds(0, 0, 400, 400);
+        pages.add(backgroundPanel, Integer.valueOf(0)); // Add to layer 0
 
-        f.add(b);//adding button in JFrame
+        // Create the foreground panel
+        JPanel foregroundPanel = new JPanel();
+        foregroundPanel.setBackground(Color.BLUE);
+        foregroundPanel.setBounds(100, 100, 200, 200);
+        pages.add(foregroundPanel, Integer.valueOf(1)); // Add to layer 1
+        foregroundPanel.setVisible(false);
 
-        f.setSize(400,500);//400 width and 500 height
-        f.setLayout(null);//using no layout managers
-        f.setVisible(true);//making the frame visible
+
+        // Add the layered pane to the frame
+        f.add(pages);
+
+        // Display the frame
+        f.setVisible(true);
+
     }
 
     public static void main(String[] args) {

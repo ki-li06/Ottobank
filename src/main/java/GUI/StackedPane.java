@@ -7,6 +7,6 @@ import java.awt.event.ActionListener;
 public class StackedPane {
     public StackedPane(StackedWidget parent) {
     }
-    public static void addActionListener(JButton button, UIButtonListener b) {
+    public static void addActionListener(JButton button) {
     }
 }

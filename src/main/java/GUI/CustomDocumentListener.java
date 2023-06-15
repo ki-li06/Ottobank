@@ -5,7 +5,7 @@ import javax.swing.event.DocumentListener;
 
 class CustomDocumentListener implements DocumentListener {
     private BetterTextField t;
-    public CustomDocumentListener(BetterTextField parent) {
+    CustomDocumentListener(BetterTextField parent) {
         this.t = parent;
     }
     @Override

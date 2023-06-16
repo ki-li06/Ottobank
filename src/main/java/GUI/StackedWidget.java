@@ -2,22 +2,35 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Stack;
 import com.formdev.flatlaf.FlatDarkLaf;
-public class StackedWidget extends JComponent{
-    private JLayeredPane pane;
-    private  Dimension size;
-    public StackedWidget(int width, int height) {
+public class StackedWidget extends JLayeredPane{
+    private ArrayList<StackedPane> comps;
+    public StackedWidget() {
         super();
-        this.pane = new JLayeredPane();
-        this.size = new Dimension(width,height);
-        this.pane.setPreferredSize(this.size);
+        setLayout(null);
+        comps = new ArrayList<StackedPane>();
     }
-    public void addComponent(JComponent c) {
-        this.addComponent(c,0);
+    public void registerPane(StackedPane element) {
+        int z = comps.size();
+        comps.add(element);
+        add(element, z);
     }
-    public void addComponent(JComponent c, int zidx) {
-
+    public void showPlane(int index) {
+        if (index < 0 || index >= comps.size()) {
+            throw new ArrayIndexOutOfBoundsException("Plane does not exist");
+        }
+        if (comps.get(index).getShown() != false) {
+            return;
+        }
+        for (int i=0;i<comps.size(); i++) {
+            if (i != index) {
+                if (comps.get(i).getShown() == true) {
+                    comps.get(i).hide();
+                }
+            }
+        }
+        comps.get(index).show();
     }
-
 }

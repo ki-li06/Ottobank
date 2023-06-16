@@ -22,7 +22,8 @@ class CustomDocumentListener implements DocumentListener {
     public void changedUpdate(DocumentEvent e) {
         updateText();
     }
-    private void updateText() {
+    private void updateText()
+    {
         this.t.getMethod().performMethod(this.t.getText());
     }
 }

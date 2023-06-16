@@ -10,6 +10,7 @@ public class MainWindow {
     MainWindow(){
         FlatDarkLaf.setup();
         f=new JFrame();//creating instance of JFrame
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setSize(500, 500);
         JLayeredPane pages = new JLayeredPane();
         pages.setPreferredSize(new Dimension(400, 400));

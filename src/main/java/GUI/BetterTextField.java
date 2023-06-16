@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
-public class BetterTextField extends JTextField {
+public class BetterTextField extends JPasswordField {
     private UITextFieldMethod method;
     public BetterTextField() {
         super();
@@ -28,6 +28,7 @@ public class BetterTextField extends JTextField {
         afterConstruct();
     }
     private void afterConstruct() {
+
         this.getDocument().addDocumentListener(new CustomDocumentListener(this));
     }
     public void addMethod(UITextFieldMethod method) {

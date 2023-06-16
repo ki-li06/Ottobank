@@ -19,6 +19,7 @@ public class StackedPane extends JPanel{
         this.parent = parent;
         this.setBounds(new Rectangle(new Point(0,0), this.size));
         shown = false;
+        setLayout(null);
     }
     public StackedPane(StackedWidget parent, Dimension size) {
         super();
@@ -28,6 +29,7 @@ public class StackedPane extends JPanel{
         this.parent = parent;
         this.setBounds(new Rectangle(new Point(0,0), this.size));
         shown = false;
+        setLayout(null);
     }
     public void registerComponent(JComponent c) {
         registerComponent(c, "ANONYMOUS");

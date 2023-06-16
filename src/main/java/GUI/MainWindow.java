@@ -70,7 +70,8 @@ public class MainWindow {
                 System.out.println(pages.getSize());*/
             }
         });
-        BetterButton i = new BetterButton(new UIButtonMethod() {
+        BetterButton i = new BetterButton();
+        i.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 if (p.getEchoChar() == 0) {

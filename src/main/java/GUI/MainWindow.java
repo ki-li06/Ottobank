@@ -12,15 +12,17 @@ public class MainWindow {
         FlatDarkLaf.setup();
         f=new JFrame();//creating instance of JFrame
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setSize(700, 500);
+        f.setSize(500, 500);
         f.setResizable(false);
         f.setLayout(null);
 
 
         StackedWidget pages = new StackedWidget();
+        //pages.setSize(500, 500);
         pages.setBounds(f.getBounds());
         StackedPane a = new StackedPane(f);
-        //a.setBackground(new Color(255,0,0));
+        a.setSize(700, 500);
+        a.setBackground(new Color(255,0,0));
         StackedPane b = new StackedPane(f);
         StackedPane c = new StackedPane(f);
         pages.registerPane(a);
@@ -44,6 +46,16 @@ public class MainWindow {
             @Override
             public void performMethod() {
                 pages.showPlane(1);
+                f.setSize(500, 500);
+            }
+        });
+        BetterButton x = new BetterButton(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                pages.showPlane(0);
+                f.setSize(700, 500);
+                pages.setSize(700, 500);
+                System.out.println(pages.getSize());
             }
         });
 
@@ -72,12 +84,11 @@ public class MainWindow {
         i.setBounds(p.getX()+p.getWidth()+15, p.getY()+1, 28, 28);
         System.out.println(System.getProperty("user.dir"));
         i.setIcon(scaleIcon(new ImageIcon("src/main/java/GUI/icons/eye.png"), 30,30));
-        //i.setText("X");
         a.registerComponent(i);
-
+        e.setBounds(a.getWidth()/2-250/2-8, 220, 250, 30);
         a.registerComponent(e);
-        b.registerComponent(d);
-        pages.showPlane(0);
+        b.registerComponent(x);
+        pages.showPlane(1);
 
         f.add(pages);
         f.setVisible(true);

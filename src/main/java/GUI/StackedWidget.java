@@ -7,15 +7,31 @@ import java.util.Stack;
 import com.formdev.flatlaf.FlatDarkLaf;
 public class StackedWidget extends JLayeredPane{
     private ArrayList<StackedPane> comps;
-    public StackedWidget() {
+    private ArrayList<String> keys;
+    private JFrame parent;
+    public StackedWidget(JFrame parent) {
         super();
         setLayout(null);
         comps = new ArrayList<StackedPane>();
+        keys = new ArrayList<String>();
+        this.parent = parent;
     }
     public void registerPane(StackedPane element) {
+        registerPane(element, "ANONYMOUS");
+    }
+    public void registerPane(StackedPane element, String key) {
         int z = comps.size();
         comps.add(element);
+        keys.add(key);
         add(element, z);
+    }
+    public StackedPane getFrame(String key) {
+        for (int i=0;i<keys.size();i++) {
+            if (keys.get(i) == key) {
+                return comps.get(i);
+            }
+        }
+        return null;
     }
     public void showPlane(int index) {
         if (index < 0 || index >= comps.size()) {
@@ -31,6 +47,8 @@ public class StackedWidget extends JLayeredPane{
                 }
             }
         }
+        parent.setSize(comps.get(index).getSize());
+        setSize(comps.get(index).getSize());
         comps.get(index).show();
     }
 }

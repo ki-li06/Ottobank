@@ -56,7 +56,7 @@ public class MainWindow {
             @Override
             public void performMethod() {
                 if (p.getEchoChar() == 0) {
-                    p.setEchoChar('\u2022');
+                    p.setEchoChar('•');
                 }
                 else{
                     p.setEchoChar((char)0);

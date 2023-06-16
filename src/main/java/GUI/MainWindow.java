@@ -39,12 +39,7 @@ public class MainWindow {
                 System.out.println(data);
             }
         });
-        BetterTextField dx = new BetterTextField(new UITextFieldMethod() {
-            @Override
-            public void performMethod(String data) {
-                System.out.println(1);
-            }
-        });
+        BetterTextField dx = new BetterTextField();
         BetterButton e = new BetterButton(new UIButtonMethod() {
             @Override
             public void performMethod() {

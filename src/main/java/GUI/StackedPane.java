@@ -8,14 +8,25 @@ public class StackedPane extends JPanel{
     private ArrayList<String> keys;
     private int w;
     private int h;
+    private Dimension size;
+    private StackedWidget parent;
     private boolean shown;
-    public StackedPane(JFrame parent) {
+    public StackedPane(StackedWidget parent) {
         super();
-        int h = parent.getHeight();
-        int w = parent.getWidth();
         comps = new ArrayList<JComponent>();
         keys = new ArrayList<String>();
-        this.setBounds(0,0,w,h);
+        this.size = parent.getSize();
+        this.parent = parent;
+        this.setBounds(new Rectangle(new Point(0,0), this.size));
+        shown = false;
+    }
+    public StackedPane(StackedWidget parent, Dimension size) {
+        super();
+        comps = new ArrayList<JComponent>();
+        keys = new ArrayList<String>();
+        this.size = size;
+        this.parent = parent;
+        this.setBounds(new Rectangle(new Point(0,0), this.size));
         shown = false;
     }
     public void registerComponent(JComponent c) {

@@ -8,11 +8,13 @@ import com.formdev.flatlaf.FlatDarkLaf;
 public class StackedWidget extends JLayeredPane{
     private ArrayList<StackedPane> comps;
     private ArrayList<String> keys;
-    public StackedWidget() {
+    private JFrame parent;
+    public StackedWidget(JFrame parent) {
         super();
         setLayout(null);
         comps = new ArrayList<StackedPane>();
         keys = new ArrayList<String>();
+        this.parent = parent;
     }
     public void registerPane(StackedPane element) {
         registerPane(element, "ANONYMOUS");
@@ -45,6 +47,8 @@ public class StackedWidget extends JLayeredPane{
                 }
             }
         }
+        parent.setSize(comps.get(index).getSize());
+        setSize(comps.get(index).getSize());
         comps.get(index).show();
     }
 }

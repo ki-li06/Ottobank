@@ -17,14 +17,14 @@ public class MainWindow {
         f.setLayout(null);
 
 
-        StackedWidget pages = new StackedWidget();
+        StackedWidget pages = new StackedWidget(f);
         //pages.setSize(500, 500);
         pages.setBounds(f.getBounds());
-        StackedPane a = new StackedPane(f);
+        StackedPane a = new StackedPane(pages);
         a.setSize(700, 500);
         a.setBackground(new Color(255,0,0));
-        StackedPane b = new StackedPane(f);
-        StackedPane c = new StackedPane(f);
+        StackedPane b = new StackedPane(pages);
+        StackedPane c = new StackedPane(pages);
         pages.registerPane(a);
         pages.registerPane(b);
         pages.registerPane(c);

@@ -10,7 +10,7 @@ public class MainWindow{
     JFrame mainFrame;
     private StackedWidget layerManager;
     MainWindow() {
-        FlatDarkLaf.registerCustomDefaultsSource( "com.myapp.themes" );
+        FlatDarkLaf.registerCustomDefaultsSource("flatlaf_themes");
         FlatDarkLaf.setup();
 
         mainFrame = new JFrame();

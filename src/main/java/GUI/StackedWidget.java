@@ -26,6 +26,9 @@ public class StackedWidget extends JLayeredPane{
         add(element, z);
     }
     public StackedPane getFrame(String key) {
+        if (key == "PRIVATE") {
+            return null;
+        }
         for (int i=0;i<keys.size();i++) {
             if (keys.get(i) == key) {
                 return comps.get(i);

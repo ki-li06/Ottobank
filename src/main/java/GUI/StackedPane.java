@@ -35,6 +35,9 @@ public class StackedPane extends JPanel{
         registerComponent(c, "ANONYMOUS");
     }
     public JComponent getElement(String key) {
+        if (key == "PRIVATE") {
+            return null;
+        }
         for (int i=0;i<keys.size();i++) {
             if (keys.get(i) == key) {
                 return comps.get(i);

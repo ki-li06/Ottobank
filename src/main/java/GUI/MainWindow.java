@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class MainWindow{
     JFrame mainFrame;
-    public StackedWidget layerManager;
+    private StackedWidget layerManager;
     MainWindow() {
         FlatDarkLaf.registerCustomDefaultsSource( "com.myapp.themes" );
         FlatDarkLaf.setup();
@@ -28,7 +28,7 @@ public class MainWindow{
         int LabelWidth = infoLabel.getPreferredSize().width;
         int LabelHeight = infoLabel.getPreferredSize().height;
         infoLabel.setBounds((loginPage.getWidth()-LabelWidth)/2-8, 40, LabelWidth, LabelHeight);
-        loginPage.registerComponent(infoLabel, "WELCOME_LABEL");
+        loginPage.registerComponent(infoLabel, "PRIVATE");
 
         //Username Text Field
         BetterTextField usernameTextField = new BetterTextField();
@@ -50,11 +50,26 @@ public class MainWindow{
         loginButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 220, 250, 30);
         loginPage.registerComponent(loginButton, "LOGIN_BUTTON");
 
+        BetterButton registerButton = new BetterButton();
+        registerButton.setText("Register");
+        registerButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
+        registerButton.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                layerManager.showPlane(1);
+            }
+        });
+        loginPage.registerComponent(registerButton, "PRIVATE");
+        //register Page
+        StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
+        layerManager.registerPane(registerPage, "REGISTER_PAGE");
         layerManager.showPlane(0);
-
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
+    }
+    public StackedWidget getWindow() {
+        return layerManager;
     }
     public static void main(String[] args) {
         new MainWindow();

@@ -5,12 +5,14 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class MainWindow{
     JFrame mainFrame;
     public StackedWidget layerManager;
     MainWindow() {
-        UIManager.put("defaultFont", new Font("Dialog", Font.PLAIN, 20));
+        FlatDarkLaf.registerCustomDefaultsSource( "com.myapp.themes" );
         FlatDarkLaf.setup();
+
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);

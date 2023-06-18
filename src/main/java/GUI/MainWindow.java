@@ -63,6 +63,14 @@ public class MainWindow{
         //register Page
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
         layerManager.registerPane(registerPage, "REGISTER_PAGE");
+
+        JLabel registerInfoLabel = new JLabel("Register your account");
+        LabelWidth = registerInfoLabel.getPreferredSize().width;
+        LabelHeight = registerInfoLabel.getPreferredSize().height;
+        registerInfoLabel.setBounds((registerPage.getWidth()-LabelWidth)/2-8, 40, LabelWidth, LabelHeight);
+        registerPage.registerComponent(registerInfoLabel, "PRIVATE");
+
+
         layerManager.showPlane(0);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);

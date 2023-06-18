@@ -14,6 +14,7 @@ public class MainWindow{
         FlatDarkLaf.setup();
 
         mainFrame = new JFrame();
+        mainFrame.setTitle("GOBank");
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
         mainFrame.setLayout(null);
@@ -24,30 +25,29 @@ public class MainWindow{
         layerManager.registerPane(loginPage, "LOGIN_PAGE");
 
         //Info Label
-        JLabel infoLabel = new JLabel("Welcome to GOBank");
-        int LabelWidth = infoLabel.getPreferredSize().width;
+        JLabel infoLabel = new JLabel("<html><center>Welcome to<br>GOBank</center></html>", JLabel.CENTER);
         int LabelHeight = infoLabel.getPreferredSize().height;
-        infoLabel.setBounds((loginPage.getWidth()-LabelWidth)/2-8, 40, LabelWidth, LabelHeight);
+        infoLabel.setBounds(0, 40, 400, LabelHeight);
         loginPage.registerComponent(infoLabel, "PRIVATE");
 
         //Username Text Field
         BetterTextField usernameTextField = new BetterTextField();
         usernameTextField.setEchoChar((char) 0);
         usernameTextField.putClientProperty("JTextField.placeholderText", "Username");
-        usernameTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 80, 250, 30);
+        usernameTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
         loginPage.registerComponent(usernameTextField, "USERNAME_INPUT");
 
         //Password Text Field
         BetterTextField passwordTextField = new BetterTextField();
         passwordTextField.putClientProperty("JTextField.placeholderText", "Password");
         passwordTextField.putClientProperty(FlatClientProperties.STYLE, "showRevealButton:true");
-        passwordTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 150, 250, 30);
+        passwordTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
         loginPage.registerComponent(passwordTextField, "PASSWORD_INPUT");
 
         //Login Button
         BetterButton loginButton = new BetterButton();
         loginButton.setText("Log in");
-        loginButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 220, 250, 30);
+        loginButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
         loginPage.registerComponent(loginButton, "LOGIN_BUTTON");
 
         BetterButton registerButton = new BetterButton();

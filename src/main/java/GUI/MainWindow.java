@@ -20,7 +20,7 @@ public class MainWindow{
         mainFrame.setLayout(null);
 
         layerManager = new StackedWidget(mainFrame);
-        StackedPane loginPage = new StackedPane(layerManager, new Dimension(400, 500));
+        StackedPane loginPage = new StackedPane(layerManager, new Dimension(400, 375));
 
         layerManager.registerPane(loginPage, "LOGIN_PAGE");
 
@@ -52,7 +52,7 @@ public class MainWindow{
 
         BetterButton registerButton = new BetterButton();
         registerButton.setText("Register");
-        registerButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
+        registerButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 270, 250, 30);
         registerButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
@@ -60,14 +60,14 @@ public class MainWindow{
             }
         });
         loginPage.registerComponent(registerButton, "PRIVATE");
+
         //register Page
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
         layerManager.registerPane(registerPage, "REGISTER_PAGE");
 
-        JLabel registerInfoLabel = new JLabel("Register your account");
-        LabelWidth = registerInfoLabel.getPreferredSize().width;
+        JLabel registerInfoLabel = new JLabel("Register your account", JLabel.CENTER);
         LabelHeight = registerInfoLabel.getPreferredSize().height;
-        registerInfoLabel.setBounds((registerPage.getWidth()-LabelWidth)/2-8, 40, LabelWidth, LabelHeight);
+        registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
         registerPage.registerComponent(registerInfoLabel, "PRIVATE");
 
 

@@ -135,7 +135,7 @@ public class MainWindow{
         BetterButton registerButton = new BetterButton();
         registerButton.setText("Register");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
-        registerPage.registerComponent(registerButton, "PRIVATE");
+        registerPage.registerComponent(registerButton, "REGISTER_BUTTON");
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();

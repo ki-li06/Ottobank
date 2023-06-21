@@ -151,6 +151,7 @@ public class MainWindow{
 
     }
     public static void main(String[] args) {
-        new MainWindow();
+
+        MainWindow mw = WindowManager.getWindow();
     }
 }

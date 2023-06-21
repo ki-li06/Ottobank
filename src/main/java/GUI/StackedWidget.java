@@ -46,14 +46,14 @@ public class StackedWidget extends JLayeredPane{
         for (int i=0;i<comps.size(); i++) {
             if (i != index) {
                 if (comps.get(i).getShown() == true) {
-                    comps.get(i).hide();
+                    comps.get(i).hidePage();
 
                 }
             }
         }
         parent.setSize(comps.get(index).getSize());
         setSize(comps.get(index).getSize());
-        comps.get(index).show();
+        comps.get(index).showPage();
         setComponentZOrder(comps.get(index),0);
     }
 }

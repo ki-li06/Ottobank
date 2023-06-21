@@ -45,7 +45,7 @@ public class StackedPane extends JPanel{
         }
         return null;
     }
-    public void registerComponent(JComponent c, String key) {
+    void registerComponent(JComponent c, String key) {
         add(c);
         comps.add(c);
         c.setVisible(shown);
@@ -56,11 +56,11 @@ public class StackedPane extends JPanel{
             comps.get(i).setVisible(shown);
         }
     }
-    public void show() {
+    void showPage() {
         shown = true;
         refresh();
     }
-    public void hide() {
+    void hidePage() {
         shown = false;
         refresh();
     }

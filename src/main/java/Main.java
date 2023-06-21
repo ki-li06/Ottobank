@@ -3,7 +3,7 @@ public class Main {
         System.out.println("Hello world");
         delay(200L);
         System.out.println("Gut reicht auch wieder");
-
+        
     }
     private static void delay (long millis){
         try{

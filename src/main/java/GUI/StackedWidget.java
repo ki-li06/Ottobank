@@ -36,6 +36,14 @@ public class StackedWidget extends JLayeredPane{
         }
         return null;
     }
+    public int getPlaneIndex(String key) {
+        for (int i=0;i<keys.size();i++) {
+            if (keys.get(i) == key) {
+                return i;
+            }
+        }
+        throw new ArrayIndexOutOfBoundsException("Requested Plane does not exist.");
+    }
     public void showPlane(int index) {
         if (index < 0 || index >= comps.size()) {
             throw new ArrayIndexOutOfBoundsException("Plane does not exist");

@@ -5,4 +5,9 @@ public class Angestellter extends Nutzer{
         name = nameneu;
         pin = pinneu;
     }
+    int SparkontoEinrichten()
+    {
+        return 0;
+    }
+
 }

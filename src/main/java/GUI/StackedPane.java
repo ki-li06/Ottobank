@@ -2,14 +2,13 @@ package GUI;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.*;
+import java.util.Objects;
 
 public class StackedPane extends JPanel{
-    private ArrayList<JComponent> comps;
-    private ArrayList<String> keys;
-    private int w;
-    private int h;
-    private Dimension size;
-    private StackedWidget parent;
+    private final ArrayList<JComponent> comps;
+    private final ArrayList<String> keys;
+    private final Dimension size;
+    private final StackedWidget parent;
     private boolean shown;
     public StackedPane(StackedWidget parent) {
         super();
@@ -31,15 +30,16 @@ public class StackedPane extends JPanel{
         shown = false;
         setLayout(null);
     }
+    @Deprecated
     public void registerComponent(JComponent c) {
         registerComponent(c, "ANONYMOUS");
     }
     public JComponent getElement(String key) {
-        if (key == "PRIVATE") {
+        if (Objects.equals(key, "PRIVATE")) {
             return null;
         }
         for (int i=0;i<keys.size();i++) {
-            if (keys.get(i) == key) {
+            if (Objects.equals(keys.get(i), key)) {
                 return comps.get(i);
             }
         }
@@ -52,8 +52,8 @@ public class StackedPane extends JPanel{
         keys.add(key);
     }
     private void refresh() {
-        for (int i=0;i<comps.size();i++) {
-            comps.get(i).setVisible(shown);
+        for (JComponent comp : comps) {
+            comp.setVisible(shown);
         }
     }
     void showPage() {

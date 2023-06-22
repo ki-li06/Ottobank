@@ -1,14 +1,13 @@
 package GUI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Stack;
-import com.formdev.flatlaf.FlatDarkLaf;
+import java.util.Objects;
+
 public class StackedWidget extends JLayeredPane{
-    private ArrayList<StackedPane> comps;
-    private ArrayList<String> keys;
-    private JFrame parent;
+    private final ArrayList<StackedPane> comps;
+    private final ArrayList<String> keys;
+    private final JFrame parent;
     public StackedWidget(JFrame parent) {
         super();
         setLayout(null);
@@ -26,11 +25,11 @@ public class StackedWidget extends JLayeredPane{
         add(element, z);
     }
     public StackedPane getFrame(String key) {
-        if (key == "PRIVATE") {
+        if (Objects.equals(key, "PRIVATE")) {
             return null;
         }
         for (int i=0;i<keys.size();i++) {
-            if (keys.get(i) == key) {
+            if (Objects.equals(keys.get(i), key)) {
                 return comps.get(i);
             }
         }
@@ -38,7 +37,7 @@ public class StackedWidget extends JLayeredPane{
     }
     public int getPlaneIndex(String key) {
         for (int i=0;i<keys.size();i++) {
-            if (keys.get(i) == key) {
+            if (Objects.equals(keys.get(i), key)) {
                 return i;
             }
         }
@@ -48,12 +47,12 @@ public class StackedWidget extends JLayeredPane{
         if (index < 0 || index >= comps.size()) {
             throw new ArrayIndexOutOfBoundsException("Plane does not exist");
         }
-        if (comps.get(index).getShown() != false) {
+        if (comps.get(index).getShown()) {
             return;
         }
         for (int i=0;i<comps.size(); i++) {
             if (i != index) {
-                if (comps.get(i).getShown() == true) {
+                if (comps.get(i).getShown()) {
                     comps.get(i).hidePage();
 
                 }

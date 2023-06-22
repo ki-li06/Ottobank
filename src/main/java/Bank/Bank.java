@@ -1,10 +1,10 @@
 package Bank;
 
 public class Bank {
-    public static void NeuenKundenEinrichten(String name, int pin){
+    public void NeuenKundenEinrichten(String name, int pin){
         Kunde kundeneu = new Kunde(name, pin);
     }
-    public static void NeuenAngestelltenEinrichten(String name, int pin, String passwort){
+    public void NeuenAngestelltenEinrichten(String name, int pin, String passwort){
         if (passwort.equals("admin")){
             Angestellter angestellterneu = new Angestellter(name, pin);
         }
@@ -22,7 +22,7 @@ public class Bank {
         new Girokonto();
         return 0;
     };
-    boolean KontoLoeschen()
+    boolean KontoLoeschen(Konto kontoLoeschen)
     {
         return true;
     };
@@ -30,9 +30,10 @@ public class Bank {
     /*Datenbankverbindung DatenbankverbindungGeben(){
         return null;
     };*/
-    Kunde KundenSuchen(){
-        return null;
-    };
+    Kunde KundenSuchen(String name)
+    {
+        
+    return null;};
     /*int [] KontonummernFuerKundenGeben(){
         return 0;
     };*/

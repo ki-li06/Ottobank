@@ -5,10 +5,9 @@ public abstract class Konto {
     protected int kontonummer;
     protected Kunde besitzer;
 
-    static boolean Abheben(double abhebebetrag)
-    {return false;}
+    boolean Abheben(double betrag){return false;}
     int KontonummerGeben (){return 0;}
-    static double KontostandGeben(){return 0;}
+    double KontostandGeben (){return 0;}
     Kunde EigentümerGeben(){return null;}
-    static void Einzahlen(double einzahlbetrag){}
+    void Einzahlen(double einzahlbetrag){}
 }

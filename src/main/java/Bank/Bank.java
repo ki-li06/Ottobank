@@ -22,7 +22,7 @@ public class Bank {
         new Girokonto();
         return 0;
     };
-    boolean KontoLoeschen()
+    boolean KontoLoeschen(Konto kontoLoeschen)
     {
         return true;
     };
@@ -30,8 +30,9 @@ public class Bank {
     /*Datenbankverbindung DatenbankverbindungGeben(){
         return null;
     };*/
-    Kunde KundenSuchen(){
-        return null;
+    Kunde KundenSuchen(String name)
+    {
+        
     };
     /*int [] KontonummernFuerKundenGeben(){
         return 0;

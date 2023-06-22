@@ -7,19 +7,19 @@ public class Kunde extends Nutzer
         pin = pinNeu;
     }
 
-    public static double KontostandGeben()
+    public double KontostandGeben()
     {
-        return Konto.KontostandGeben();
+        return konto.KontostandGeben();
     }
 
-    public static void Einzahlen(double einzahlbetrag)
+    public void Einzahlen(double einzahlbetrag)
     {
-        Konto.Einzahlen(einzahlbetrag);
+        konto.Einzahlen(einzahlbetrag);
     }
 
     public boolean Abheben(double abhebebetrag)
     {
-        return Konto.Abheben(abhebebetrag);
+        return konto.Abheben(abhebebetrag);
     }
 
     /*Auszugseintrag[] AuszugsdatenErstelen(){};*/

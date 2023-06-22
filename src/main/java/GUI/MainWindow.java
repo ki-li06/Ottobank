@@ -4,11 +4,13 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class MainWindow{
     JFrame mainFrame;
-    private StackedWidget layerManager;
+    private final StackedWidget layerManager;
     MainWindow() {
         FlatDarkLaf.registerCustomDefaultsSource("flatlaf_themes");
         FlatDarkLaf.setup();
@@ -25,9 +27,9 @@ public class MainWindow{
 
         createRegisterPage();
 
+        createMainPage();
 
-
-        layerManager.showPlane(0);
+        layerManager.showPlane(2);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -36,7 +38,7 @@ public class MainWindow{
         return layerManager;
     }
 
-    public void createLoginPage(){
+    void createLoginPage(){
         StackedPane loginPage = new StackedPane(layerManager, new Dimension(400, 375));
 
         layerManager.registerPane(loginPage, "LOGIN_PAGE");
@@ -85,7 +87,7 @@ public class MainWindow{
         loginPage.registerComponent(registerButton, "PRIVATE");
     }
 
-    public void createRegisterPage(){
+    void createRegisterPage(){
         //register Page
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
         layerManager.registerPane(registerPage, "REGISTER_PAGE");
@@ -150,8 +152,33 @@ public class MainWindow{
         registerPage.registerComponent(loginButton, "PRIVATE");
 
     }
+
+    void createMainPage(){
+        StackedPane mainPage = new StackedPane(layerManager, new Dimension(850, 500));
+        layerManager.registerPane(mainPage, "MAIN_PAGE");
+
+        BetterButton settingsButton = new BetterButton();
+        settingsButton.setBounds(mainPage.getWidth()-75, 10, 45, 45);
+        settingsButton.setIcon(new ImageIcon("src/main/resources/icons/settings.png"));
+
+        mainPage.registerComponent(settingsButton, "SETTINGS_BUTTON");
+
+        String[] optionsToChoose = {"Giro 1", "Giro 2", "Sparkonto 1", "Sparkonto 2"};
+        BetterComboBox kontowechselBox = new BetterComboBox(optionsToChoose);
+        kontowechselBox.setBounds(settingsButton.getX()-210, 10, 200, 45);
+        kontowechselBox.addMethod(new UIComboBoxMethod() {
+            @Override
+            public void performMethod(String data) {
+                System.out.println(data);
+            }
+        });
+
+        mainPage.registerComponent(kontowechselBox, "KONTO_WECHSEL_BOX");
+
+    }
+
     public static void main(String[] args) {
 
-        MainWindow mw = WindowManager.getWindow();
+        WindowManager.getWindow();
     }
 }

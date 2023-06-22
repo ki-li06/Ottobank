@@ -1,10 +1,10 @@
 package GUI;
 import javax.swing.*;
 
-public class BetterComboBox extends JComboBox {
+public class BetterComboBox extends JComboBox<String> {
     private UIComboBoxMethod method;
-    public BetterComboBox() {
-        super();
+    public BetterComboBox(String[] stringlist) {
+        super(stringlist);
         this.method = new UIComboBoxMethod() {
             @Override
             public void performMethod(String data) {
@@ -14,8 +14,8 @@ public class BetterComboBox extends JComboBox {
         this.addActionListener(new CustomActionListener(this));
 
     }
-    public BetterComboBox(UIComboBoxMethod method) {
-        super();
+    public BetterComboBox(String[] stringlist, UIComboBoxMethod method) {
+        super(stringlist);
         if (method == null) {
             this.method = new UIComboBoxMethod() {
                 @Override

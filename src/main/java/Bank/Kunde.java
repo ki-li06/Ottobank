@@ -22,6 +22,9 @@ public class Kunde extends Nutzer
         return konto.Abheben(abhebebetrag);
     }
 
-    /*Auszugseintrag[] AuszugsdatenErstelen(){};*/
+    /*Auszugseintrag[] AuszugsdatenErstelen(){};
+    * boolean Aktkonto(int)*/
+
+
 }
 

@@ -165,6 +165,7 @@ public class MainWindow{
 
         String[] optionsToChoose = {"Giro 1", "Giro 2", "Sparkonto 1", "Sparkonto 2"};
         BetterComboBox kontowechselBox = new BetterComboBox(optionsToChoose);
+
         kontowechselBox.setBounds(settingsButton.getX()-210, 10, 200, 45);
         kontowechselBox.addMethod(new UIComboBoxMethod() {
             @Override

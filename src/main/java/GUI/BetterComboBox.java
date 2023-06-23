@@ -35,6 +35,10 @@ public class BetterComboBox extends JComboBox<String> {
             this.method = method;
         }
     }
+    public void setElements(String[] elements) {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(elements);
+        this.setModel(model);
+    }
     public UIComboBoxMethod getMethod() {
         return this.method;
     }

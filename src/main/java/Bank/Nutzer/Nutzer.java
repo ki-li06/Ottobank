@@ -1,6 +1,6 @@
-package Bank;
+package Bank.Nutzer;
 
-import java.util.Random;
+import Bank.Konten.Konto;
 
 public abstract class Nutzer {
     String name;

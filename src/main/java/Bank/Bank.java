@@ -1,5 +1,11 @@
 package Bank;
 
+import Bank.Konten.Girokonto;
+import Bank.Konten.Konto;
+import Bank.Konten.Sparkonto;
+import Bank.Nutzer.Angestellter;
+import Bank.Nutzer.Kunde;
+
 public class Bank {
     public void NeuenKundenEinrichten(String name, int pin){
         Kunde kundeneu = new Kunde(name, pin);

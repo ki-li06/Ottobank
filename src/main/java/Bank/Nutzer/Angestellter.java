@@ -1,4 +1,4 @@
-package Bank;
+package Bank.Nutzer;
 
 public class Angestellter extends Nutzer{
     public Angestellter(String nameneu, int pinneu) {

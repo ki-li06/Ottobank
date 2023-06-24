@@ -1,4 +1,4 @@
-package Bank;
+package Bank.Nutzer;
 
 public class Kunde extends Nutzer
 {

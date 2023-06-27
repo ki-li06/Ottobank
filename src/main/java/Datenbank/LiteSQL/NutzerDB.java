@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.StringFormat.format;
 import static util.Zufall.RandomInt;
 
 public class NutzerDB extends LiteSQL{
@@ -25,8 +26,8 @@ public class NutzerDB extends LiteSQL{
         System.out.println("Nutzer {'Name'=" + Name + ", 'ID'=" + ID + ", 'PIN'=" + PIN + "} hinzugefügt");
     }
     public void NutzerHinzufügen(String Name, String PIN){
-        if(NutzerNameUNdPInExistiert(Name, PIN)){
-            System.out.println("Es existiert bereits ein Nutzer mit {'Name'=" + Name + ", 'PIN'=" + PIN + "}");
+        if(NutzerNameExistiert(Name)){
+            System.out.println("Es existiert bereits ein Nutzer mit {'Name'=" + Name + "}");
             return;
         }
         int id;
@@ -56,7 +57,12 @@ public class NutzerDB extends LiteSQL{
             return -1;
         }
     }
-    
+
+    /**
+     * Es wird überprüft, ob bereits ein Nutzer mit diesem Namen existiert.
+     * Die Datenbank ist nicht darauf ausgelegt, zwei Nutzer mit dem gleichen Namen anzulegen.
+     * @return
+     */
     public boolean NutzerNameExistiert(String name){
         connect();
         String command = "SELECT Name FROM NutzerDB;";
@@ -90,26 +96,25 @@ public class NutzerDB extends LiteSQL{
         return list.contains(id);
     }
 
-    /**
-     * es wird gecheckt, ob es bereits einen Nutzer mit dem gleichen Namen und dem gleichen Passwort gibt
-     */
-    public boolean NutzerNameUNdPInExistiert(String name, String Pin){
+    public void TabelleAusgeben(){
+        System.out.println("---\nNutzerDatenbank wird ausgegeben:");
+        System.out.println(format("Name", 20) + " | " + format("ID", 5) + " | " + format("PIN", 10));
+        System.out.println("-".repeat(41));
         connect();
-        String command = "SELECT ID FROM NutzerDB WHERE "
-                + "Name = '" + name + "' AND "
-                + "PIN = '" + Pin + "';";
+        String command = "SELECT * FROM NutzerDB;";
         ResultSet rs = onQuery(command);
         try {
-            if(rs.next()){
-                disconnect();
-                return true;
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String id = String.valueOf(rs.getInt("ID"));
+                String pin = rs.getString("PIN");
+                System.out.println(format(name, 20) + " | " + format(id, 5) + " | " + format(pin, 10));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         disconnect();
-        return false;
+        System.out.println("---");
     }
-
 
 }

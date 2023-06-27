@@ -7,7 +7,7 @@ public class DBSchnittstelle {
         NutzerDB nutzerDB = new NutzerDB();
         int id = nutzerDB.PinRichtig("Anton Huber", "123456");
         System.out.println("id: " + id);
-
+        nutzerDB.TabelleAusgeben();
 
     }
 }

@@ -4,7 +4,7 @@ import GUI.*;
 
 import java.util.Objects;
 
-public class schnittstelle {
+public class Schnittstelle {
     public static void main(String[] args) {
         MainWindow mw = WindowManager.getWindow();
         BetterTextField t = (BetterTextField) mw.getWindow().getFrame("LOGIN_PAGE").getElement("EMAIL_INPUT");

@@ -4,9 +4,6 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 public class MainWindow{
     JFrame mainFrame;
@@ -176,10 +173,19 @@ public class MainWindow{
 
         mainPage.registerComponent(kontowechselBox, "KONTO_WECHSEL_BOX");
 
+        JLabel moneyLabel = new JLabel(formatLabelString("Your_Money :)"), JLabel.CENTER);
+        int LabelHeight = moneyLabel.getPreferredSize().height;
+        moneyLabel.setBounds(0, 40, 850, LabelHeight);
+        mainPage.registerComponent(moneyLabel, "MONEY_LABEL");
+
+
     }
 
     public static void main(String[] args) {
 
         WindowManager.getWindow();
+    }
+    public static String formatLabelString(String original) {
+        return "<html><center>" + original + "</center></html>";
     }
 }

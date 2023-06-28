@@ -7,10 +7,10 @@ import Bank.Nutzer.Angestellter;
 import Bank.Nutzer.Kunde;
 
 public class Bank {
-    public void NeuenKundenEinrichten(String name, int pin){
+    public void NeuenKundenEinrichten(String name, String pin){
         Kunde kundeneu = new Kunde(name, pin);
     }
-    public void NeuenAngestelltenEinrichten(String name, int pin, String passwort){
+    public void NeuenAngestelltenEinrichten(String name, String pin, String passwort){
         if (passwort.equals("admin")){
             Angestellter angestellterneu = new Angestellter(name, pin);
         }
@@ -48,7 +48,7 @@ public class Bank {
     String [] AngestelltennamenGeben(){return null;};*/
     void NeuenKundenEinrichten(){};
     void KundenLoeschen(){};
-    void NeuenAngestelltenEinrichten(String nameNeu, int pinNeu){
+    void NeuenAngestelltenEinrichten(String nameNeu, String pinNeu){
         new Angestellter(nameNeu, pinNeu);
     }
 

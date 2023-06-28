@@ -9,10 +9,26 @@ public abstract class Konto {
 
     //Warum keine abstract Methoden? (kilian)
 
+
+    public void setKontonummer(int kontonummer) {
+        this.kontonummer = kontonummer;
+    }
+
+    public void setBesitzer(Kunde besitzer) {
+        this.besitzer = besitzer;
+    }
+
     public boolean Abheben(double betrag){return false;}
-    int KontonummerGeben (){return 0;}
-    public double KontostandGeben(){return 0;}
-    Kunde EigentümerGeben(){return null;}
+    public int KontonummerGeben (){
+        return kontonummer;
+    }
+    public double KontostandGeben(){
+        return kontostand;
+    }
+    public Kunde EigentümerGeben(){
+        return besitzer;
+    }
     public void Einzahlen(double einzahlbetrag) {}
+
 
 }

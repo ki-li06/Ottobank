@@ -16,18 +16,18 @@ public class NutzerDB extends LiteSQL{
 
     private void NutzerHinzufügen(String Name, int ID, String PIN) {
         connect();
-        String command =
-                "INSERT INTO NutzerDB (Name, ID, PIN) VALUES ("
-                        + "'" + Name + "', "
-                        + "'" + ID + "', "
-                        + "'" + PIN + "');";
-        onUpdate(command);
+        String cmd = "INSERT INTO NutzerDB (Name, ID, PIN) VALUES ('PARAM_NAME', 'PARAM_ID', 'PARAM_PIN');";
+        cmd = cmd
+                .replace("PARAM_NAME", Name)
+                .replace("PARAM_ID", String.valueOf(ID))
+                .replace("PARAM_PIN", PIN);
+        onUpdate(cmd);
         disconnect();
         System.out.println("Nutzer {'Name'=" + Name + ", 'ID'=" + ID + ", 'PIN'=" + PIN + "} hinzugefügt");
     }
-    public void NutzerHinzufügen(String Name, String PIN){
-        if(NutzerNameExistiert(Name)){
-            System.out.println("Es existiert bereits ein Nutzer mit {'Name'=" + Name + "}");
+    public void NutzerHinzufügen(String name, String PIN){
+        if(NutzerNameExistiert(name)){
+            System.out.println("Es existiert bereits ein Nutzer mit {'Name'=" + name + "}");
             return;
         }
         int id;
@@ -35,7 +35,7 @@ public class NutzerDB extends LiteSQL{
             id = RandomInt(1, 99999);
         }
         while (NutzerIdExistiert(id));
-        NutzerHinzufügen(Name, id, PIN);
+        NutzerHinzufügen(name, id, PIN);
 
     }
 
@@ -46,9 +46,10 @@ public class NutzerDB extends LiteSQL{
      */
     public int PinRichtig(String Name, String PIN){
         connect();
-        String cmd = "SELECT ID FROM NutzerDB WHERE "
-                + "Name = '" + Name + "' AND "
-                + "PIN = '" + PIN + "';";
+        String cmd = "SELECT ID FROM NutzerDB WHERE Name = 'PARAM_NAME' AND PIN = 'PARAM_PIN';";
+        cmd = cmd
+                .replace("PARAM_NAME", Name)
+                .replace("PARAM_PIN", PIN);
         ResultSet rs = onQuery(cmd);
         try {
             return rs.getInt("ID");
@@ -94,6 +95,25 @@ public class NutzerDB extends LiteSQL{
         }
         disconnect();
         return list.contains(id);
+    }
+
+    public int NutzerIDGeben(String name){
+        if(!NutzerNameExistiert(name)){return -1;}
+        connect();
+        String cmd = "SELECT ID From NutzerDB WHERE Name = '" + name + "';";
+        ResultSet rs = onQuery(cmd);
+        try {
+            if(rs.next()){
+                int i = rs.getInt("ID");
+                disconnect();
+                return i;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            disconnect();
+        }
+        return -1;
+
     }
 
     public void TabelleAusgeben(){

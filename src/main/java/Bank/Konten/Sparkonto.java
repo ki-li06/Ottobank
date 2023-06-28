@@ -13,11 +13,11 @@ public class Sparkonto extends Konto{
             @Override
             public void run() {
                 kontostand = kontostand*(1+zinssatz);
-                System.out.println(kontostand);
+                //System.out.println(kontostand);
             }
         }, 0, 5000);
     }
-    double ZinssatzGeben(){return zinssatz;}
+    public double ZinssatzGeben(){return zinssatz;}
     public boolean Abheben(double abhebebetrag) {
         if (KontostandGeben() - abhebebetrag < 0) {
             kontostand = kontostand - abhebebetrag;
@@ -30,9 +30,13 @@ public class Sparkonto extends Konto{
     public static void main(String[] args) {
         Sparkonto sp = new Sparkonto();
         sp.Einzahlen(10.0);
-        while(true){
+        boolean b = true;
+        while(b){
             System.out.println("kontostand: " + sp.KontostandGeben());
             delay(100);
+            if (System.currentTimeMillis()%200000 == 0){
+                b = false;
+            }
         }
     }
 }

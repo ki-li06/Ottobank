@@ -2,7 +2,7 @@ package Bank.Nutzer;
 
 public class Kunde extends Nutzer
 {
-    public Kunde(String nameNeu, int pinNeu) {
+    public Kunde(String nameNeu, String pinNeu) {
         name = nameNeu;
         pin = pinNeu;
     }

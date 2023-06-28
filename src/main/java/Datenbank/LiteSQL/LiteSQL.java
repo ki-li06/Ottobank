@@ -2,7 +2,6 @@ package Datenbank.LiteSQL;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.sql.*;
 
 public abstract class LiteSQL {
@@ -10,7 +9,7 @@ public abstract class LiteSQL {
     private Connection connection;
     private Statement stmt;
 
-    private String filename;
+    private final String filename;
 
     protected LiteSQL(){
         this("datenbank.db");

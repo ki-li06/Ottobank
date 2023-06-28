@@ -1,13 +1,25 @@
 package Datenbank;
 
+import Bank.Konten.Konto;
+import Bank.Konten.Sparkonto;
+import Bank.Nutzer.Kunde;
+import Bank.Nutzer.Nutzer;
+import Datenbank.LiteSQL.KontenDB;
 import Datenbank.LiteSQL.NutzerDB;
 
 public class DBSchnittstelle {
     public static void main(String[] args) {
-        NutzerDB nutzerDB = new NutzerDB();
-        int id = nutzerDB.PinRichtig("Anton Huber", "123456");
-        System.out.println("id: " + id);
-        nutzerDB.TabelleAusgeben();
+        Kunde kunde = new Kunde("HuberSepp", "123456ficken");
+        NutzerDB ndb = new NutzerDB();
+        ndb.NutzerHinzufügen(kunde.getName(), kunde.getPin());
+
+        Konto konto = new Sparkonto();
+        konto.setBesitzer(kunde);
+
+        KontenDB kdb = new KontenDB();
+        kdb.KontoHinzufügen(konto);
+
+        System.out.println("id: " + konto.KontonummerGeben());
 
     }
 }

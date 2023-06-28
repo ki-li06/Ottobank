@@ -14,7 +14,7 @@ public class Girokonto extends Konto{
         überziehungsrahmen = nettoeinkommen*3;
         return überziehungsrahmen;
     }
-    double ÜberziehungsrahmenGeben(){
+    public double ÜberziehungsrahmenGeben(){
         double nettoeinkommen = 0.0; //pop up fenster mit eingabe feld für nettoeinkommen
         return ÜberziehungsrahmenBerechnen(nettoeinkommen);
     }

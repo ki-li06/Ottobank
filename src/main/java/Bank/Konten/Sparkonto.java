@@ -2,6 +2,8 @@ package Bank.Konten;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static util.Delay.delay;
+
 public class Sparkonto extends Konto{
     double zinssatz = 0.03;
 
@@ -13,7 +15,7 @@ public class Sparkonto extends Konto{
                 kontostand = kontostand*(1+zinssatz);
                 System.out.println(kontostand);
             }
-        }, 0, 60000);
+        }, 0, 5000);
     }
     double ZinssatzGeben(){return zinssatz;}
     public boolean Abheben(double abhebebetrag) {
@@ -22,6 +24,15 @@ public class Sparkonto extends Konto{
             return true;
         } else {
             return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Sparkonto sp = new Sparkonto();
+        sp.Einzahlen(10.0);
+        while(true){
+            System.out.println("kontostand: " + sp.KontostandGeben());
+            delay(100);
         }
     }
 }

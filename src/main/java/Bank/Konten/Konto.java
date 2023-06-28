@@ -13,6 +13,6 @@ public abstract class Konto {
     int KontonummerGeben (){return 0;}
     public double KontostandGeben(){return 0;}
     Kunde EigentümerGeben(){return null;}
-    public void Einzahlen(double einzahlbetrag){}
+    public void Einzahlen(double einzahlbetrag) {}
 
 }

@@ -15,19 +15,17 @@ public class Bank {
             Angestellter angestellterneu = new Angestellter(name, pin);
         }
         else {
-            System.out.println("Das Passwort stimmt nicht mit dem adminpasswort überein");
+            System.out.println("Das Passwort stimmt nicht mit dem Adminpasswort überein");
         }
     }
     int SparkontoEinrichten()
     {
         new Sparkonto();
-        return 0;
+        return 0 ;
     };
-    int GirokontoEinrichten()
-    {
-        new Girokonto();
-        return 0;
-    };
+    Girokonto GirokontoEinrichten() {
+        return new Girokonto();
+    }
     boolean KontoLoeschen(Konto kontoLoeschen)
     {
         return true;
@@ -38,8 +36,8 @@ public class Bank {
     };*/
     Kunde KundenSuchen(String name)
     {
-        
-    return null;};
+        return null;
+    };
     /*int [] KontonummernFuerKundenGeben(){
         return 0;
     };*/
@@ -50,7 +48,9 @@ public class Bank {
     String [] AngestelltennamenGeben(){return null;};*/
     void NeuenKundenEinrichten(){};
     void KundenLoeschen(){};
-    void NeuenAngestelltenEinrichten(){};
+    void NeuenAngestelltenEinrichten(String nameNeu, int pinNeu){
+        new Angestellter(nameNeu, pinNeu);
+    }
 
     Bank BankGeben(){return null;};//???
     Konto KontoSuchen(int kontonummer)

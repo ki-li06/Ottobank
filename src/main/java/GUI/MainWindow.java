@@ -29,7 +29,7 @@ public class MainWindow{
 
         createSettingsPage();
 
-        layerManager.showPlane(1);
+        layerManager.showPlane(3);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -69,7 +69,7 @@ public class MainWindow{
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                JOptionPane.showMessageDialog(null, "Test", "TEST", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Test", "TEST", JOptionPane.WARNING_MESSAGE);
             }
         });
         loginButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
@@ -237,31 +237,31 @@ public class MainWindow{
         //Pin Text Field
         BetterTextField pinTextField = new BetterTextField();
         pinTextField.setEchoChar((char) 0);
-        pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
+        pinTextField.putClientProperty("JTextField.placeholderText", "Alte PIN");
         pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
         registerPage.registerComponent(pinTextField, "PIN_INPUT");
 
         //Confirm Pin Text Field
         BetterTextField pinConfirmRegisterTextField = new BetterTextField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
-        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
+        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Neue PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
         registerPage.registerComponent(pinConfirmRegisterTextField, "CONFIRM_PIN_INPUT");
 
         //Register Button
         BetterButton registerButton = new BetterButton();
-        registerButton.setText("Register");
+        registerButton.setText("Save Changes");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
-        registerPage.registerComponent(registerButton, "REGISTER_BUTTON");
+        registerPage.registerComponent(registerButton, "SAVE_BUTTON");
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
-        loginButton.setText("Back to log in");
+        loginButton.setText("Back to main Page");
         loginButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 390, 250, 30);
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(0);
+                layerManager.showPlane(2);
             }
         });
         registerPage.registerComponent(loginButton, "PRIVATE");

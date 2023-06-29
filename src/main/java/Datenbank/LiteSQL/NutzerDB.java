@@ -18,7 +18,7 @@ public class NutzerDB extends LiteSQL{
 
 
     public static final String ANGESTELLTER = "Angestellter";
-    public static final String NUTZER = "NUTZER";
+    public static final String KUNDE = "KUNDE";
     public void NutzerHinzufügen(String Name, String Mail, String PIN, String type){
         connect();
         String cmd = "INSERT INTO NutzerDB (Name, Mail, PIN, Type) VALUES ('PARAM_NAME', 'PARAM_ID', 'PARAM_PIN');";
@@ -40,7 +40,7 @@ public class NutzerDB extends LiteSQL{
     public List<Nutzer> alleNutzerGeben(){
         return null;
     }
-    public void NutzerNameÄndern(String Mail, String PIN){
+    public void NutzerNameÄndern(String Mail, String PIN, String nameNeu){
 
     }
     public void NutzerLöschen (String Mail){

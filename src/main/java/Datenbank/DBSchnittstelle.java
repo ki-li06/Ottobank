@@ -11,7 +11,7 @@ public class DBSchnittstelle {
     public static void main(String[] args) {
         Kunde kunde = new Kunde("HuberSepp", "huber@sepp.com", "123456ficken");
         NutzerDB ndb = new NutzerDB();
-        ndb.NutzerHinzufügen(kunde.getName(), kunde.getEmail(), kunde.getPin(), NutzerDB.NUTZER);
+        ndb.NutzerHinzufügen(kunde.getName(), kunde.getEmail(), kunde.getPin(), NutzerDB.KUNDE);
 
         Konto konto = new Sparkonto();
         konto.setBesitzer(kunde);

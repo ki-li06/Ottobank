@@ -8,6 +8,7 @@ import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
 import Datenbank.LiteSQL.NutzerDB;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bank {
@@ -24,12 +25,15 @@ public class Bank {
     }
     int SparkontoEinrichten()
     {
-        new Sparkonto();
-        return 0 ;
+        Sparkonto spark=new Sparkonto();
+        return spark.KontonummerGeben();
     }
-    Girokonto GirokontoEinrichten() {
-        return new Girokonto();
+    int GirokontoEinrichten()
+    {
+        Girokonto girok =new Girokonto();
+        return girok.KontonummerGeben();
     }
+
     boolean KontoLoeschen(Konto kontoLoeschen)
     {
         return true;
@@ -61,9 +65,39 @@ public class Bank {
     Angestellter AngestellterSuchen(){
         return null;
     };
-    /*String [] KundennamenGeben(){return null;};
-    String [] AngestelltennamenGeben(){return null;};*/
-    void NeuenKundenEinrichten(){};
+    List<String> NutzernamenGeben()
+    {
+    NutzerDB ndb=new NutzerDB();
+    List<Nutzer> list=ndb.alleNutzerGeben();
+    List<String> ausgabe=new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            ausgabe.add(list.get(i).getName());
+        }
+        return ausgabe;
+    }
+    List<String> AngestelltennamenGeben()
+    {
+        NutzerDB ndb=new NutzerDB();
+        List<Nutzer> list=ndb.alleNutzerGeben();
+        List<String> ausgabe=new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (List.get(i) instanceof Angestellter)
+            { ausgabe.add(list.get(i).getName());}
+        }
+        return ausgabe;
+    }
+    List<String> KundennamenGeben()
+    {
+        NutzerDB ndb=new NutzerDB();
+        List<Nutzer> list=ndb.alleNutzerGeben();
+        List<String> ausgabe=new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (List.get(i) instanceof Kunde)
+            { ausgabe.add(list.get(i).getName());}
+        }
+        return ausgabe;
+    }
+
 
     /*void KundenLoeschen(String name, String pin){
         NutzerDB ndb = new NutzerDB();
@@ -72,9 +106,7 @@ public class Bank {
         }
     };*/
 
-    void NeuenAngestelltenEinrichten(String nameNeu, String pinNeu){
-        new Angestellter(nameNeu, pinNeu);
-    }
+
 
     Bank BankGeben(){return null;};//???
     Konto KontoSuchen(int kontonummer)

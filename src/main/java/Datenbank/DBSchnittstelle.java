@@ -9,9 +9,9 @@ import Datenbank.LiteSQL.NutzerDB;
 
 public class DBSchnittstelle {
     public static void main(String[] args) {
-        Kunde kunde = new Kunde("HuberSepp", "123456ficken");
+        Kunde kunde = new Kunde("HuberSepp", "huber@sepp.com", "123456ficken");
         NutzerDB ndb = new NutzerDB();
-        ndb.NutzerHinzufügen(kunde.getName(), kunde.getPin());
+        ndb.NutzerHinzufügen(kunde.getName(), kunde.getEmail(), kunde.getPin(), NutzerDB.NUTZER);
 
         Konto konto = new Sparkonto();
         konto.setBesitzer(kunde);

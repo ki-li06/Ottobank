@@ -9,6 +9,7 @@ public class Angestellter extends Nutzer{
         name = nameneu;
         pin = pinneu;
     }
+
     int SparkontoEinrichten()
     {
 
@@ -31,7 +32,7 @@ public class Angestellter extends Nutzer{
 
     String NeuenKundeEinrichten(String nameNeu, String pinNeu)
     {
-        new Kunde(nameNeu, pinNeu);
+        //new Kunde(nameNeu, pinNeu);
         return "";
     }
     void KontoSetzten(){}

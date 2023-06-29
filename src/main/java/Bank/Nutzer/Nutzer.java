@@ -4,7 +4,9 @@ import Bank.Konten.Konto;
 import Datenbank.LiteSQL.NutzerDB;
 
 public abstract class Nutzer {
+
     String name;
+    String email;
     String pin;
     Konto konto;   //(kilian) warum hat ein Nutzer ein Konto?
 
@@ -16,8 +18,12 @@ public abstract class Nutzer {
         return pin;
     }
 
-    public int NutzerIDGeben(){
+    public String getEmail() {
+        return email;
+    }
+    /*
+    public String NutzerIDGeben(){
         NutzerDB ndb = new NutzerDB();
         return ndb.NutzerIDGeben(name);
-    }
+    }*/
 }

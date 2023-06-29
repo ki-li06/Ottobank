@@ -5,9 +5,10 @@ import Bank.Konten.Girokonto;
 import Bank.Konten.Sparkonto;
 
 public class Angestellter extends Nutzer{
-    public Angestellter(String nameneu, String pinneu) {
+    public Angestellter(String nameneu, String pinneu, String mailneu) {
         name = nameneu;
         pin = pinneu;
+        email = mailneu;
     }
     int SparkontoEinrichten()
     {

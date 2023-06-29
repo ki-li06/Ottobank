@@ -81,7 +81,7 @@ public class Bank {
         List<Nutzer> list=ndb.alleNutzerGeben();
         List<String> ausgabe=new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) instanceof Angestellter)
+            if (List.get(i) instanceof Angestellter)
             { ausgabe.add(list.get(i).getName());}
         }
         return ausgabe;
@@ -92,7 +92,7 @@ public class Bank {
         List<Nutzer> list=ndb.alleNutzerGeben();
         List<String> ausgabe=new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) instanceof Kunde)
+            if (List.get(i) instanceof Kunde)
             { ausgabe.add(list.get(i).getName());}
         }
         return ausgabe;

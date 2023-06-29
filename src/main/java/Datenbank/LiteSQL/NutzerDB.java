@@ -17,160 +17,95 @@ public class NutzerDB extends LiteSQL{
     }
 
 
-    public static final String ANGESTELLTER = "Angestellter";
+    public static final String ANGESTELLTER = "ANGESTELLTER";
     public static final String KUNDE = "KUNDE";
-    public void NutzerHinzufügen(String Name, String Mail, String PIN, String type){
+
+    /**
+     * fügt einen neuen Nutzer in die Datenbank ein
+     * @param name der Nutzername
+     * @param mail die MailAdresse des Nutzers (individuell pro Nutzer --> EMailExistiert)
+     * @param pin die PIN/ das Passwort
+     * @param type der Typ des Nutzers (entweder NutzerDB.ANGESTELLTER oder NutzerDB.KUNDE)
+     */
+    public void NutzerHinzufügen(String name, String mail, String pin, String type){
         connect();
         String cmd = "INSERT INTO NutzerDB (Name, Mail, PIN, Type) VALUES ('PARAM_NAME', 'PARAM_ID', 'PARAM_PIN');";
         cmd = cmd
-                .replace("PARAM_NAME", Name)
-                .replace("PARAM_Mail", String.valueOf(Mail))
-                .replace("PARAM_PIN", PIN)
-                .replace("PARAM_Type", type);
+                .replace("PARAM_NAME", name)
+                .replace("PARAM_MAIL", String.valueOf(mail))
+                .replace("PARAM_PIN", pin)
+                .replace("PARAM_TYPE", type);
         onUpdate(cmd);
         disconnect();
-        System.out.println("Nutzer {'Name'=" + Name + ", 'Mail'=" + Mail + ", 'PIN'=" + PIN + ", 'Type'=" + type + "}f hinzugefügt");
+        System.out.println("Nutzer {'name'=" + name + ", 'mail'=" + mail + ", 'pin'=" + pin + ", 'type'=" + type + "}f hinzugefügt");
     }
-    public Nutzer NutzerZuAnmeldeDaten(String Mail, String PIN){
+
+    /**
+     * überprüft, ob diese EMail Adresse schon in der Datenbank vorhanden ist
+     * @param mail zu überprüfende Mail-Adresse
+     * @return
+     */
+    public boolean EMailExistiert(String mail){
+        return false;
+    }
+
+    /**
+     * gibt einen Nutzer zur passenden Mail Adresse zurück
+     * @param mail die Mail-Adresse des Nutzers
+     * @return gleich null, wenn die Adresse nicht vorhanden ist
+     */
+    public Nutzer NutzerZuMail(String mail){
         return null;
     }
+
+    /**
+     * überprüft, ob das Passwort 'richtig' zu diesem Nutzer ist
+     * @param Mail die Mail Adresse des Nutzers
+     * @param PIN die Pin des Nutzers
+     */
+    public boolean PasswortRichtig(String Mail, String PIN){
+        return false;
+    }
+
+    /**
+     * gibt zurück, ob dieser NutzerName schon in der Datenbank existiert
+     * @param name der name
+     */
     public boolean NutzerNameExistiert(String name){
         return false;
     }
+
+    /**
+     * gibt zurück, ob diese MailAdresse schon in der Datenbank existiert
+     * @param mail der E-Mail Adresse
+     */
+    public boolean MailAdresseExistiert(String mail){
+        return false;
+    }
+
+    /**
+     * gibt eine List an allen Nutzer zurück, die in der Datenbank gespeichert sind (mit instanceof Angestellter/Kunde checken)
+     */
     public List<Nutzer> alleNutzerGeben(){
         return null;
     }
+
+    /**
+     * ändert den NutzerName eines Kontos
+     * @param Mail die Mail Adresse des Kontos
+     * @param PIN der Pin des Kontos
+     * @param nameNeu der neue Name des Kontos
+     */
     public void NutzerNameÄndern(String Mail, String PIN, String nameNeu){
 
     }
+
+    /**
+     * löscht ein Konto
+     * @param Mail die EMail Adresse des Kontos
+     */
     public void NutzerLöschen (String Mail){
 
     }
-    /*
-    private void NutzerHinzufügen(String Name, int ID, String PIN) {
-        connect();
-        String cmd = "INSERT INTO NutzerDB (Name, ID, PIN) VALUES ('PARAM_NAME', 'PARAM_ID', 'PARAM_PIN');";
-        cmd = cmd
-                .replace("PARAM_NAME", Name)
-                .replace("PARAM_ID", String.valueOf(ID))
-                .replace("PARAM_PIN", PIN);
-        onUpdate(cmd);
-        disconnect();
-        System.out.println("Nutzer {'Name'=" + Name + ", 'ID'=" + ID + ", 'PIN'=" + PIN + "} hinzugefügt");
-    }
-    public void NutzerHinzufügen(String name, String PIN){
-        if(NutzerNameExistiert(name)){
-            System.out.println("Es existiert bereits ein Nutzer mit {'Name'=" + name + "}");
-            return;
-        }
-        int id;
-        do{
-            id = RandomInt(1, 99999);
-        }
-        while (NutzerIdExistiert(id));
-        NutzerHinzufügen(name, id, PIN);
-
-    }
-
-    /**
-     * @param Name Name des Nutzers
-     * @param PIN Pin des gleichen Nutzers, wird überprüft
-     * @return gibt die NutzerID zurück
-     **/
-    /*
-    public int PinRichtig(String Name, String PIN){
-        connect();
-        String cmd = "SELECT ID FROM NutzerDB WHERE Name = 'PARAM_NAME' AND PIN = 'PARAM_PIN';";
-        cmd = cmd
-                .replace("PARAM_NAME", Name)
-                .replace("PARAM_PIN", PIN);
-        ResultSet rs = onQuery(cmd);
-        try {
-            return rs.getInt("ID");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    /**
-     * Es wird überprüft, ob bereits ein Nutzer mit diesem Namen existiert.
-     * Die Datenbank ist nicht darauf ausgelegt, zwei Nutzer mit dem gleichen Namen anzulegen.
-     * @return
-     */
-    /*
-    public boolean NutzerNameExistiert(String name){
-        connect();
-        String command = "SELECT Name FROM NutzerDB;";
-        ResultSet rs = onQuery(command);
-        List<String> list = new ArrayList<>();
-        try{
-            while (rs.next()){
-                String s = rs.getString("Name");
-                list.add(s);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        disconnect();
-        return list.contains(name);
-    }
-    private boolean NutzerIdExistiert (int id){
-        connect();
-        String command = "SELECT ID FROM NutzerDB;";
-        ResultSet rs = onQuery(command);
-        List<Integer> list = new ArrayList<>();
-        try{
-            while (rs.next()){
-                int i = rs.getInt("ID");
-                list.add(i);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        disconnect();
-        return list.contains(id);
-    }
-
-    public int NutzerIDGeben(String name){
-        if(!NutzerNameExistiert(name)){return -1;}
-        connect();
-        String cmd = "SELECT ID From NutzerDB WHERE Name = '" + name + "';";
-        ResultSet rs = onQuery(cmd);
-        try {
-            if(rs.next()){
-                int i = rs.getInt("ID");
-                disconnect();
-                return i;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            disconnect();
-        }
-        return -1;
-
-    }
-
-    public void TabelleAusgeben(){
-        System.out.println("---\nNutzerDatenbank wird ausgegeben:");
-        System.out.println(format("Name", 20) + " | " + format("ID", 5) + " | " + format("PIN", 10));
-        System.out.println("-".repeat(41));
-        connect();
-        String command = "SELECT * FROM NutzerDB;";
-        ResultSet rs = onQuery(command);
-        try {
-            while (rs.next()) {
-                String name = rs.getString("Name");
-                String id = String.valueOf(rs.getInt("ID"));
-                String pin = rs.getString("PIN");
-                System.out.println(format(name, 20) + " | " + format(id, 5) + " | " + format(pin, 10));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        disconnect();
-        System.out.println("---");
-    }
-    */
 
 }

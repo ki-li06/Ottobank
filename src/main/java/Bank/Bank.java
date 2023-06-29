@@ -17,7 +17,8 @@ public class Bank {
     }
     public void NeuenAngestelltenEinrichten(String name, String pin, String passwort){
         if (passwort.equals("admin")){
-            Angestellter angestellterneu = new Angestellter(name, pin);
+            //bitte überarbeiten
+            //Angestellter angestellterneu = new Angestellter(name, pin);
         }
         else {
             System.out.println("Das Passwort stimmt nicht mit dem Adminpasswort überein");
@@ -42,6 +43,7 @@ public class Bank {
     /*Datenbankverbindung DatenbankverbindungGeben(){
         return null;
     };*/
+    // bitte überarbeiten - macht in unserem Sachzusammenhang keine Sinn, Mail ist das Individuelle Attribut
     Kunde KundenSuchen(String name)
     {
         NutzerDB ndb = new NutzerDB();
@@ -81,7 +83,7 @@ public class Bank {
         List<Nutzer> list=ndb.alleNutzerGeben();
         List<String> ausgabe=new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (List.get(i) instanceof Angestellter)
+            if (list.get(i) instanceof Angestellter)
             { ausgabe.add(list.get(i).getName());}
         }
         return ausgabe;
@@ -92,7 +94,7 @@ public class Bank {
         List<Nutzer> list=ndb.alleNutzerGeben();
         List<String> ausgabe=new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (List.get(i) instanceof Kunde)
+            if (list.get(i) instanceof Kunde)
             { ausgabe.add(list.get(i).getName());}
         }
         return ausgabe;

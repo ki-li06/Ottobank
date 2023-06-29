@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Stack;
 
 public class MainWindow{
     JFrame mainFrame;
@@ -26,7 +27,9 @@ public class MainWindow{
 
         createMainPage();
 
-        layerManager.showPlane(2);
+        createSettingsPage();
+
+        layerManager.showPlane(1);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -151,7 +154,7 @@ public class MainWindow{
     }
 
     void createMainPage(){
-        StackedPane mainPage = new StackedPane(layerManager, new Dimension(850, 500));
+        StackedPane mainPage = new StackedPane(layerManager, new Dimension(450, 260));
         layerManager.registerPane(mainPage, "MAIN_PAGE");
 
         BetterButton settingsButton = new BetterButton();
@@ -160,7 +163,7 @@ public class MainWindow{
 
         mainPage.registerComponent(settingsButton, "SETTINGS_BUTTON");
 
-        String[] optionsToChoose = {"Giro 1", "Giro 2", "Sparkonto 1", "Sparkonto 2"};
+        String[] optionsToChoose = {"OPT_1","OPT_2","OPT_3"};
         BetterComboBox kontowechselBox = new BetterComboBox(optionsToChoose);
 
         kontowechselBox.setBounds(settingsButton.getX()-210, 10, 200, 45);
@@ -173,14 +176,96 @@ public class MainWindow{
 
         mainPage.registerComponent(kontowechselBox, "KONTO_WECHSEL_BOX");
 
-        JLabel moneyLabel = new JLabel(formatLabelString("Your_Money :)"), JLabel.CENTER);
+        JLabel moneyLabel = new JLabel(formatLabelString("Your Name :)"), JLabel.CENTER);
         int LabelHeight = moneyLabel.getPreferredSize().height;
-        moneyLabel.setBounds(0, 40, 850, LabelHeight);
-        mainPage.registerComponent(moneyLabel, "MONEY_LABEL");
+        moneyLabel.setBounds(10, 15, 140, LabelHeight);
+        mainPage.registerComponent(moneyLabel, "NAME_LABEL");
 
+        BetterButton freeMoneyButton = new BetterButton();
+        freeMoneyButton.setText("Einzahlen");
+        freeMoneyButton.setBounds(10,60,420,30);
+        mainPage.registerComponent(freeMoneyButton, "DEPOSIT_BUTTON");
 
+        BetterButton transactionButton = new BetterButton();
+        transactionButton.setText("Überweisen");
+        transactionButton.setBounds(10,100,420,30);
+        mainPage.registerComponent(transactionButton, "TRANSACTION_BUTTON");
+
+        BetterButton deleteMoneyButton = new BetterButton();
+        deleteMoneyButton.setText("Abheben");
+        deleteMoneyButton.setBounds(10,140,420,30);
+        mainPage.registerComponent(deleteMoneyButton, "WITHDRAW_BUTTON");
+
+        BetterButton unknownUseButton = new BetterButton();
+        unknownUseButton.setText("Zinssatz ändern");
+        unknownUseButton.setBounds(10,180,420,30);
+        mainPage.registerComponent(unknownUseButton, "???_BUTTON");
     }
 
+    void createSettingsPage() {
+        //register Page
+        StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
+        layerManager.registerPane(registerPage, "SETTINGS_PAGE");
+
+        JLabel registerInfoLabel = new JLabel("Edit your account", JLabel.CENTER);
+        int LabelHeight = registerInfoLabel.getPreferredSize().height;
+        registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
+        registerPage.registerComponent(registerInfoLabel, "PRIVATE");
+
+
+        //Vorname Text Field
+        BetterTextField vornameTextField = new BetterTextField();
+        vornameTextField.setEchoChar((char) 0);
+        vornameTextField.putClientProperty("JTextField.placeholderText", "Vorname");
+        vornameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
+        registerPage.registerComponent(vornameTextField, "VORNAME_INPUT");
+
+        //Nachname Text Field
+        BetterTextField nachnameTextField = new BetterTextField();
+        nachnameTextField.setEchoChar((char) 0);
+        nachnameTextField.putClientProperty("JTextField.placeholderText", "Nachname");
+        nachnameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
+        registerPage.registerComponent(nachnameTextField, "NACHNAME_INPUT");
+
+        //Email Text Field
+        BetterTextField emailTextField = new BetterTextField();
+        emailTextField.setEchoChar((char) 0);
+        emailTextField.putClientProperty("JTextField.placeholderText", "Email");
+        emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
+        registerPage.registerComponent(emailTextField, "EMAIL_INPUT");
+
+        //Pin Text Field
+        BetterTextField pinTextField = new BetterTextField();
+        pinTextField.setEchoChar((char) 0);
+        pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
+        pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
+        registerPage.registerComponent(pinTextField, "PIN_INPUT");
+
+        //Confirm Pin Text Field
+        BetterTextField pinConfirmRegisterTextField = new BetterTextField();
+        pinConfirmRegisterTextField.setEchoChar((char) 0);
+        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
+        pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
+        registerPage.registerComponent(pinConfirmRegisterTextField, "CONFIRM_PIN_INPUT");
+
+        //Register Button
+        BetterButton registerButton = new BetterButton();
+        registerButton.setText("Register");
+        registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
+        registerPage.registerComponent(registerButton, "REGISTER_BUTTON");
+
+        //Back to Login-Window Button
+        BetterButton loginButton = new BetterButton();
+        loginButton.setText("Back to log in");
+        loginButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 390, 250, 30);
+        loginButton.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                layerManager.showPlane(0);
+            }
+        });
+        registerPage.registerComponent(loginButton, "PRIVATE");
+    }
     public static void main(String[] args) {
 
         WindowManager.getWindow();

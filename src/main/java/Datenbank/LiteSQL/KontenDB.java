@@ -80,6 +80,10 @@ public class KontenDB extends LiteSQL{
     public Konto getKontoVonKontonummer(int nummer){
         return null;
     }
+    public void KontoÄndern (int id){
+
+    }
+
 
 
 }

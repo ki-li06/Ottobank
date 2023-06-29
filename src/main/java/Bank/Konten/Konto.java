@@ -28,7 +28,10 @@ public abstract class Konto {
     public Kunde EigentümerGeben(){
         return besitzer;
     }
-    public void Einzahlen(double einzahlbetrag) {}
+    public void Einzahlen(double einzahlbetrag)
+    {
+        kontostand=kontostand+einzahlbetrag;
+    }
 
 
 }

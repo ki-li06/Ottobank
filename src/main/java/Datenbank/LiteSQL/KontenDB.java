@@ -77,6 +77,9 @@ public class KontenDB extends LiteSQL{
         disconnect();
         return list.contains(nummer);*/
     }
+    public Konto getKontoVonKontonummer(int nummer){
+        return null;
+    }
 
 
 }

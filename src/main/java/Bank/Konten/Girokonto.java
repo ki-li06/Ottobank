@@ -3,6 +3,10 @@ package Bank.Konten;
 public class Girokonto extends Konto{
     double überziehungsrahmen = 0.0;
 
+    public Girokonto(){
+        
+    }
+
     public boolean Abheben(double abhebebetrag){
         if (KontostandGeben()+ÜberziehungsrahmenGeben() - abhebebetrag < 0) {
         kontostand = kontostand - abhebebetrag;

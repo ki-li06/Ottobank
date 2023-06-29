@@ -21,7 +21,7 @@ public class KontenDB extends LiteSQL{
     }
 
     public void KontoHinzufügen(Konto konto){
-        int nummer;
+        /*int nummer;
         do{
             nummer = RandomInt(100000, 999999);
         }
@@ -75,7 +75,7 @@ public class KontenDB extends LiteSQL{
             throwables.printStackTrace();
         }
         disconnect();
-        return list.contains(nummer);
+        return list.contains(nummer);*/
     }
 
 

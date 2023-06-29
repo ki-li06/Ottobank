@@ -24,6 +24,9 @@ public class Angestellter extends Nutzer{
     {
         return false;
     }
+    public void ZinssatzÄndern(){
+
+    }
 
     String AngestellterLoeschen(String eingabe)
     {

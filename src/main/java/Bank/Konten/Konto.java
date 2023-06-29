@@ -7,7 +7,7 @@ public abstract class Konto {
     protected int kontonummer;
     protected Kunde besitzer;
 
-    //Warum keine abstract Methoden? (kilian)
+
 
 
     public void setKontonummer(int kontonummer) {

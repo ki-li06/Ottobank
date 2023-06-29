@@ -35,6 +35,17 @@ public class StackedWidget extends JLayeredPane{
         }
         return null;
     }
+    public JComponent getElement(String keypair) {
+        String[] keys = keypair.split(":");
+        if (keys.length != 2) {
+            throw new ArrayIndexOutOfBoundsException("INVALID keypair");
+        }
+        try {
+            return getFrame(keys[0]).getElement(keys[1]);
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
     public int getPlaneIndex(String key) {
         for (int i=0;i<keys.size();i++) {
             if (Objects.equals(keys.get(i), key)) {

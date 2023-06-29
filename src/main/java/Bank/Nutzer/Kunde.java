@@ -2,10 +2,12 @@ package Bank.Nutzer;
 
 public class Kunde extends Nutzer
 {
-    public Kunde(String nameNeu, String pinNeu) {
+    public Kunde(String nameNeu, String mail, String pinNeu) {
         name = nameNeu;
+        this.email = mail;
         pin = pinNeu;
     }
+
 
     public double KontostandGeben()
     {

@@ -1,5 +1,7 @@
 package Datenbank.LiteSQL;
 
+import Bank.Nutzer.Nutzer;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,6 +16,23 @@ public class NutzerDB extends LiteSQL{
         super();
     }
 
+
+    public static final String ANGESTELLTER = "Angestellter";
+    public static final String NUTZER = "NUTZER";
+    public void NutzerHinzufügen(String Name, String Mail, String PIN, String type){
+
+    }
+    public Nutzer NutzerZuAnmeldeDaten(String Mail, String PIN){
+        return null;
+    }
+    public boolean NutzerNameExistiert(String name){
+        return false;
+    }
+    public List<Nutzer> alleNutzerGeben(){
+        return null;
+    }
+
+    /*
     private void NutzerHinzufügen(String Name, int ID, String PIN) {
         connect();
         String cmd = "INSERT INTO NutzerDB (Name, ID, PIN) VALUES ('PARAM_NAME', 'PARAM_ID', 'PARAM_PIN');";
@@ -43,7 +62,8 @@ public class NutzerDB extends LiteSQL{
      * @param Name Name des Nutzers
      * @param PIN Pin des gleichen Nutzers, wird überprüft
      * @return gibt die NutzerID zurück
-     */
+     **/
+    /*
     public int PinRichtig(String Name, String PIN){
         connect();
         String cmd = "SELECT ID FROM NutzerDB WHERE Name = 'PARAM_NAME' AND PIN = 'PARAM_PIN';";
@@ -64,6 +84,7 @@ public class NutzerDB extends LiteSQL{
      * Die Datenbank ist nicht darauf ausgelegt, zwei Nutzer mit dem gleichen Namen anzulegen.
      * @return
      */
+    /*
     public boolean NutzerNameExistiert(String name){
         connect();
         String command = "SELECT Name FROM NutzerDB;";
@@ -136,5 +157,6 @@ public class NutzerDB extends LiteSQL{
         disconnect();
         System.out.println("---");
     }
+    */
 
 }

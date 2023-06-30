@@ -43,9 +43,14 @@ public class Bank {
     /*Datenbankverbindung DatenbankverbindungGeben(){
         return null;
     };*/
-    // bitte überarbeiten - macht in unserem Sachzusammenhang keine Sinn, Mail ist das Individuelle Attribut
+    /*
+        bitte überarbeiten - macht in unserem Sachzusammenhang keine Sinn,
+        Mail ist das Individuelle Attribut
+        (man muss sich nicht genau an die Angaben vom Buch halten)
+     */
     Kunde KundenSuchen(String name)
     {
+        /*
         NutzerDB ndb = new NutzerDB();
         if (ndb.NutzerNameExistiert(name) == true){
             List<Nutzer> list = ndb.alleNutzerGeben();
@@ -59,6 +64,8 @@ public class Bank {
         else{
             return null;
         }
+        */
+        return null;
     };
     /*int [] KontonummernFuerKundenGeben(){
         NutzerDB ndb = new NutzerDB();

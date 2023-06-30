@@ -3,9 +3,7 @@ package Bank.Nutzer;
 public class Kunde extends Nutzer
 {
     public Kunde(String nameNeu, String mail, String pinNeu) {
-        name = nameNeu;
-        this.email = mail;
-        pin = pinNeu;
+        super(nameNeu, mail, pinNeu);
     }
 
 
@@ -27,6 +25,13 @@ public class Kunde extends Nutzer
     /*Auszugseintrag[] AuszugsdatenErstelen(){};
     * boolean Aktkonto(int)*/
 
-
+    @Override
+    public String toString() {
+        return "Kunde{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", pin='" + pin + '\'' +
+                '}';
+    }
 }
 

@@ -10,6 +10,12 @@ public abstract class Nutzer {
     String pin;
     Konto konto;   //(kilian) warum hat ein Nutzer ein Konto?
 
+    public Nutzer(String name, String email, String pin) {
+        this.name = name;
+        this.email = email;
+        this.pin = pin;
+    }
+
     public String getName() {
         return name;
     }
@@ -18,7 +24,7 @@ public abstract class Nutzer {
         return pin;
     }
 
-    public String getEmail() {
+    public String getEMail() {
         return email;
     }
     /*
@@ -26,4 +32,9 @@ public abstract class Nutzer {
         NutzerDB ndb = new NutzerDB();
         return ndb.NutzerIDGeben(name);
     }*/
+
+    @Override
+    public String toString() {
+        return null;
+    }
 }

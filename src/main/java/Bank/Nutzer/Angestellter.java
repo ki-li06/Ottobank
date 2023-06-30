@@ -5,10 +5,8 @@ import Bank.Konten.Girokonto;
 import Bank.Konten.Sparkonto;
 
 public class Angestellter extends Nutzer{
-    public Angestellter(String nameneu, String pinneu, String mailneu) {
-        name = nameneu;
-        pin = pinneu;
-        email = mailneu;
+    public Angestellter(String nameNeu, String mailNeu, String pinNeu) {
+        super(nameNeu, mailNeu, pinNeu);
     }
     int SparkontoEinrichten()
     {
@@ -39,4 +37,13 @@ public class Angestellter extends Nutzer{
         return "";
     }
     void KontoSetzten(){}
+
+    @Override
+    public String toString() {
+        return "Angestellter{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", pin='" + pin + '\'' +
+                '}';
+    }
 }

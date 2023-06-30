@@ -4,7 +4,7 @@ public class Girokonto extends Konto{
     double überziehungsrahmen = 0.0;
 
     public Girokonto(){
-        
+        super();
     }
 
     public boolean Abheben(double abhebebetrag){
@@ -21,5 +21,15 @@ public class Girokonto extends Konto{
     public double ÜberziehungsrahmenGeben(){
         double nettoeinkommen = 0.0; //pop up fenster mit eingabe feld für nettoeinkommen
         return ÜberziehungsrahmenBerechnen(nettoeinkommen);
+    }
+
+    @Override
+    public String toString() {
+        return "Girokonto{" +
+                "überziehungsrahmen=" + überziehungsrahmen +
+                ", kontostand=" + kontostand +
+                ", kontonummer=" + kontonummer +
+                ", besitzer=" + besitzer +
+                '}';
     }
 }

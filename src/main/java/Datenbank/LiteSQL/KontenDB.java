@@ -20,6 +20,10 @@ public class KontenDB extends LiteSQL{
         super();
     }
 
+    /**
+     * fügt ein neues Konto in die Datenbank ein
+     * @param konto Konto das eingefügt werden soll; KontoNummer wird automatisch gesetzt (bitte 0 lassen)
+     */
     public void KontoHinzufügen(Konto konto){
         /*int nummer;
         do{
@@ -77,13 +81,31 @@ public class KontenDB extends LiteSQL{
         disconnect();
         return list.contains(nummer);*/
     }
+
+    /**
+     * gibt das Konto zur passenden Kontonummer zurück
+     * @param nummer die Kontonummer
+     */
     public Konto getKontoVonKontonummer(int nummer){
         return null;
     }
-    public void KontoÄndern (int id){
+
+    /**
+     * überschreibt die Attribute des neuen Kontos auf das in der Datenbank gespeicherte Konto
+     * @param nummer die Kontonummer des "alten" Kontos
+     * @param neuesKonto die Attribute dieses Objektes werden übernommen
+     */
+    public void KontoÄndern (int nummer, Konto neuesKonto){
 
     }
 
+    /**
+     * löscht ein Konto
+     * @param nummer die Kontonummer des Kontos
+     */
+    public void KontoLöschen(int nummer){
+
+    }
 
 
 }

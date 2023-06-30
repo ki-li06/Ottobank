@@ -7,8 +7,10 @@ public abstract class Konto {
     protected int kontonummer;
     protected Kunde besitzer;
 
-
-
+    public Konto(){
+        kontostand = 0;
+        kontonummer = -1;
+    }
 
     public void setKontonummer(int kontonummer) {
         this.kontonummer = kontonummer;
@@ -33,5 +35,8 @@ public abstract class Konto {
         kontostand=kontostand+einzahlbetrag;
     }
 
-
+    @Override
+    public String toString() {
+        return null;
+    }
 }

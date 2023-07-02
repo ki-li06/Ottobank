@@ -29,7 +29,7 @@ public class MainWindow{
 
         createSettingsPage();
 
-        layerManager.showPlane(3);
+        layerManager.showPlane(2);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -183,22 +183,36 @@ public class MainWindow{
 
         BetterButton freeMoneyButton = new BetterButton();
         freeMoneyButton.setText("Einzahlen");
-        freeMoneyButton.setBounds(10,60,420,30);
+        freeMoneyButton.setBounds(25,60,390,30);
+        freeMoneyButton.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                CustomPopup cb = new CustomPopup();
+                JLabel xy = new JLabel("Betrag zum Einzahlen eingeben");
+                cb.addWidget(xy, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+                JTextField zy = new JTextField();
+                zy.addKeyListener(new IntegerInputKeyListener());
+                zy.setHorizontalAlignment(JTextField.CENTER);
+                zy.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+                cb.addWidget(zy, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+                System.out.println(cb.displayPopup(mainPage, "Einzahlen"));
+            }
+        });
         mainPage.registerComponent(freeMoneyButton, "DEPOSIT_BUTTON");
 
         BetterButton transactionButton = new BetterButton();
         transactionButton.setText("Überweisen");
-        transactionButton.setBounds(10,100,420,30);
+        transactionButton.setBounds(25,100,390,30);
         mainPage.registerComponent(transactionButton, "TRANSACTION_BUTTON");
 
         BetterButton deleteMoneyButton = new BetterButton();
         deleteMoneyButton.setText("Abheben");
-        deleteMoneyButton.setBounds(10,140,420,30);
+        deleteMoneyButton.setBounds(25,140,390,30);
         mainPage.registerComponent(deleteMoneyButton, "WITHDRAW_BUTTON");
 
         BetterButton unknownUseButton = new BetterButton();
         unknownUseButton.setText("Zinssatz ändern");
-        unknownUseButton.setBounds(10,180,420,30);
+        unknownUseButton.setBounds(25,180,390,30);
         mainPage.registerComponent(unknownUseButton, "???_BUTTON");
     }
 

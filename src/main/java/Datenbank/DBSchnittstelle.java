@@ -1,45 +1,29 @@
 package Datenbank;
 
+import Bank.Konten.Girokonto;
+import Bank.Konten.Konto;
+import Bank.Konten.Sparkonto;
 import Bank.Nutzer.Angestellter;
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
+import Datenbank.LiteSQL.KontenDB;
 import Datenbank.LiteSQL.NutzerDB;
 
 import java.util.List;
 
 public class DBSchnittstelle {
     public static void main(String[] args) {
-        Angestellter kunde = new Angestellter("ThomasMüller", "tm@gmail.com", "passwort");
         NutzerDB ndb = new NutzerDB();
-        ndb.NutzerHinzufügen(kunde);
-        System.out.println();
-        Nutzer nd = ndb.NutzerZuMail("tm@gmail.com");
-        System.out.println("nutzer in der datenbank " + nd.toString());
-        System.out.println();
-        boolean b = ndb.PasswortRichtig("tm@gmail.com", "passwort");
-        System.out.println("passwort richtig ? " + b);
-        System.out.println();
-        System.out.println("Alle NutzerGeben");
-        List<Nutzer> list = ndb.alleNutzerGeben();
-        for (Nutzer n : list) {
-            System.out.println(" - " + n);
-        }
-        System.out.println();
-        ndb.PinÄndern("tm@gmail.com", "nEuEsPaSsWoRt");
-        System.out.println();
-        ndb.alleNutzerAusgeben();
-        System.out.println();
-        ndb.NutzerLöschen("tm@gmail.com");
+        Kunde kunde = (Kunde) ndb.NutzerZuMail("mustermann@gmx.de");
+        System.out.println("kunde: " + kunde);
 
-        /*
-        Konto konto = new Sparkonto();
-        konto.setBesitzer(kunde);
-
+        //Girokonto gk = new Girokonto(420.00, kunde, 999.99);
+        final int NUMMER = 856808;
         KontenDB kdb = new KontenDB();
-        kdb.KontoHinzufügen(konto);
+        Konto k = kdb.getKontoVonKontonummer(NUMMER);
 
-        System.out.println("id: " + konto.KontonummerGeben());
-        */
+        System.out.println("konto: " + k);
+
 
 
     }

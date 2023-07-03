@@ -26,7 +26,7 @@ public class Bank {
     }
     int SparkontoEinrichten()
     {
-        Sparkonto spark=new Sparkonto();
+        Sparkonto spark= new Sparkonto();
         return spark.KontonummerGeben();
     }
     int GirokontoEinrichten()
@@ -39,7 +39,7 @@ public class Bank {
     {
         return true;
     }
-    void AngestelltenLoeschen(){};
+    void AngestelltenLoeschen(){}
     /*Datenbankverbindung DatenbankverbindungGeben(){
         return null;
     };*/
@@ -66,14 +66,14 @@ public class Bank {
         }
         */
         return null;
-    };
+    }
     /*int [] KontonummernFuerKundenGeben(){
         NutzerDB ndb = new NutzerDB();
         ;
     };*/
     Angestellter AngestellterSuchen(){
         return null;
-    };
+    }
     List<String> NutzernamenGeben()
     {
     NutzerDB ndb=new NutzerDB();
@@ -117,12 +117,12 @@ public class Bank {
 
 
 
-    Bank BankGeben(){return null;};//???
+    Bank BankGeben(){return null;}//???
     Konto KontoSuchen(int kontonummer)
     {
         return null;
-    };
-    void Beenden(){};
+    }
+    void Beenden(){}
 
 
 }

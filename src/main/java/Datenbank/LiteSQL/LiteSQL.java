@@ -9,13 +9,11 @@ public abstract class LiteSQL {
     private Connection connection;
     private Statement stmt;
 
-    private final String filename;
+    private final String filename = "datenbank.db";
+    private String table_name;
 
-    protected LiteSQL(){
-        this("datenbank.db");
-    }
-    protected LiteSQL(String filename) {
-        this.filename = filename;
+    protected LiteSQL(String table) {
+        this.table_name = table;
     }
 
     protected void connect(){
@@ -50,14 +48,16 @@ public abstract class LiteSQL {
             e.printStackTrace();
         }
     }
-    protected void onUpdate(String sql){
+    protected void onUpdate(String cmd){
+        String sql = cmd.replace("TABLE", table_name);
         try {
             stmt.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    protected ResultSet onQuery(String sql){
+    protected ResultSet onQuery(String cmd){
+        String sql = cmd.replace("TABLE", table_name);
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException e) {

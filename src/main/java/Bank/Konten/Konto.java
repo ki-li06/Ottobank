@@ -3,13 +3,24 @@ package Bank.Konten;
 import Bank.Nutzer.Kunde;
 
 public abstract class Konto {
-    protected double kontostand;
     protected int kontonummer;
+    protected double kontostand;
     protected Kunde besitzer;
 
-    public Konto(){
+    protected Konto(){
         kontostand = 0;
         kontonummer = -1;
+    }
+
+    public Konto(double kontostand, Kunde besitzer) {
+        kontonummer = -1;
+        this.kontostand = kontostand;
+        this.besitzer = besitzer;
+    }
+
+    protected Konto(int kontonummer, double kontostand, Kunde besitzer) {
+        this(kontostand, besitzer);
+        this.kontonummer = kontonummer;
     }
 
     public void setKontonummer(int kontonummer) {
@@ -34,6 +45,13 @@ public abstract class Konto {
     {
         kontostand=kontostand+einzahlbetrag;
     }
+
+    /**
+     * für die Datenbank wichtig (da sowohl GiroKonto als auch das Sparkonto nur ein Double
+     * szg. extra als Attribut haben, wird dies in der Datenbank als eines gespeichert)
+     */
+    public abstract double getSpecialDouble();
+    public abstract String getType();
 
     @Override
     public String toString() {

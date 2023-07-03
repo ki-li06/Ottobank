@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Bank.Nutzer.Angestellter.ANGESTELLTER;
+import static Bank.Nutzer.Kunde.KUNDE;
 import static util.StringFormat.format;
 
 /**
@@ -21,12 +23,9 @@ import static util.StringFormat.format;
 public class NutzerDB extends LiteSQL{
 
     public NutzerDB(){
-        super();
+        super("NutzerDB");
     }
 
-
-    public static final String ANGESTELLTER = "ANGESTELLTER";
-    public static final String KUNDE = "KUNDE";
 
     /**
      * fügt einen neuen Nutzer in die Datenbank ein (Mail bitte davor checken)
@@ -36,20 +35,14 @@ public class NutzerDB extends LiteSQL{
         String name = nutzer.getName();
         String mail = nutzer.getEMail();
         String pin = nutzer.getPin();
-        String type = "-FEHLER_TYPE-";
-        if(nutzer instanceof Angestellter){
-            type = ANGESTELLTER;
-        }
-        else if(nutzer instanceof Kunde){
-            type = KUNDE;
-        }
+        String type = nutzer.getType();
 
         if(MailBelegt(mail)){
             System.out.println("FEHLER - MailAdresse '" + mail + "' schon belegt");
             return;
         }
         connect();
-        String cmd = "INSERT INTO NutzerDB (Name, Mail, PIN, Type) VALUES ('PARAM_NAME', 'PARAM_MAIL', 'PARAM_PIN', 'PARAM_TYPE');";
+        String cmd = "INSERT INTO TABLE (Name, Mail, PIN, Type) VALUES ('PARAM_NAME', 'PARAM_MAIL', 'PARAM_PIN', 'PARAM_TYPE');";
         cmd = cmd
                 .replace("PARAM_NAME", name)
                 .replace("PARAM_MAIL", String.valueOf(mail))
@@ -57,16 +50,15 @@ public class NutzerDB extends LiteSQL{
                 .replace("PARAM_TYPE", type);
         onUpdate(cmd);
         disconnect();
-        System.out.println(nutzer.toString() + " hinzugefügt");
+        System.out.println(nutzer + " hinzugefügt");
     }
 
     /**
      * überprüft, ob diese EMail Adresse schon in der Datenbank vorhanden ist
      * @param mail zu überprüfende Mail-Adresse
-     * @return
      */
     public boolean MailBelegt(String mail){
-        String cmd = "SELECT Mail FROM NutzerDB";
+        String cmd = "SELECT Mail FROM TABLE";
         connect();
         ResultSet rs = onQuery(cmd);
         List<String> adresssen = new ArrayList<>();
@@ -88,15 +80,18 @@ public class NutzerDB extends LiteSQL{
      * @return gleich null, wenn die Adresse nicht vorhanden ist
      */
     public Nutzer NutzerZuMail(String mail){
-        String cmd = "SELECT * FROM NutzerDB WHERE Mail = 'PARAM_MAIL'";
+        String cmd = "SELECT * FROM TABLE WHERE Mail = 'PARAM_MAIL'";
         cmd = cmd
                 .replace("PARAM_MAIL", mail);
         connect();
         ResultSet rs = onQuery(cmd);
         try{
             String name = rs.getString("Name");
+            //System.out.println("name: " + name);
             String pin = rs.getString("PIN");
+            //System.out.println("pin: " + pin);
             String type = rs.getString("Type");
+            //System.out.println("type: " + type);
             disconnect();
             if(type.equals(ANGESTELLTER)){
                 return new Angestellter(name, mail, pin);
@@ -120,7 +115,7 @@ public class NutzerDB extends LiteSQL{
         if(!MailBelegt(mail)){
             return false;
         }
-        String cmd = "SELECT PIN FROM NutzerDB WHERE Mail = 'PARAM_MAIL'";
+        String cmd = "SELECT PIN FROM TABLE WHERE Mail = 'PARAM_MAIL'";
         cmd = cmd
                 .replace("PARAM_MAIL", mail);
         connect();
@@ -141,7 +136,7 @@ public class NutzerDB extends LiteSQL{
      * gibt eine List an allen Nutzer zurück, die in der Datenbank gespeichert sind (mit instanceof Angestellter/Kunde checken)
      */
     public List<Nutzer> alleNutzerGeben(){
-        String cmd = "SELECT * FROM NutzerDB";
+        String cmd = "SELECT * FROM TABLE";
         connect();
         ResultSet rs = onQuery(cmd);
         List<Nutzer> list = new ArrayList<>();
@@ -173,7 +168,7 @@ public class NutzerDB extends LiteSQL{
      * @param pinNeu die neue Pin des Nutzers
      */
     public void PinÄndern(String mail, String pinNeu){
-        String cmd = "UPDATE NutzerDB SET PIN = 'PARAM_PIN' WHERE Mail = 'PARAM_MAIL'";
+        String cmd = "UPDATE TABLE SET PIN = 'PARAM_PIN' WHERE Mail = 'PARAM_MAIL'";
         cmd = cmd
                 .replace("PARAM_PIN", pinNeu)
                 .replace("PARAM_MAIL", mail);
@@ -188,7 +183,7 @@ public class NutzerDB extends LiteSQL{
      * @param mail die EMail Adresse des Nutzers
      */
     public void NutzerLöschen (String mail){
-        String cmd = "DELETE FROM NutzerDB WHERE Mail = 'PARAM_MAIL'";
+        String cmd = "DELETE FROM TABLE WHERE Mail = 'PARAM_MAIL'";
         cmd = cmd
                 .replace("PARAM_MAIL", mail);
         connect();
@@ -200,20 +195,14 @@ public class NutzerDB extends LiteSQL{
 
     public void alleNutzerAusgeben(){
         List<Nutzer> list = new ArrayList<>(alleNutzerGeben());
-        System.out.println("AUSGABE NutzerDB");
+        System.out.println("AUSGABE TABLE");
         System.out.println("Name" + " ".repeat(21) + "Mail" + " ".repeat(21) + "PIN" + " ".repeat(22) + "Type" + " ".repeat(21));
         for (Nutzer n : list) {
             String s = "";
             s += format(n.getName(), 25);
             s += format(n.getEMail(), 25);
             s += format(n.getPin(), 25);
-            String type = "-----";
-            if(n instanceof Angestellter){
-                type = ANGESTELLTER;
-            }
-            else if(n instanceof Kunde){
-                type = KUNDE;
-            }
+            String type = n.getType();
             s += type;
             System.out.println(s);
 

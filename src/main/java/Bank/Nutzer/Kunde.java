@@ -2,6 +2,8 @@ package Bank.Nutzer;
 
 public class Kunde extends Nutzer
 {
+    public static String KUNDE = "KUNDE";
+
     public Kunde(String nameNeu, String mail, String pinNeu) {
         super(nameNeu, mail, pinNeu);
     }
@@ -24,6 +26,11 @@ public class Kunde extends Nutzer
 
     /*Auszugseintrag[] AuszugsdatenErstelen(){};
     * boolean Aktkonto(int)*/
+
+    @Override
+    public String getType() {
+        return KUNDE;
+    }
 
     @Override
     public String toString() {

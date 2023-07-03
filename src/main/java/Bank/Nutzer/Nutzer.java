@@ -33,6 +33,8 @@ public abstract class Nutzer {
         return ndb.NutzerIDGeben(name);
     }*/
 
+    public abstract String getType();
+
     @Override
     public String toString() {
         return null;

@@ -210,20 +210,22 @@ public class KontenDB extends LiteSQL{
 
     public void AlleKontenAusgeben(){
         List<Konto> konten = new ArrayList<>(alleKontenGeben());
+        System.out.println("-".repeat(75));
         System.out.println("AUSGABE KontenDB");
-        System.out.println("Nummer Stand" + " ".repeat(6) + "BesitzerMail" + " ".repeat(13) + "Type" + " ".repeat(6) + "Zinsen/Rahmen");
+        System.out.println("Nummer Stand" + " ".repeat(6) + "BesitzerMail" + " ".repeat(13) + "Type" + " ".repeat(8) + "Zinsen/Rahmen");
         for (Konto k: konten) {
             String nummer = format(String.valueOf(k.KontonummerGeben()), 7);
             double doubleStand = k.KontostandGeben();
             String stand = format(formatDouble(doubleStand), 11);
             String mail = format(k.EigentümerGeben().getEMail(), 25);
-            String type = format(k.getType(), 10);
+            String type = format(k.getType(), 12);
             String specialDouble = String.valueOf(k.getSpecialDouble());
 
             System.out.println(nummer + stand + mail + type + specialDouble);
 
-
         }
+        System.out.println("-".repeat(75));
+
     }
 
 }

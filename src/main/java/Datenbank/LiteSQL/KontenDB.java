@@ -12,6 +12,9 @@ import java.util.List;
 
 import static Bank.Konten.Girokonto.GIROKONTO;
 import static Bank.Konten.Sparkonto.SPARKONTO;
+import static util.Round.round;
+import static util.StringFormat.format;
+import static util.StringFormat.formatDouble;
 import static util.Zufall.RandomInt;
 
 /**
@@ -69,7 +72,7 @@ public class KontenDB extends LiteSQL{
      * überprüft, ob die eingegebene Nummer schon in der Datenbank belegt ist
      * @param nummer die Kontonummer
      */
-    private boolean NummerSchonBelegt(int nummer){
+    public boolean NummerSchonBelegt(int nummer){
         connect();
         String command = "SELECT Nummer FROM TABLE;";
         ResultSet rs = onQuery(command);
@@ -202,6 +205,25 @@ public class KontenDB extends LiteSQL{
         }
         disconnect();
         return ausgabe;
+    }
+
+
+    public void AlleKontenAusgeben(){
+        List<Konto> konten = new ArrayList<>(alleKontenGeben());
+        System.out.println("AUSGABE KontenDB");
+        System.out.println("Nummer Stand" + " ".repeat(6) + "BesitzerMail" + " ".repeat(13) + "Type" + " ".repeat(6) + "Zinsen/Rahmen");
+        for (Konto k: konten) {
+            String nummer = format(String.valueOf(k.KontonummerGeben()), 7);
+            double doubleStand = k.KontostandGeben();
+            String stand = format(formatDouble(doubleStand), 11);
+            String mail = format(k.EigentümerGeben().getEMail(), 25);
+            String type = format(k.getType(), 10);
+            String specialDouble = String.valueOf(k.getSpecialDouble());
+
+            System.out.println(nummer + stand + mail + type + specialDouble);
+
+
+        }
     }
 
 }

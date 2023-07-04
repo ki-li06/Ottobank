@@ -193,9 +193,10 @@ public class NutzerDB extends LiteSQL{
 
     }
 
-    public void alleNutzerAusgeben(){
+    public void AlleNutzerAusgeben(){
         List<Nutzer> list = new ArrayList<>(alleNutzerGeben());
-        System.out.println("AUSGABE TABLE");
+        System.out.println("-".repeat(100));
+        System.out.println("AUSGABE NutzerDB");
         System.out.println("Name" + " ".repeat(21) + "Mail" + " ".repeat(21) + "PIN" + " ".repeat(22) + "Type" + " ".repeat(21));
         for (Nutzer n : list) {
             String s = "";
@@ -207,5 +208,6 @@ public class NutzerDB extends LiteSQL{
             System.out.println(s);
 
         }
+        System.out.println("-".repeat(100));
     }
 }

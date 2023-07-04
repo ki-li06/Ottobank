@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class MainWindow{
@@ -187,15 +188,7 @@ public class MainWindow{
         freeMoneyButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                CustomPopup cb = new CustomPopup();
-                JLabel xy = new JLabel("Betrag zum Einzahlen eingeben");
-                cb.addWidget(xy, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
-                JTextField zy = new JTextField();
-                zy.addKeyListener(new IntegerInputKeyListener());
-                zy.setHorizontalAlignment(JTextField.CENTER);
-                zy.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-                cb.addWidget(zy, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
-                System.out.println(cb.displayPopup(mainPage, "Einzahlen"));
+                System.out.println(zinssatzPopUp(mainPage));
             }
         });
         mainPage.registerComponent(freeMoneyButton, "DEPOSIT_BUTTON");
@@ -279,6 +272,57 @@ public class MainWindow{
             }
         });
         registerPage.registerComponent(loginButton, "PRIVATE");
+    }
+    public ArrayList<String> einzahlenPopUp(StackedPane page){
+        CustomPopup cb = new CustomPopup();
+        JLabel infoLabel = new JLabel("Betrag zum Einzahlen eingeben");
+        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        JTextField betragEntry = new JTextField();
+        betragEntry.addKeyListener(new IntegerInputKeyListener());
+        betragEntry.setHorizontalAlignment(JTextField.CENTER);
+        betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cb.displayPopup(page, "Einzahlen");
+    }
+    public ArrayList<String> ueberweisenPopUp(StackedPane page){
+        CustomPopup cb = new CustomPopup();
+        JLabel infoLabel = new JLabel("Betrag zum Überweisen eingeben");
+        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        JTextField betragEntry = new JTextField();
+        betragEntry.addKeyListener(new IntegerInputKeyListener());
+        betragEntry.setHorizontalAlignment(JTextField.CENTER);
+        betragEntry.setPreferredSize(new Dimension(400, 35)); // Adjust the height here
+        cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        JLabel kontonummerLabel = new JLabel("Kontonummer des anderen Kontos eingeben");
+        cb.addWidget(kontonummerLabel, cb.createConstraints(0,2,GridBagConstraints.VERTICAL, 2));
+        JTextField kontonummerTextField = new JTextField();
+        //kontonummerTextField.addKeyListener(new IntegerInputKeyListener());
+        kontonummerTextField.setHorizontalAlignment(JTextField.CENTER);
+        kontonummerTextField.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cb.addWidget(kontonummerTextField, cb.createConstraints(0,3,GridBagConstraints.HORIZONTAL, 1));
+        return cb.displayPopup(page, "Überweisen");
+    }
+    public ArrayList<String> abhebenPopUp(StackedPane page){
+        CustomPopup cb = new CustomPopup();
+        JLabel infoLabel = new JLabel("Betrag zum Abheben eingeben");
+        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        JTextField abhebenEntry = new JTextField();
+        abhebenEntry.addKeyListener(new IntegerInputKeyListener());
+        abhebenEntry.setHorizontalAlignment(JTextField.CENTER);
+        abhebenEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cb.addWidget(abhebenEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cb.displayPopup(page, "Abheben");
+    }
+    public ArrayList<String> zinssatzPopUp(StackedPane page){
+        CustomPopup cb = new CustomPopup();
+        JLabel infoLabel = new JLabel("Neuen Zinssatz eingeben");
+        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        JTextField zinssatzEntry = new JTextField();
+        zinssatzEntry.addKeyListener(new IntegerInputKeyListener());
+        zinssatzEntry.setHorizontalAlignment(JTextField.CENTER);
+        zinssatzEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cb.addWidget(zinssatzEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cb.displayPopup(page, "Zinssatz ändern");
     }
     public static void main(String[] args) {
 

@@ -13,12 +13,8 @@ class IntegerInputKeyListener implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        // Do nothing
-    }
+    public void keyPressed(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        // Do nothing
-    }
+    public void keyReleased(KeyEvent e) {}
 }

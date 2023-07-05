@@ -30,6 +30,10 @@ public class MainWindow{
 
         createSettingsPage();
 
+        createAdminMainPage();
+
+        createAdminSettingsPage();
+
         layerManager.showPlane(2);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
@@ -220,40 +224,32 @@ public class MainWindow{
         registerPage.registerComponent(registerInfoLabel, "PRIVATE");
 
 
-        //Vorname Text Field
-        BetterTextField vornameTextField = new BetterTextField();
-        vornameTextField.setEchoChar((char) 0);
-        vornameTextField.putClientProperty("JTextField.placeholderText", "Vorname");
-        vornameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        registerPage.registerComponent(vornameTextField, "VORNAME_INPUT");
-
+        //Account delete choice
+        BetterComboBox accountDeleteChoice = new BetterComboBox(new String[] {"K1","K2","K3"});
+        accountDeleteChoice.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
+        registerPage.registerComponent(accountDeleteChoice, "ACCOUNT_DELETE_CHOICE");
         //Nachname Text Field
-        BetterTextField nachnameTextField = new BetterTextField();
-        nachnameTextField.setEchoChar((char) 0);
-        nachnameTextField.putClientProperty("JTextField.placeholderText", "Nachname");
-        nachnameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
-        registerPage.registerComponent(nachnameTextField, "NACHNAME_INPUT");
-
-        //Email Text Field
-        BetterTextField emailTextField = new BetterTextField();
-        emailTextField.setEchoChar((char) 0);
-        emailTextField.putClientProperty("JTextField.placeholderText", "Email");
-        emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
-        registerPage.registerComponent(emailTextField, "EMAIL_INPUT");
-
-        //Pin Text Field
-        BetterTextField pinTextField = new BetterTextField();
-        pinTextField.setEchoChar((char) 0);
-        pinTextField.putClientProperty("JTextField.placeholderText", "Alte PIN");
-        pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
-        registerPage.registerComponent(pinTextField, "PIN_INPUT");
-
+        BetterButton accountDelete = new BetterButton();
+        accountDelete.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
+        accountDelete.setText("DELETE?");
+        registerPage.registerComponent(accountDelete,"ACCOUNT_DELETE_BUTTON");
+        //Account create
+        BetterTextField accountCreateField = new BetterTextField();
+        accountCreateField.setEchoChar((char) 0);
+        accountCreateField.putClientProperty("JTextField.placeholderText","Account name");
+        accountCreateField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
+        registerPage.registerComponent(accountCreateField,"ACCOUNT_CREATE_INPUT");
+        //Create Button
+        BetterButton accountCreateButton = new BetterButton();
+        accountCreateButton.setText("Create new Account");
+        accountCreateButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
+        registerPage.registerComponent(accountCreateButton,"ACCOUNT_CREATE_BUTTON");
         //Confirm Pin Text Field
         BetterTextField pinConfirmRegisterTextField = new BetterTextField();
-        pinConfirmRegisterTextField.setEchoChar((char) 0);
+        pinConfirmRegisterTextField.setEchoChar('*');
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Neue PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
-        registerPage.registerComponent(pinConfirmRegisterTextField, "CONFIRM_PIN_INPUT");
+        registerPage.registerComponent(pinConfirmRegisterTextField, "NEW_PIN_INPUT");
 
         //Register Button
         BetterButton registerButton = new BetterButton();
@@ -324,6 +320,73 @@ public class MainWindow{
         cb.addWidget(zinssatzEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Zinssatz ändern");
     }
+
+    void createAdminMainPage() {
+        StackedPane adminControls = new StackedPane(layerManager, new Dimension(300,260));
+        layerManager.registerPane(adminControls, "ADMIN_MAIN_PAGE");
+
+        JLabel infoLabel = new JLabel("<html><center>Access user accounts:</center></html>", JLabel.CENTER);
+        int LabelHeight = infoLabel.getPreferredSize().height;
+        infoLabel.setBounds(0, 60, 300, LabelHeight);
+        adminControls.registerComponent(infoLabel, "PRIVATE");
+
+        BetterTextField accountName = new BetterTextField();
+        accountName.setEchoChar((char) 0);
+        accountName.putClientProperty("JTextField.placeholderText","Account Email");
+        accountName.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 90, 250, 30);
+        adminControls.registerComponent(accountName, "USER_NAME");
+
+        BetterButton accountLogin = new BetterButton();
+        accountLogin.setText("Login as User");
+        accountLogin.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
+        adminControls.registerComponent(accountLogin, "LOGIN_BUTTON");
+
+        BetterButton settingsButton = new BetterButton();
+        settingsButton.setBounds(adminControls.getWidth()-75, 10, 45, 45);
+        settingsButton.setIcon(new ImageIcon("src/main/resources/icons/settings.png"));
+        settingsButton.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                layerManager.showPlane(5);
+            }
+        });
+
+        adminControls.registerComponent(settingsButton, "PRIVATE");
+    }
+
+    void createAdminSettingsPage() {
+        StackedPane adminSettings = new StackedPane(layerManager, new Dimension(350,260));
+        layerManager.registerPane(adminSettings, "ADMIN_SETTINGS_PAGE");
+
+        JLabel infoLabel = new JLabel("<html><center>Upgrade Account to admin</center></html>", JLabel.CENTER);
+        int LabelHeight = infoLabel.getPreferredSize().height;
+        infoLabel.setBounds(0, 60, 350, LabelHeight);
+        adminSettings.registerComponent(infoLabel, "PRIVATE");
+
+        BetterTextField accountName = new BetterTextField();
+        accountName.setEchoChar((char) 0);
+        accountName.putClientProperty("JTextField.placeholderText","Account Email");
+        accountName.setBounds(adminSettings.getWidth() / 2 - 250 / 2 - 8, 90, 250, 30);
+        adminSettings.registerComponent(accountName, "USER_NAME");
+
+        BetterButton accountLogin = new BetterButton();
+        accountLogin.setText("Upgrade Account");
+        accountLogin.setBounds(adminSettings.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
+        adminSettings.registerComponent(accountLogin, "LOGIN_BUTTON");
+
+        BetterButton backButton = new BetterButton();
+        backButton.setText("Back");
+        backButton.setBounds(adminSettings.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
+        adminSettings.registerComponent(backButton, "PRIVATE");
+
+        backButton.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                layerManager.showPlane(4);
+            }
+        });
+    }
+    
     public static void main(String[] args) {
 
         WindowManager.getWindow();

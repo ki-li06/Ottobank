@@ -31,11 +31,9 @@ public abstract class Konto {
         this.besitzer = besitzer;
     }
 
-    public void Abheben(double betrag)
-    {
-        kontostand=kontostand-betrag;
-        System.out.println("Neuer Kontostand:"+kontostand);
-    }
+    public boolean Abheben(double betrag)
+    {return false;} //wird in den Kontos überschrieben
+
     public int KontonummerGeben (){
         return kontonummer;
     }

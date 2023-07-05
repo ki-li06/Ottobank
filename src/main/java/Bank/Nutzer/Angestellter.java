@@ -7,7 +7,8 @@ import Bank.Konten.Sparkonto;
 public class Angestellter extends Nutzer{
     public static final String ANGESTELLTER = "ANGESTELLTER";
 
-    public Angestellter(String nameNeu, String mailNeu, String pinNeu) {
+    public Angestellter(String nameNeu, String mailNeu, String pinNeu)
+    {
         super(nameNeu, mailNeu, pinNeu);
     }
 

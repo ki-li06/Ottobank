@@ -12,8 +12,6 @@ public class Kunde extends Nutzer
     }
 
 
-
-
     /*Auszugseintrag[] AuszugsdatenErstelen(){};
     * boolean Aktkonto(int)*/
 

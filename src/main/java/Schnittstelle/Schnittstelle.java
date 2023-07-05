@@ -52,7 +52,7 @@ public class Schnittstelle {
                     Kunde k = new Kunde(TRV.getText() +"\n"+ TRN.getText(),mail,TRP.getText());
                     nutzerDB.NutzerHinzufügen(k);
                     mw.getWindow().showPlane(1);
-                }else{ 
+                }else{
                     PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
                 }
             }
@@ -66,10 +66,23 @@ public class Schnittstelle {
         BetterButton BSS = (BetterButton) mw.getWindow().getFrame("SETTINGS_PAGE").getElement("SAVE_BUTTON");
 
 
-        //MAIN PAGE
+        //MAIN PAGE USER
         BetterButton BMS = (BetterButton) mw.getWindow().getFrame("REGISTER_PAGE").getElement("SETTINGS_BUTTON");
         
 
+        //MAIN PAGE ADMIN
+        BetterTextField TMAN = (BetterTextField) mw.getWindow().getFrame("ADMIN_MAIN_PAGE").getElement("USER_NAME");
+        BetterButton BMAL = (BetterButton) mw.getWindow().getFrame("ADMIN_MAIN_PAGE").getElement("LOGIN_BUTTON");
+        BMAL.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                if(TMAN.getText().equals("")){
+                    PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
+                }else{
+                    mw.getWindow().showPlane(2);
+                }
+            }
+        });
     }
 
     public static void main(MainWindow mw) {

@@ -24,22 +24,22 @@ public class Bank {
             System.out.println("Das Passwort stimmt nicht mit dem Adminpasswort überein");
         }
     }
-    int SparkontoEinrichten()
-    {
+
+    int SparkontoEinrichten() {
         Sparkonto spark= new Sparkonto();
         return spark.KontonummerGeben();
     }
-    int GirokontoEinrichten()
-    {
+
+    int GirokontoEinrichten() {
         Girokonto girok =new Girokonto();
         return girok.KontonummerGeben();
     }
 
-    boolean KontoLoeschen(Konto kontoLoeschen)
-    {
+    boolean KontoLoeschen(Konto kontoLoeschen) {
         return true;
     }
-    void AngestelltenLoeschen(){}
+
+    void AngestelltenLoeschen() {
     /*Datenbankverbindung DatenbankverbindungGeben(){
         return null;
     };*/
@@ -48,8 +48,9 @@ public class Bank {
         Mail ist das Individuelle Attribut
         (man muss sich nicht genau an die Angaben vom Buch halten)
      */
-    Kunde KundenSuchen(String name)
-    {
+    }
+
+    Kunde KundenSuchen(String name) {
         /*
         NutzerDB ndb = new NutzerDB();
         if (ndb.NutzerNameExistiert(name) == true){
@@ -67,25 +68,27 @@ public class Bank {
         */
         return null;
     }
+
     /*int [] KontonummernFuerKundenGeben(){
         NutzerDB ndb = new NutzerDB();
         ;
     };*/
+
     Angestellter AngestellterSuchen(){
         return null;
     }
-    List<String> NutzernamenGeben()
-    {
-    NutzerDB ndb=new NutzerDB();
-    List<Nutzer> list=ndb.alleNutzerGeben();
-    List<String> ausgabe=new ArrayList<>();
+
+    List<String> NutzernamenGeben() {
+        NutzerDB ndb=new NutzerDB();
+        List<Nutzer> list=ndb.alleNutzerGeben();
+        List<String> ausgabe=new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             ausgabe.add(list.get(i).getName());
         }
         return ausgabe;
     }
-    List<String> AngestelltennamenGeben()
-    {
+
+    List<String> AngestelltennamenGeben() {
         NutzerDB ndb=new NutzerDB();
         List<Nutzer> list=ndb.alleNutzerGeben();
         List<String> ausgabe=new ArrayList<>();
@@ -95,8 +98,8 @@ public class Bank {
         }
         return ausgabe;
     }
-    List<String> KundennamenGeben()
-    {
+
+    List<String> KundennamenGeben() {
         NutzerDB ndb=new NutzerDB();
         List<Nutzer> list=ndb.alleNutzerGeben();
         List<String> ausgabe=new ArrayList<>();

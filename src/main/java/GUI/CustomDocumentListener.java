@@ -4,7 +4,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 class CustomDocumentListener implements DocumentListener {
-    private BetterTextField t;
+    private final BetterTextField t;
     CustomDocumentListener(BetterTextField parent) {
         this.t = parent;
     }

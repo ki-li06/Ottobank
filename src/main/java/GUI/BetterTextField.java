@@ -9,7 +9,6 @@ public class BetterTextField extends JPasswordField {
         this.method = new UITextFieldMethod() {
             @Override
             public void performMethod(String data) {
-                return;
             }
         };
         afterConstruct();
@@ -19,7 +18,6 @@ public class BetterTextField extends JPasswordField {
             this.method = new UITextFieldMethod() {
                 @Override
                 public void performMethod(String data) {
-                    return;
                 }
             };
         } else {

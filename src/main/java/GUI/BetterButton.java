@@ -5,7 +5,7 @@ import javax.swing.JButton;
 /**
  * Extended Button class. Easier support for method binding.\n
  * Usage:\n
- * .addMethod(new UIButtonMethod() {@\n
+ * .addMethod(new UIButtonMethod() {\n
  *      \@Override\n
  *      public void performMethod() {\n
  *          DO_STUFF_HERE\n
@@ -21,7 +21,6 @@ public class BetterButton extends JButton {
         this.method = new UIButtonMethod() {
             @Override
             public void performMethod() {
-                return;
             }
         };
         this.addActionListener(new CustomActionListener(this));
@@ -33,7 +32,6 @@ public class BetterButton extends JButton {
             this.method = new UIButtonMethod() {
                 @Override
                 public void performMethod() {
-                    return;
                 }
             };
         } else {
@@ -42,9 +40,7 @@ public class BetterButton extends JButton {
         this.addActionListener(new CustomActionListener(this));
     }
     public void addMethod(UIButtonMethod method) {
-        if (method == null) {
-            return;
-        } else {
+        if (method != null) {
             this.method = method;
         }
     }

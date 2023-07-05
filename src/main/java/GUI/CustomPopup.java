@@ -18,7 +18,7 @@ public class CustomPopup {
         widgets.add(widget);
     }
 
-    public ArrayList displayPopup(JComponent parent, String title){
+    public ArrayList<String> displayPopup(JComponent parent, String title){
         ArrayList<String> result = new ArrayList<>();
         int options = JOptionPane.showConfirmDialog(parent,
                 mainPanel,

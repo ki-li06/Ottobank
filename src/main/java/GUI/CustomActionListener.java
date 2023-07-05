@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class CustomActionListener implements ActionListener {
-    private JComponent parent;
+    private final JComponent parent;
     CustomActionListener(BetterButton parent) {
         this.parent = parent;
     }
@@ -19,7 +19,7 @@ class CustomActionListener implements ActionListener {
         }
         if (this.parent.getClass().equals(BetterComboBox.class)) {
             int index = ((BetterComboBox) this.parent).getSelectedIndex();
-            ((BetterComboBox) this.parent).getMethod().performMethod((String) ((BetterComboBox) this.parent).getItemAt(index));
+            ((BetterComboBox) this.parent).getMethod().performMethod(((BetterComboBox) this.parent).getItemAt(index));
         }
 
     }

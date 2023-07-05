@@ -8,7 +8,6 @@ public class BetterComboBox extends JComboBox<String> {
         this.method = new UIComboBoxMethod() {
             @Override
             public void performMethod(String data) {
-                return;
             }
         };
         this.addActionListener(new CustomActionListener(this));
@@ -20,7 +19,6 @@ public class BetterComboBox extends JComboBox<String> {
             this.method = new UIComboBoxMethod() {
                 @Override
                 public void performMethod(String data) {
-                    return;
                 }
             };
         } else {
@@ -29,9 +27,7 @@ public class BetterComboBox extends JComboBox<String> {
         this.addActionListener(new CustomActionListener(this));
     }
     public void addMethod(UIComboBoxMethod method) {
-        if (method == null) {
-            return;
-        } else {
+        if (method != null) {
             this.method = method;
         }
     }

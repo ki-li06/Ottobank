@@ -8,7 +8,7 @@ public abstract class Nutzer {
     String name;
     String email;
     String pin;
-    Konto konto;   //(kilian) warum hat ein Nutzer ein Konto?
+
 
     public Nutzer(String name, String email, String pin) {
         this.name = name;

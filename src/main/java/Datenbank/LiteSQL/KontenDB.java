@@ -207,6 +207,21 @@ public class KontenDB extends LiteSQL{
         return ausgabe;
     }
 
+    /**
+     * gibt eine Liste an allen Konten zurück, die einem User gehören
+     * @param mail die Mail des Users
+     * @return
+     */
+    public List<Konto> KontenVonUserGeben(String mail){
+        List<Konto> alleKonten = new ArrayList<>();
+        List<Konto> ausgabe = new ArrayList<>();
+        for (Konto k : alleKonten) {
+            if(k.EigentümerGeben().getEMail().equals(mail)){
+                ausgabe.add(k);
+            }
+        }
+        return ausgabe;
+    }
 
     public void AlleKontenAusgeben(){
         List<Konto> konten = new ArrayList<>(alleKontenGeben());

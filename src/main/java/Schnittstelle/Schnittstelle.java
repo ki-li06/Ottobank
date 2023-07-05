@@ -25,6 +25,8 @@ public class Schnittstelle {
         BLL.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
+                //System.out.println("email: '" + TLE.getText() + "'");
+                //System.out.println("text : '" + TLP.getText() + "'");
                 if (nutzerDB.PasswortRichtig(TLE.getText(),TLP.getText())) {
                     if(nutzerDB.NutzerZuMail(TLE.getText()).getType().equals(ANGESTELLTER)) {
                         mw.getWindow().showPlane(4);

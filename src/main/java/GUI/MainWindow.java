@@ -269,6 +269,7 @@ public class MainWindow{
         });
         registerPage.registerComponent(loginButton, "PRIVATE");
     }
+
     public ArrayList<String> einzahlenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
         JLabel infoLabel = new JLabel("Betrag zum Einzahlen eingeben");
@@ -280,6 +281,7 @@ public class MainWindow{
         cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Einzahlen");
     }
+
     public ArrayList<String> ueberweisenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
         JLabel infoLabel = new JLabel("Betrag zum Überweisen eingeben");
@@ -419,9 +421,9 @@ public class MainWindow{
     }
     
     public static void main(String[] args) {
-
         WindowManager.getWindow();
     }
+
     public static String formatLabelString(String original) {
         return "<html><center>" + original + "</center></html>";
     }

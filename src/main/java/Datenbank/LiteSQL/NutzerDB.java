@@ -80,6 +80,10 @@ public class NutzerDB extends LiteSQL{
      * @return gleich null, wenn die Adresse nicht vorhanden ist
      */
     public Nutzer NutzerZuMail(String mail){
+        if(!MailBelegt(mail)){
+            System.out.println("FEHLER - NutzerZuMail - die Mail '" + mail + "' ist nicht belegt");
+            return null;
+        }
         String cmd = "SELECT * FROM TABLE WHERE Mail = 'PARAM_MAIL'";
         cmd = cmd
                 .replace("PARAM_MAIL", mail);
@@ -179,6 +183,20 @@ public class NutzerDB extends LiteSQL{
     }
 
     /**
+     * ändert den Typ (Nutzer/Angestellter) des Nutzers
+     */
+    public void TypeÄndern(String mail, String typeNeu){
+        String cmd = "UPDATE TABLE SET Type = 'PARAM_Type' WHERE Mail = 'PARAM_Mail'";
+        cmd = cmd
+                .replace("PARAM_Type", typeNeu)
+                .replace("PARAM_Mail", mail);
+        connect();
+        onUpdate(cmd);
+        disconnect();
+        System.out.println("Type des Nutzers mit der Mail '" + mail + "' auf '" + typeNeu + "' geändert");
+    }
+
+    /**
      * löscht einen Nutzer
      * @param mail die EMail Adresse des Nutzers
      */
@@ -192,6 +210,7 @@ public class NutzerDB extends LiteSQL{
         System.out.println("Nutzers mit der Mail '" + mail + "' gelöscht");
 
     }
+
 
     public void AlleNutzerAusgeben(){
         List<Nutzer> list = new ArrayList<>(alleNutzerGeben());
@@ -210,4 +229,5 @@ public class NutzerDB extends LiteSQL{
         }
         System.out.println("-".repeat(100));
     }
+
 }

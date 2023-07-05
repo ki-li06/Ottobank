@@ -1,31 +1,22 @@
 package Datenbank;
 
-import Bank.Konten.Girokonto;
-import Bank.Konten.Konto;
-import Bank.Konten.Sparkonto;
-import Bank.Nutzer.Angestellter;
-import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
-import Datenbank.LiteSQL.KontenDB;
 import Datenbank.LiteSQL.NutzerDB;
 
-import java.util.List;
+import static Bank.Nutzer.Angestellter.ANGESTELLTER;
+import static Bank.Nutzer.Kunde.KUNDE;
 
 
 public class DBSchnittstelle {
     public static void main(String[] args) {
         NutzerDB ndb = new NutzerDB();
-        Kunde kunde = (Kunde) ndb.NutzerZuMail("huber@sepp.com");
-        System.out.println("kunde: " + kunde);
-        ndb.AlleNutzerAusgeben();
+        String mail = "huber@sepp.com";
+        Nutzer nutzer = ndb.NutzerZuMail(mail);
+        System.out.println("kunde: " + nutzer);
 
-        //Sparkonto sk = new Sparkonto(11200300.41, kunde, 0.025);
-        int NUMMER = 359889;
-        KontenDB kdb = new KontenDB();
-        Konto k = kdb.getKontoVonKontonummer(NUMMER);
+        ndb.TypeÄndern(mail, KUNDE);
 
-        System.out.println("konto: " + k);
-        kdb.AlleKontenAusgeben();
+
 
 
 

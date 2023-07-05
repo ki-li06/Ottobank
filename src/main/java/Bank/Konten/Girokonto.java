@@ -21,12 +21,15 @@ public class Girokonto extends Konto{
     }
 
     public boolean Abheben(double abhebebetrag){
-        if (KontostandGeben()+ÜberziehungsrahmenGeben() - abhebebetrag < 0) {
-        kontostand = kontostand - abhebebetrag;
-        return true;
-    } else {
-        return false;
-    }}
+        if (KontostandGeben()+ÜberziehungsrahmenGeben() - abhebebetrag < 0)
+        {
+            kontostand = kontostand - abhebebetrag;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     private double ÜberziehungsrahmenBerechnen(double nettoeinkommen){
         überziehungsrahmen = nettoeinkommen*3;
         return überziehungsrahmen;

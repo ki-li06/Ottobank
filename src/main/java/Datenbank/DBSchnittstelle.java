@@ -19,11 +19,12 @@ public class DBSchnittstelle {
         System.out.println("kunde: " + kunde);
         ndb.AlleNutzerAusgeben();
 
-        Sparkonto sk = new Sparkonto(11200300.41, kunde, 0.025);
+        //Sparkonto sk = new Sparkonto(11200300.41, kunde, 0.025);
+        int NUMMER = 359889;
         KontenDB kdb = new KontenDB();
-        kdb.KontoHinzufügen(sk);
+        Konto k = kdb.getKontoVonKontonummer(NUMMER);
 
-        System.out.println("konto: " + sk);
+        System.out.println("konto: " + k);
         kdb.AlleKontenAusgeben();
 
 

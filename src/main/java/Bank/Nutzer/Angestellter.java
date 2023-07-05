@@ -7,19 +7,11 @@ import Bank.Konten.Sparkonto;
 public class Angestellter extends Nutzer{
     public static final String ANGESTELLTER = "ANGESTELLTER";
 
-    public Angestellter(String nameNeu, String mailNeu, String pinNeu) {
+    public Angestellter(String nameNeu, String mailNeu, String pinNeu)
+    {
         super(nameNeu, mailNeu, pinNeu);
     }
-    int SparkontoEinrichten()
-    {
 
-        return 0;
-    }
-    int GirokontoEinrichten()
-    {
-        new Girokonto();
-        return -1;
-    }
     boolean KontoLoeschen()
     {
         return false;

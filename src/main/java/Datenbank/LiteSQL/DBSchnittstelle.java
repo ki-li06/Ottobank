@@ -1,5 +1,4 @@
-package Datenbank;
-
+package Datenbank.LiteSQL;
 import Bank.Konten.Konto;
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
@@ -13,7 +12,7 @@ public class DBSchnittstelle {
     public static void main(String[] args) {
         //Kunde k = new Kunde("Herbert Maier", "coole-mail@gmail.com", "notNull");
         NutzerDB ndb = new NutzerDB();
-        //ndb.NutzerHinzufügen(k);
+        //ndb.NutzerHinzufÃ¼gen(k);
         ndb.AlleNutzerAusgeben();
         String mail = "huber@sepp.com";
         String pin = "123456";

@@ -356,7 +356,7 @@ public class MainWindow{
 
     void createAdminSettingsPage() {
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
-        layerManager.registerPane(registerPage, "REGISTER_PAGE");
+        layerManager.registerPane(registerPage, "ADMIN_REGISTER_PAGE");
 
         JLabel registerInfoLabel = new JLabel("Register new admin", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;

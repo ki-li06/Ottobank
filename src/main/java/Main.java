@@ -1,10 +1,16 @@
+import Datenbank.LiteSQL.NutzerDB;
+
 import static util.Delay.delay;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world");
-        delay(200L);
-        System.out.println("Gut reicht auch wieder");
-        
+        //Kunde k = new Kunde("Herbert Maier", "coole-mail@gmail.com", "notNull");
+        NutzerDB ndb = new NutzerDB();
+        //ndb.NutzerHinzufügen(k);
+        ndb.AlleNutzerAusgeben();
+        String mail = "huber@sepp.com";
+        String pin = "123456";
+        boolean b = ndb.PasswortRichtig(mail, pin);
+        System.out.println("b: " + b);
     }
 }

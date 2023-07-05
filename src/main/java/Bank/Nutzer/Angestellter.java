@@ -30,7 +30,7 @@ public class Angestellter extends Nutzer{
         new Kunde(nameNeu, mailNeu, pinNeu);
         return "";
     }
-    void KontoSetzten(){}
+    void KontoSetzen(){}
 
     @Override
     public String getType() {

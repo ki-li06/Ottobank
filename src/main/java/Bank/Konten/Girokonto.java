@@ -20,6 +20,7 @@ public class Girokonto extends Konto{
         this.überziehungsrahmen = überziehungsrahmen;
     }
 
+    @Override
     public boolean Abheben(double abhebebetrag){
         if (KontostandGeben()+ÜberziehungsrahmenGeben() - abhebebetrag < 0)
         {

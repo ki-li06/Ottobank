@@ -10,10 +10,10 @@ public abstract class LiteSQL {
     private Statement stmt;
 
     private final String filename = "datenbank.db";
-    private String table_name;
+    private String tablename;
 
     protected LiteSQL(String table) {
-        this.table_name = table;
+        this.tablename = table;
     }
 
     protected void connect(){
@@ -49,7 +49,7 @@ public abstract class LiteSQL {
         }
     }
     protected void onUpdate(String cmd){
-        String sql = cmd.replace("TABLE", table_name);
+        String sql = cmd.replace("TABLE", tablename);
         try {
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -57,7 +57,7 @@ public abstract class LiteSQL {
         }
     }
     protected ResultSet onQuery(String cmd){
-        String sql = cmd.replace("TABLE", table_name);
+        String sql = cmd.replace("TABLE", tablename);
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException e) {

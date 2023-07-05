@@ -5,12 +5,12 @@ import Datenbank.LiteSQL.NutzerDB;
 
 public abstract class Nutzer {
 
-    String name;
-    String email;
-    String pin;
+    protected String name;
+    protected String email;
+    protected String pin;
 
 
-    public Nutzer(String name, String email, String pin) {
+    protected Nutzer(String name, String email, String pin) {
         this.name = name;
         this.email = email;
         this.pin = pin;

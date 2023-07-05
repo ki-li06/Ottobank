@@ -15,6 +15,7 @@ public class Sparkonto extends Konto{
     public Sparkonto(double kontostand, Kunde besitzer, double zinssatz) {
         super(kontostand, besitzer);
         this.zinssatz = zinssatz;
+        startTimerZinsen();
     }
 
     public Sparkonto(int kontonummer, double kontostand, Kunde besitzer, double zinssatz) {
@@ -34,13 +35,17 @@ public class Sparkonto extends Konto{
     }
 
     public double ZinssatzGeben(){return zinssatz;}
+
+    @Override
     public boolean Abheben(double abhebebetrag) {
+        boolean result;
         if (KontostandGeben() - abhebebetrag < 0) {
             kontostand = kontostand - abhebebetrag;
-            return true;
+            result = true;
         } else {
-            return false;
+            result = false;
         }
+        return result;
     }
 
     @Override

@@ -35,6 +35,7 @@ public class Schnittstelle {
                 } else {
                     PopUp.showError("Passwort falsch!");
                 }
+
             }
         });
         //REGISTER PAGE
@@ -46,9 +47,14 @@ public class Schnittstelle {
         BRR.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-               String mail = TRE.getText();
-               Kunde k = new Kunde(TRV.getText() +"\n"+ TRN.getText(),mail,TRP.getText());
-               nutzerDB.NutzerHinzufügen(k);
+                if(TRV.getText().equals("") ||TRN.getText().equals("")|| TRE.getText().equals("") || TRP.getText().equals("")){
+                    String mail = TRE.getText();
+                    Kunde k = new Kunde(TRV.getText() +"\n"+ TRN.getText(),mail,TRP.getText());
+                    nutzerDB.NutzerHinzufügen(k);
+                    mw.getWindow().showPlane(1);
+                }else{ 
+                    PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
+                }
             }
         });
         //SETTINGS PAGE
@@ -62,6 +68,7 @@ public class Schnittstelle {
 
         //MAIN PAGE
         BetterButton BMS = (BetterButton) mw.getWindow().getFrame("REGISTER_PAGE").getElement("SETTINGS_BUTTON");
+        
 
     }
 

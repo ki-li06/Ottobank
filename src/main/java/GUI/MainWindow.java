@@ -189,12 +189,7 @@ public class MainWindow{
         BetterButton freeMoneyButton = new BetterButton();
         freeMoneyButton.setText("Einzahlen");
         freeMoneyButton.setBounds(25,60,390,30);
-        freeMoneyButton.addMethod(new UIButtonMethod() {
-            @Override
-            public void performMethod() {
-                System.out.println(zinssatzPopUp(mainPage));
-            }
-        });
+
         mainPage.registerComponent(freeMoneyButton, "DEPOSIT_BUTTON");
 
         BetterButton transactionButton = new BetterButton();
@@ -207,10 +202,6 @@ public class MainWindow{
         deleteMoneyButton.setBounds(25,140,390,30);
         mainPage.registerComponent(deleteMoneyButton, "WITHDRAW_BUTTON");
 
-        BetterButton unknownUseButton = new BetterButton();
-        unknownUseButton.setText("Zinssatz ändern");
-        unknownUseButton.setBounds(25,180,390,30);
-        mainPage.registerComponent(unknownUseButton, "???_BUTTON");
     }
 
     void createSettingsPage() {
@@ -311,17 +302,7 @@ public class MainWindow{
         cb.addWidget(abhebenEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Abheben");
     }
-    public ArrayList<String> zinssatzPopUp(StackedPane page){
-        CustomPopup cb = new CustomPopup();
-        JLabel infoLabel = new JLabel("Neuen Zinssatz eingeben");
-        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
-        JTextField zinssatzEntry = new JTextField();
-        zinssatzEntry.addKeyListener(new IntegerInputKeyListener());
-        zinssatzEntry.setHorizontalAlignment(JTextField.CENTER);
-        zinssatzEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(zinssatzEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
-        return cb.displayPopup(page, "Zinssatz ändern");
-    }
+
 
     void createAdminMainPage() {
         StackedPane adminControls = new StackedPane(layerManager, new Dimension(300,260));

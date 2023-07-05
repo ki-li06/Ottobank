@@ -10,16 +10,7 @@ public class Angestellter extends Nutzer{
     public Angestellter(String nameNeu, String mailNeu, String pinNeu) {
         super(nameNeu, mailNeu, pinNeu);
     }
-    int SparkontoEinrichten()
-    {
 
-        return 0;
-    }
-    int GirokontoEinrichten()
-    {
-        new Girokonto();
-        return -1;
-    }
     boolean KontoLoeschen()
     {
         return false;

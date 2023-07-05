@@ -31,7 +31,11 @@ public abstract class Konto {
         this.besitzer = besitzer;
     }
 
-    public boolean Abheben(double betrag){return false;}
+    public void Abheben(double betrag)
+    {
+        kontostand=kontostand-betrag;
+        System.out.println("Neuer Kontostand:"+kontostand);
+    }
     public int KontonummerGeben (){
         return kontonummer;
     }
@@ -44,7 +48,10 @@ public abstract class Konto {
     public void Einzahlen(double einzahlbetrag)
     {
         kontostand=kontostand+einzahlbetrag;
+        System.out.println("Neuer Kontostand:"+kontostand);
     }
+
+
 
     /**
      * für die Datenbank wichtig (da sowohl GiroKonto als auch das Sparkonto nur ein Double

@@ -15,10 +15,9 @@ public class Bank {
     public void NeuenKundenEinrichten(String name, String pin, String mail){
         Kunde kundeneu = new Kunde(name, mail, pin);
     }
-    public void NeuenAngestelltenEinrichten(String name, String pin, String passwort){
+    public void NeuenAngestelltenEinrichten(String name, String pin, String mail, String passwort){
         if (passwort.equals("admin")){
-            //bitte überarbeiten
-            //Angestellter angestellterneu = new Angestellter(name, pin);
+            Angestellter angestellterneu = new Angestellter(name, mail, pin);
         }
         else {
             System.out.println("Das Passwort stimmt nicht mit dem Adminpasswort überein");
@@ -48,24 +47,24 @@ public class Bank {
         Mail ist das Individuelle Attribut
         (man muss sich nicht genau an die Angaben vom Buch halten)
      */
-    Kunde KundenSuchen(String name)
+    Kunde KundenSuchen(String mail)
     {
-        /*
+
         NutzerDB ndb = new NutzerDB();
-        if (ndb.NutzerNameExistiert(name) == true){
+        if (ndb.MailBelegt(mail) == true)
+        {
             List<Nutzer> list = ndb.alleNutzerGeben();
-            for (int i = 0; i < list.size(); i++) {
-                if(name.equals(list.get(i).getName())){
+            for (int i = 0; i < list.size(); i++)
+            {
+                if(mail.equals(list.get(i).getName()))
+                {
                     return (Kunde) list.get(i);
                 }
             }
             return null;
         }
         else{
-            return null;
-        }
-        */
-        return null;
+            return null;}
     }
     /*int [] KontonummernFuerKundenGeben(){
         NutzerDB ndb = new NutzerDB();
@@ -115,14 +114,6 @@ public class Bank {
         }
     };*/
 
-
-
-    Bank BankGeben(){return null;}//???
-    Konto KontoSuchen(int kontonummer)
-    {
-        return null;
-    }
-    void Beenden(){}
 
 
 }

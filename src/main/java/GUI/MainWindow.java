@@ -34,7 +34,7 @@ public class MainWindow{
 
         createAdminSettingsPage();
 
-        layerManager.showPlane(2);
+        layerManager.showPlane(0);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -402,7 +402,49 @@ public class MainWindow{
     }
     
     public static void main(String[] args) {
-        WindowManager.getWindow();
+        MainWindow mw = WindowManager.getWindow();
+        ((BetterButton) (mw.getWindow().getElement("LOGIN_PAGE:LOGIN_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.getWindow().showPlane(1);
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement("REGISTER_PAGE:REGISTER_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.getWindow().showPlane(2);
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:SETTINGS_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.getWindow().showPlane(3);
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:DEPOSIT_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.einzahlenPopUp(mw.getWindow().getFrame("MAIN_PAGE"));
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:TRANSACTION_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.ueberweisenPopUp(mw.getWindow().getFrame("MAIN_PAGE"));
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:WITHDRAW_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.abhebenPopUp(mw.getWindow().getFrame("MAIN_PAGE"));
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement("SETTINGS_PAGE:ACCOUNT_DELETE_BUTTON"))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.getWindow().showPlane(4);
+            }
+        });
     }
 
     public static String formatLabelString(String original) {

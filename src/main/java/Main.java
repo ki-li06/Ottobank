@@ -53,7 +53,7 @@ public class Main {
                     String mail = TRE.getText();
                     Kunde k = new Kunde(TRV.getText() +" "+ TRN.getText(),mail,TRP.getText());
                     nutzerDB.NutzerHinzufügen(k);
-                    PopUp.showInfo("Neues Konto wurde erstellt.");
+                    PopUp.showInfo("Neuer Account wurde erstellt.");
                     mw.getWindow().showPlane(0);
                 }else{
                     PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");

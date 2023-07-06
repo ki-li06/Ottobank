@@ -47,7 +47,7 @@ public class Main {
             public void performMethod() {
                 if(!TRV.getText().equals("") && !TRN.getText().equals("") && !TRE.getText().equals("") && !TRP.getText().equals("")){
                     if (!TRP.getText().equals(TRC.getText())){
-                        PopUp.showError("Pin stimmt nicht überein!");
+                        PopUp.showError("PIN stimmt nicht überein!");
                         return;
                     }
                     String mail = TRE.getText();

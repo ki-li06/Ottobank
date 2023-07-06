@@ -18,4 +18,7 @@ public class PopUp {
     public static void showWarning(String message) {
         showMessage(message, JOptionPane.WARNING_MESSAGE);
     }
+    public static void showInfo(String message) {
+        showMessage(message, JOptionPane.INFORMATION_MESSAGE);
+    }
 }

@@ -40,15 +40,21 @@ public class Main {
         BetterTextField TRN = (BetterTextField) mw.getWindow().getFrame("REGISTER_PAGE").getElement("NACHNAME_INPUT");
         BetterTextField TRE = (BetterTextField) mw.getWindow().getFrame("REGISTER_PAGE").getElement("EMAIL_INPUT");
         BetterTextField TRP = (BetterTextField) mw.getWindow().getFrame("REGISTER_PAGE").getElement("PIN_INPUT");
+        BetterTextField TRC = (BetterTextField) mw.getWindow().getFrame("REGISTER_PAGE").getElement("CONFIRM_PIN_INPUT");
         BetterButton BRR = (BetterButton) mw.getWindow().getFrame("REGISTER_PAGE").getElement("REGISTER_BUTTON");
         BRR.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 if(!TRV.getText().equals("") && !TRN.getText().equals("") && !TRE.getText().equals("") && !TRP.getText().equals("")){
+                    if (!TRP.getText().equals(TRC.getText())){
+                        PopUp.showError("Pin stimmt nicht überein!");
+                        return;
+                    }
                     String mail = TRE.getText();
                     Kunde k = new Kunde(TRV.getText() +"\n"+ TRN.getText(),mail,TRP.getText());
                     nutzerDB.NutzerHinzufügen(k);
-                    mw.getWindow().showPlane(1);
+                    PopUp.showInfo("Neues Konto wurde erstellt.");
+                    mw.getWindow().showPlane(0);
                 }else{
                     PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
                 }

@@ -44,7 +44,7 @@ public class Main {
         BRR.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                if(TRV.getText().equals("") ||TRN.getText().equals("")|| TRE.getText().equals("") || TRP.getText().equals("")){
+                if(!TRV.getText().equals("") && !TRN.getText().equals("") && !TRE.getText().equals("") && !TRP.getText().equals("")){
                     String mail = TRE.getText();
                     Kunde k = new Kunde(TRV.getText() +"\n"+ TRN.getText(),mail,TRP.getText());
                     nutzerDB.NutzerHinzufügen(k);

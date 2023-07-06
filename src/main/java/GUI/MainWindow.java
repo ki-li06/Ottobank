@@ -34,7 +34,7 @@ public class MainWindow{
 
         createAdminSettingsPage();
 
-        layerManager.showPlane(4);
+        layerManager.showPlane(2);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -159,7 +159,7 @@ public class MainWindow{
     }
 
     void createMainPage(){
-        StackedPane mainPage = new StackedPane(layerManager, new Dimension(450, 260));
+        StackedPane mainPage = new StackedPane(layerManager, new Dimension(450, 220));
         layerManager.registerPane(mainPage, "MAIN_PAGE");
 
         BetterButton settingsButton = new BetterButton();
@@ -181,7 +181,7 @@ public class MainWindow{
 
         mainPage.registerComponent(kontowechselBox, "KONTO_WECHSEL_BOX");
 
-        JLabel moneyLabel = new JLabel(formatLabelString("Your Name :)"), JLabel.CENTER);
+        JLabel moneyLabel = new JLabel(formatLabelString(""), JLabel.CENTER);
         int LabelHeight = moneyLabel.getPreferredSize().height;
         moneyLabel.setBounds(10, 15, 140, LabelHeight);
         mainPage.registerComponent(moneyLabel, "NAME_LABEL");

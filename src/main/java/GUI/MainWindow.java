@@ -6,8 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
+import static GUI.StackedWidget.PAGES;
+import static GUI.StackedPane.COMPONENTS;
 
 public class MainWindow{
+
     JFrame mainFrame;
     private final StackedWidget layerManager;
     MainWindow() {
@@ -46,27 +49,27 @@ public class MainWindow{
     void createLoginPage(){
         StackedPane loginPage = new StackedPane(layerManager, new Dimension(400, 375));
 
-        layerManager.registerPane(loginPage, "LOGIN_PAGE");
+        layerManager.registerPane(loginPage, PAGES.LOGIN_PAGE);
 
         //Info Label
         JLabel infoLabel = new JLabel("<html><center>Welcome to<br>Ottobank</center></html>", JLabel.CENTER);
         int LabelHeight = infoLabel.getPreferredSize().height;
         infoLabel.setBounds(0, 40, 400, LabelHeight);
-        loginPage.registerComponent(infoLabel, "PRIVATE");
+        loginPage.registerComponent(infoLabel, COMPONENTS.PRIVATE);
 
         //Email Text Field
         BetterTextField emailTextField = new BetterTextField();
         emailTextField.setEchoChar((char) 0);
         emailTextField.putClientProperty("JTextField.placeholderText", "Email");
         emailTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        loginPage.registerComponent(emailTextField, "EMAIL_INPUT");
+        loginPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
         //PIN Text Field
         BetterTextField pinTextField = new BetterTextField();
         pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
         pinTextField.putClientProperty(FlatClientProperties.STYLE, "showRevealButton:true");
         pinTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
-        loginPage.registerComponent(pinTextField, "PIN_INPUT");
+        loginPage.registerComponent(pinTextField, COMPONENTS.PIN_INPUT);
 
         //Login Button
         BetterButton loginButton = new BetterButton();
@@ -78,7 +81,7 @@ public class MainWindow{
             }
         });
         loginButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
-        loginPage.registerComponent(loginButton, "LOGIN_BUTTON");
+        loginPage.registerComponent(loginButton, COMPONENTS.LOGIN_BUTTON);
 
         BetterButton registerButton = new BetterButton();
         registerButton.setText("Register");
@@ -89,18 +92,18 @@ public class MainWindow{
                 layerManager.showPlane(1);
             }
         });
-        loginPage.registerComponent(registerButton, "PRIVATE");
+        loginPage.registerComponent(registerButton, COMPONENTS.PRIVATE);
     }
 
     void createRegisterPage(){
         //register Page
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
-        layerManager.registerPane(registerPage, "REGISTER_PAGE");
+        layerManager.registerPane(registerPage, PAGES.REGISTER_PAGE);
 
         JLabel registerInfoLabel = new JLabel("Register your account", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
-        registerPage.registerComponent(registerInfoLabel, "PRIVATE");
+        registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
 
 
         //Vorname Text Field
@@ -108,41 +111,41 @@ public class MainWindow{
         vornameTextField.setEchoChar((char) 0);
         vornameTextField.putClientProperty("JTextField.placeholderText", "Vorname");
         vornameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        registerPage.registerComponent(vornameTextField, "VORNAME_INPUT");
+        registerPage.registerComponent(vornameTextField, COMPONENTS.VORNAME_INPUT);
 
         //Nachname Text Field
         BetterTextField nachnameTextField = new BetterTextField();
         nachnameTextField.setEchoChar((char) 0);
         nachnameTextField.putClientProperty("JTextField.placeholderText", "Nachname");
         nachnameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
-        registerPage.registerComponent(nachnameTextField, "NACHNAME_INPUT");
+        registerPage.registerComponent(nachnameTextField, COMPONENTS.NACHNAME_INPUT);
 
         //Email Text Field
         BetterTextField emailTextField = new BetterTextField();
         emailTextField.setEchoChar((char) 0);
         emailTextField.putClientProperty("JTextField.placeholderText", "Email");
         emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
-        registerPage.registerComponent(emailTextField, "EMAIL_INPUT");
+        registerPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
         //Pin Text Field
         BetterTextField pinTextField = new BetterTextField();
         pinTextField.setEchoChar((char) 0);
         pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
         pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
-        registerPage.registerComponent(pinTextField, "PIN_INPUT");
+        registerPage.registerComponent(pinTextField, COMPONENTS.PIN_INPUT);
 
         //Confirm Pin Text Field
         BetterTextField pinConfirmRegisterTextField = new BetterTextField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
-        registerPage.registerComponent(pinConfirmRegisterTextField, "CONFIRM_PIN_INPUT");
+        registerPage.registerComponent(pinConfirmRegisterTextField, COMPONENTS.CONFIRM_PIN_INPUT);
 
         //Register Button
         BetterButton registerButton = new BetterButton();
         registerButton.setText("Register");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
-        registerPage.registerComponent(registerButton, "REGISTER_BUTTON");
+        registerPage.registerComponent(registerButton, COMPONENTS.REGISTER_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
@@ -154,19 +157,19 @@ public class MainWindow{
                 layerManager.showPlane(0);
             }
         });
-        registerPage.registerComponent(loginButton, "PRIVATE");
+        registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
 
     }
 
     void createMainPage(){
         StackedPane mainPage = new StackedPane(layerManager, new Dimension(450, 220));
-        layerManager.registerPane(mainPage, "MAIN_PAGE");
+        layerManager.registerPane(mainPage, PAGES.MAIN_PAGE);
 
         BetterButton settingsButton = new BetterButton();
         settingsButton.setBounds(mainPage.getWidth()-75, 10, 45, 45);
         settingsButton.setIcon(new ImageIcon("src/main/resources/icons/settings.png"));
 
-        mainPage.registerComponent(settingsButton, "SETTINGS_BUTTON");
+        mainPage.registerComponent(settingsButton, COMPONENTS.SETTINGS_BUTTON);
 
         String[] optionsToChoose = {"OPT_1","OPT_2","OPT_3"};
         BetterComboBox kontowechselBox = new BetterComboBox(optionsToChoose);
@@ -179,74 +182,74 @@ public class MainWindow{
             }
         });
 
-        mainPage.registerComponent(kontowechselBox, "KONTO_WECHSEL_BOX");
+        mainPage.registerComponent(kontowechselBox, COMPONENTS.KONTO_WECHSEL_BOX);
 
         JLabel moneyLabel = new JLabel(formatLabelString(""), JLabel.CENTER);
         int LabelHeight = moneyLabel.getPreferredSize().height;
         moneyLabel.setBounds(10, 15, 140, LabelHeight);
-        mainPage.registerComponent(moneyLabel, "NAME_LABEL");
+        mainPage.registerComponent(moneyLabel, COMPONENTS.NAME_LABEL);
 
         BetterButton freeMoneyButton = new BetterButton();
         freeMoneyButton.setText("Einzahlen");
         freeMoneyButton.setBounds(25,60,390,30);
 
-        mainPage.registerComponent(freeMoneyButton, "DEPOSIT_BUTTON");
+        mainPage.registerComponent(freeMoneyButton, COMPONENTS.DEPOSIT_BUTTON);
 
         BetterButton transactionButton = new BetterButton();
         transactionButton.setText("Überweisen");
         transactionButton.setBounds(25,100,390,30);
-        mainPage.registerComponent(transactionButton, "TRANSACTION_BUTTON");
+        mainPage.registerComponent(transactionButton, COMPONENTS.TRANSACTION_BUTTON);
 
         BetterButton deleteMoneyButton = new BetterButton();
         deleteMoneyButton.setText("Abheben");
         deleteMoneyButton.setBounds(25,140,390,30);
-        mainPage.registerComponent(deleteMoneyButton, "WITHDRAW_BUTTON");
+        mainPage.registerComponent(deleteMoneyButton, COMPONENTS.WITHDRAW_BUTTON);
 
     }
 
     void createSettingsPage() {
         //register Page
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
-        layerManager.registerPane(registerPage, "SETTINGS_PAGE");
+        layerManager.registerPane(registerPage, PAGES.SETTINGS_PAGE);
 
         JLabel registerInfoLabel = new JLabel("Edit your account", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
-        registerPage.registerComponent(registerInfoLabel, "PRIVATE");
+        registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
 
 
         //Account delete choice
         BetterComboBox accountDeleteChoice = new BetterComboBox(new String[] {"K1","K2","K3"});
         accountDeleteChoice.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        registerPage.registerComponent(accountDeleteChoice, "ACCOUNT_DELETE_CHOICE");
-        //Nachname Text Field
+        registerPage.registerComponent(accountDeleteChoice, COMPONENTS.ACCOUNT_DELETE_CHOICE);
+        //Account delete button
         BetterButton accountDelete = new BetterButton();
         accountDelete.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
         accountDelete.setText("DELETE?");
-        registerPage.registerComponent(accountDelete,"ACCOUNT_DELETE_BUTTON");
+        registerPage.registerComponent(accountDelete,COMPONENTS.ACCOUNT_DELETE_BUTTON);
         //Account create
         BetterTextField accountCreateField = new BetterTextField();
         accountCreateField.setEchoChar((char) 0);
         accountCreateField.putClientProperty("JTextField.placeholderText","Account name");
         accountCreateField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
-        registerPage.registerComponent(accountCreateField,"ACCOUNT_CREATE_INPUT");
+        registerPage.registerComponent(accountCreateField,COMPONENTS.ACCOUNT_CREATE_INPUT);
         //Create Button
         BetterButton accountCreateButton = new BetterButton();
         accountCreateButton.setText("Create new Account");
         accountCreateButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
-        registerPage.registerComponent(accountCreateButton,"ACCOUNT_CREATE_BUTTON");
+        registerPage.registerComponent(accountCreateButton,COMPONENTS.ACCOUNT_CREATE_BUTTON);
         //Confirm Pin Text Field
         BetterTextField pinConfirmRegisterTextField = new BetterTextField();
         pinConfirmRegisterTextField.setEchoChar('*');
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Neue PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
-        registerPage.registerComponent(pinConfirmRegisterTextField, "NEW_PIN_INPUT");
+        registerPage.registerComponent(pinConfirmRegisterTextField, COMPONENTS.NEW_PIN_INPUT);
 
         //Register Button
         BetterButton registerButton = new BetterButton();
         registerButton.setText("Save Changes");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
-        registerPage.registerComponent(registerButton, "SAVE_BUTTON");
+        registerPage.registerComponent(registerButton, COMPONENTS.SAVE_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
@@ -258,7 +261,7 @@ public class MainWindow{
                 layerManager.showPlane(2);
             }
         });
-        registerPage.registerComponent(loginButton, "PRIVATE");
+        registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
     }
 
     public ArrayList<String> einzahlenPopUp(StackedPane page){
@@ -306,23 +309,23 @@ public class MainWindow{
 
     void createAdminMainPage() {
         StackedPane adminControls = new StackedPane(layerManager, new Dimension(300,260));
-        layerManager.registerPane(adminControls, "ADMIN_MAIN_PAGE");
+        layerManager.registerPane(adminControls, PAGES.ADMIN_MAIN_PAGE);
 
         JLabel infoLabel = new JLabel("<html><center>Access user accounts:</center></html>", JLabel.CENTER);
         int LabelHeight = infoLabel.getPreferredSize().height;
         infoLabel.setBounds(0, 60, 300, LabelHeight);
-        adminControls.registerComponent(infoLabel, "PRIVATE");
+        adminControls.registerComponent(infoLabel, COMPONENTS.PRIVATE);
 
         BetterTextField accountName = new BetterTextField();
         accountName.setEchoChar((char) 0);
         accountName.putClientProperty("JTextField.placeholderText","Account Email");
         accountName.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 90, 250, 30);
-        adminControls.registerComponent(accountName, "USER_NAME");
+        adminControls.registerComponent(accountName, COMPONENTS.USER_NAME);
 
         BetterButton accountLogin = new BetterButton();
         accountLogin.setText("Login as User");
         accountLogin.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        adminControls.registerComponent(accountLogin, "LOGIN_BUTTON");
+        adminControls.registerComponent(accountLogin, COMPONENTS.LOGIN_BUTTON);
 
         BetterButton settingsButton = new BetterButton();
         settingsButton.setBounds(adminControls.getWidth()-75, 10, 45, 45);
@@ -334,17 +337,17 @@ public class MainWindow{
             }
         });
 
-        adminControls.registerComponent(settingsButton, "PRIVATE");
+        adminControls.registerComponent(settingsButton, COMPONENTS.PRIVATE);
     }
 
     void createAdminSettingsPage() {
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
-        layerManager.registerPane(registerPage, "ADMIN_REGISTER_PAGE");
+        layerManager.registerPane(registerPage, PAGES.ADMIN_REGISTER_PAGE);
 
         JLabel registerInfoLabel = new JLabel("Register new admin", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
-        registerPage.registerComponent(registerInfoLabel, "PRIVATE");
+        registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
 
 
         //Vorname Text Field
@@ -352,41 +355,41 @@ public class MainWindow{
         vornameTextField.setEchoChar((char) 0);
         vornameTextField.putClientProperty("JTextField.placeholderText", "Vorname");
         vornameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        registerPage.registerComponent(vornameTextField, "VORNAME_INPUT");
+        registerPage.registerComponent(vornameTextField, COMPONENTS.VORNAME_INPUT);
 
         //Nachname Text Field
         BetterTextField nachnameTextField = new BetterTextField();
         nachnameTextField.setEchoChar((char) 0);
         nachnameTextField.putClientProperty("JTextField.placeholderText", "Nachname");
         nachnameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
-        registerPage.registerComponent(nachnameTextField, "NACHNAME_INPUT");
+        registerPage.registerComponent(nachnameTextField, COMPONENTS.NACHNAME_INPUT);
 
         //Email Text Field
         BetterTextField emailTextField = new BetterTextField();
         emailTextField.setEchoChar((char) 0);
         emailTextField.putClientProperty("JTextField.placeholderText", "Email");
         emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
-        registerPage.registerComponent(emailTextField, "EMAIL_INPUT");
+        registerPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
         //Pin Text Field
         BetterTextField pinTextField = new BetterTextField();
         pinTextField.setEchoChar((char) 0);
         pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
         pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
-        registerPage.registerComponent(pinTextField, "PIN_INPUT");
+        registerPage.registerComponent(pinTextField, COMPONENTS.PIN_INPUT);
 
         //Confirm Pin Text Field
         BetterTextField pinConfirmRegisterTextField = new BetterTextField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
-        registerPage.registerComponent(pinConfirmRegisterTextField, "CONFIRM_PIN_INPUT");
+        registerPage.registerComponent(pinConfirmRegisterTextField, COMPONENTS.CONFIRM_PIN_INPUT);
 
         //Register Button
         BetterButton registerButton = new BetterButton();
         registerButton.setText("Register");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
-        registerPage.registerComponent(registerButton, "REGISTER_BUTTON");
+        registerPage.registerComponent(registerButton, COMPONENTS.REGISTER_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
@@ -398,48 +401,48 @@ public class MainWindow{
                 layerManager.showPlane(4);
             }
         });
-        registerPage.registerComponent(loginButton, "PRIVATE");
+        registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
     }
     
     public static void main(String[] args) {
         MainWindow mw = WindowManager.getWindow();
-        ((BetterButton) (mw.getWindow().getElement("LOGIN_PAGE:LOGIN_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.LOGIN_PAGE, COMPONENTS.LOGIN_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 mw.getWindow().showPlane(1);
             }
         });
-        ((BetterButton) (mw.getWindow().getElement("REGISTER_PAGE:REGISTER_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.REGISTER_PAGE, COMPONENTS.REGISTER_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 mw.getWindow().showPlane(2);
             }
         });
-        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:SETTINGS_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.SETTINGS_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 mw.getWindow().showPlane(3);
             }
         });
-        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:DEPOSIT_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.DEPOSIT_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.einzahlenPopUp(mw.getWindow().getFrame("MAIN_PAGE"));
+                mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
             }
         });
-        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:TRANSACTION_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.TRANSACTION_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.ueberweisenPopUp(mw.getWindow().getFrame("MAIN_PAGE"));
+                mw.ueberweisenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
             }
         });
-        ((BetterButton) (mw.getWindow().getElement("MAIN_PAGE:WITHDRAW_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.WITHDRAW_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.abhebenPopUp(mw.getWindow().getFrame("MAIN_PAGE"));
+                mw.abhebenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
             }
         });
-        ((BetterButton) (mw.getWindow().getElement("SETTINGS_PAGE:ACCOUNT_DELETE_BUTTON"))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.SETTINGS_PAGE, COMPONENTS.ACCOUNT_DELETE_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 mw.getWindow().showPlane(4);

@@ -16,8 +16,8 @@ public class Kunde extends Nutzer
     * boolean Aktkonto(int)*/
 
     @Override
-    public String getType() {
-        return KUNDE;
+    public TYPE getType() {
+        return TYPE.KUNDE;
     }
 
     @Override

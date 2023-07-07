@@ -4,8 +4,9 @@ import Bank.Nutzer.Kunde;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static Bank.Konten.Konto.TYPE.SPARKONTO;
+
 public class Sparkonto extends Konto{
-    public static final String SPARKONTO = "Sparkonto";
     double zinssatz = 0.03;
 
     public Sparkonto(){
@@ -54,7 +55,7 @@ public class Sparkonto extends Konto{
     }
 
     @Override
-    public String getType() {
+    public TYPE getType() {
         return SPARKONTO;
     }
 

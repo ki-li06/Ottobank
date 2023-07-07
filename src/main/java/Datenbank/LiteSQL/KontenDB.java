@@ -4,15 +4,14 @@ import Bank.Konten.Girokonto;
 import Bank.Konten.Konto;
 import Bank.Konten.Sparkonto;
 import Bank.Nutzer.Kunde;
+import Bank.Nutzer.Nutzer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Bank.Konten.Girokonto.GIROKONTO;
-import static Bank.Konten.Sparkonto.SPARKONTO;
-import static util.Round.round;
+import static Bank.Konten.Konto.TYPE;
 import static util.StringFormat.format;
 import static util.StringFormat.formatDouble;
 import static util.Zufall.RandomInt;
@@ -26,7 +25,8 @@ import static util.Zufall.RandomInt;
  * (Numeric/Double) SpecialDouble (Sparkonto - Zinssatz; Girokonto - Überziehungsrahmen)
  */
 public class KontenDB extends LiteSQL{
-
+    private static final String CONST_SPARKONTO = "Sparkonto";
+    private static final String CONST_GIROKONTO = "Girokonto";
 
     public KontenDB(){
         super("KontenDB");
@@ -47,7 +47,7 @@ public class KontenDB extends LiteSQL{
         while (NummerSchonBelegt(nummer));
         konto.setKontonummer(nummer);
 
-        String type = konto.getType();
+        String type = getConstOfType(konto.getType());
 
         double specialDouble = konto.getSpecialDouble();
 
@@ -110,10 +110,10 @@ public class KontenDB extends LiteSQL{
             String type = rs.getString("Type");
             double specialDouble = rs.getDouble("SpecialDouble");
             disconnect();
-            if(type.equals(SPARKONTO)){
+            if(type.equals(CONST_SPARKONTO)){
                 return new Sparkonto(nummer, stand, besitzer, specialDouble);
             }
-            else if(type.equals(GIROKONTO)){
+            else if(type.equals(CONST_GIROKONTO)){
                 return new Girokonto(nummer, stand, besitzer, specialDouble);
             }
         } catch (SQLException throwables) {
@@ -138,7 +138,7 @@ public class KontenDB extends LiteSQL{
             return;
         }
 
-        String type = neuesKonto.getType();
+        String type = getConstOfType(neuesKonto.getType());
 
         double specialDouble = neuesKonto.getSpecialDouble();
 
@@ -193,9 +193,9 @@ public class KontenDB extends LiteSQL{
                 String type = rs.getString("Type");
                 double specialDouble = rs.getDouble("SpecialDouble");
                 Konto k = null;
-                if (type.equals(SPARKONTO)) {
+                if (type.equals(CONST_SPARKONTO)) {
                     k = new Sparkonto(nummer, stand, besitzer, specialDouble);
-                } else if (type.equals(GIROKONTO)) {
+                } else if (type.equals(CONST_GIROKONTO)) {
                     k = new Girokonto(nummer, stand, besitzer, specialDouble);
                 }
                 ausgabe.add(k);
@@ -233,7 +233,7 @@ public class KontenDB extends LiteSQL{
             double doubleStand = k.KontostandGeben();
             String stand = format(formatDouble(doubleStand), 11);
             String mail = format(k.EigentümerGeben().getEMail(), 25);
-            String type = format(k.getType(), 12);
+            String type = format(getConstOfType(k.getType()), 12);
             String specialDouble = String.valueOf(k.getSpecialDouble());
 
             System.out.println(nummer + stand + mail + type + specialDouble);
@@ -243,4 +243,14 @@ public class KontenDB extends LiteSQL{
 
     }
 
+    public static String getConstOfType(TYPE type){
+        if(type == TYPE.GIROKONTO){
+            return CONST_GIROKONTO;
+        }
+        else if(type == TYPE.SPARKONTO){
+            return CONST_SPARKONTO;
+        }
+        return null;
+
+    }
 }

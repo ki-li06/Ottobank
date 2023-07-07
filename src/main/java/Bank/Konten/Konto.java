@@ -3,6 +3,11 @@ package Bank.Konten;
 import Bank.Nutzer.Kunde;
 
 public abstract class Konto {
+    public enum TYPE{
+        SPARKONTO,
+        GIROKONTO
+    }
+
     protected int kontonummer;
     protected double kontostand;
     protected Kunde besitzer;
@@ -56,7 +61,7 @@ public abstract class Konto {
      * szg. extra als Attribut haben, wird dies in der Datenbank als eines gespeichert)
      */
     public abstract double getSpecialDouble();
-    public abstract String getType();
+    public abstract TYPE getType();
 
     @Override
     public String toString() {

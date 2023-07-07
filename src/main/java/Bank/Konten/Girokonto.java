@@ -3,7 +3,6 @@ package Bank.Konten;
 import Bank.Nutzer.Kunde;
 
 public class Girokonto extends Konto{
-    public static final String GIROKONTO = "Girokonto";
     double überziehungsrahmen = 0.0;
 
     public Girokonto(){
@@ -46,8 +45,8 @@ public class Girokonto extends Konto{
     }
 
     @Override
-    public String getType() {
-        return GIROKONTO;
+    public TYPE getType() {
+        return TYPE.GIROKONTO;
     }
 
     @Override

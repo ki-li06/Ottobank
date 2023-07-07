@@ -4,13 +4,13 @@ import Bank.Nutzer.Angestellter;
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
 
+import javax.print.DocFlavor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Bank.Nutzer.Angestellter.ANGESTELLTER;
-import static Bank.Nutzer.Kunde.KUNDE;
+import static Bank.Nutzer.Nutzer.TYPE;
 import static util.StringFormat.format;
 
 /**
@@ -21,6 +21,9 @@ import static util.StringFormat.format;
  * (String) Type
  */
 public class NutzerDB extends LiteSQL{
+    private static final String CONST_ANGESTELLTER = "ANGESTELLTER";
+    private static final String CONST_KUNDE = "KUNDE";
+
 
     public NutzerDB(){
         super("NutzerDB");
@@ -35,7 +38,7 @@ public class NutzerDB extends LiteSQL{
         String name = nutzer.getName();
         String mail = nutzer.getEMail();
         String pin = nutzer.getPin();
-        String type = nutzer.getType();
+        String type = getConstOfType(nutzer.getType());
 
         if(MailBelegt(mail)){
             System.out.println("FEHLER - MailAdresse '" + mail + "' schon belegt");
@@ -97,10 +100,10 @@ public class NutzerDB extends LiteSQL{
             String type = rs.getString("Type");
             //System.out.println("type: " + type);
             disconnect();
-            if(type.equals(ANGESTELLTER)){
+            if(type.equals(CONST_ANGESTELLTER)){
                 return new Angestellter(name, mail, pin);
             }
-            else if(type.equals(KUNDE)){
+            else if(type.equals(CONST_KUNDE)){
                 return new Kunde(name, mail, pin);
             }
         } catch (SQLException throwables) {
@@ -151,10 +154,10 @@ public class NutzerDB extends LiteSQL{
                 String pin = rs.getString("PIN");
                 String type = rs.getString("Type");
                 Nutzer n = null;
-                if(type.equals(KUNDE)){
+                if(type.equals(CONST_KUNDE)){
                     n = new Kunde(name, mail, pin);
                 }
-                else if(type.equals(ANGESTELLTER)){
+                else if(type.equals(CONST_ANGESTELLTER)){
                     n = new Angestellter(name, mail, pin);
                 }
                 list.add(n);
@@ -222,7 +225,7 @@ public class NutzerDB extends LiteSQL{
             s += format(n.getName(), 25);
             s += format(n.getEMail(), 25);
             s += format(n.getPin(), 25);
-            String type = n.getType();
+            String type = getConstOfType(n.getType());
             s += type;
             System.out.println(s);
 
@@ -230,4 +233,14 @@ public class NutzerDB extends LiteSQL{
         System.out.println("-".repeat(100));
     }
 
+    public static String getConstOfType(TYPE type){
+        if(type == TYPE.ANGESTELLTER){
+            return CONST_ANGESTELLTER;
+        }
+        else if(type == TYPE.KUNDE){
+            return CONST_KUNDE;
+        }
+        return null;
+
+    }
 }

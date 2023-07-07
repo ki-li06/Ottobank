@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class BetterTextField extends JPasswordField {
     private UITextFieldMethod method;
@@ -35,4 +37,5 @@ public class BetterTextField extends JPasswordField {
     public UITextFieldMethod getMethod() {
         return this.method;
     }
+
 }

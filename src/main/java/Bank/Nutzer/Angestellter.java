@@ -5,8 +5,6 @@ import Bank.Konten.Girokonto;
 import Bank.Konten.Sparkonto;
 
 public class Angestellter extends Nutzer{
-    public static final String ANGESTELLTER = "ANGESTELLTER";
-
     public Angestellter(String nameNeu, String mailNeu, String pinNeu)
     {
         super(nameNeu, mailNeu, pinNeu);
@@ -33,8 +31,8 @@ public class Angestellter extends Nutzer{
     void KontoSetzen(){}
 
     @Override
-    public String getType() {
-        return ANGESTELLTER;
+    public TYPE getType() {
+        return TYPE.ANGESTELLTER;
     }
 
     @Override

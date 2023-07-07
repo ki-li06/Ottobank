@@ -4,6 +4,10 @@ import Bank.Konten.Konto;
 import Datenbank.LiteSQL.NutzerDB;
 
 public abstract class Nutzer {
+    public enum TYPE{
+        ANGESTELLTER,
+        KUNDE
+    }
 
     protected String name;
     protected String email;
@@ -33,7 +37,7 @@ public abstract class Nutzer {
         return ndb.NutzerIDGeben(name);
     }*/
 
-    public abstract String getType();
+    public abstract TYPE getType();
 
     @Override
     public String toString() {

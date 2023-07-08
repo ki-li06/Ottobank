@@ -1,11 +1,15 @@
 package Bank.Konten;
 
 import Bank.Nutzer.Kunde;
+import util.Round;
+
+import static util.Round.round;
+import static util.StringFormat.formatDouble;
 
 public abstract class Konto {
     public enum TYPE{
-        SPARKONTO,
-        GIROKONTO
+        GIROKONTO,
+        SPARKONTO
     }
 
     protected int kontonummer;
@@ -45,6 +49,11 @@ public abstract class Konto {
     public double KontostandGeben(){
         return kontostand;
     }
+
+    public String KontostandAlsStringGeben(){
+        return formatDouble(kontostand, 2) + " €";
+    }
+
     public Kunde EigentümerGeben(){
         return besitzer;
     }

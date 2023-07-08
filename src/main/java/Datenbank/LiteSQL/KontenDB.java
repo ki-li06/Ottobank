@@ -213,7 +213,7 @@ public class KontenDB extends LiteSQL{
      * @return
      */
     public List<Konto> KontenVonUserGeben(String mail){
-        List<Konto> alleKonten = new ArrayList<>();
+        List<Konto> alleKonten = new ArrayList<>(alleKontenGeben());
         List<Konto> ausgabe = new ArrayList<>();
         for (Konto k : alleKonten) {
             if(k.EigentümerGeben().getEMail().equals(mail)){

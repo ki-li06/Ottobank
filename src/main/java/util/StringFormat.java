@@ -32,4 +32,11 @@ public class StringFormat {
         }
         return rückgabe;
     }
+
+    public static String formatDouble(double input, int digits){
+        if(digits <= 0){
+            return null;
+        }
+        return String.format("%." + digits +  "f", input);
+    }
 }

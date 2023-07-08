@@ -5,7 +5,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Stack;
+
 import static GUI.StackedWidget.PAGES;
 import static GUI.StackedPane.COMPONENTS;
 
@@ -58,14 +58,14 @@ public class MainWindow{
         loginPage.registerComponent(infoLabel, COMPONENTS.PRIVATE);
 
         //Email Text Field
-        BetterTextField emailTextField = new BetterTextField();
+        BetterInputField emailTextField = new BetterInputField();
         emailTextField.setEchoChar((char) 0);
         emailTextField.putClientProperty("JTextField.placeholderText", "Email");
         emailTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
         loginPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
         //PIN Text Field
-        BetterTextField pinTextField = new BetterTextField();
+        BetterInputField pinTextField = new BetterInputField();
         pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
         pinTextField.putClientProperty(FlatClientProperties.STYLE, "showRevealButton:true");
         pinTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
@@ -107,35 +107,35 @@ public class MainWindow{
 
 
         //Vorname Text Field
-        BetterTextField vornameTextField = new BetterTextField();
+        BetterInputField vornameTextField = new BetterInputField();
         vornameTextField.setEchoChar((char) 0);
         vornameTextField.putClientProperty("JTextField.placeholderText", "Vorname");
         vornameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
         registerPage.registerComponent(vornameTextField, COMPONENTS.VORNAME_INPUT);
 
         //Nachname Text Field
-        BetterTextField nachnameTextField = new BetterTextField();
+        BetterInputField nachnameTextField = new BetterInputField();
         nachnameTextField.setEchoChar((char) 0);
         nachnameTextField.putClientProperty("JTextField.placeholderText", "Nachname");
         nachnameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
         registerPage.registerComponent(nachnameTextField, COMPONENTS.NACHNAME_INPUT);
 
         //Email Text Field
-        BetterTextField emailTextField = new BetterTextField();
+        BetterInputField emailTextField = new BetterInputField();
         emailTextField.setEchoChar((char) 0);
         emailTextField.putClientProperty("JTextField.placeholderText", "Email");
         emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
         registerPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
         //Pin Text Field
-        BetterTextField pinTextField = new BetterTextField();
+        BetterInputField pinTextField = new BetterInputField();
         pinTextField.setEchoChar((char) 0);
         pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
         pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
         registerPage.registerComponent(pinTextField, COMPONENTS.PIN_INPUT);
 
         //Confirm Pin Text Field
-        BetterTextField pinConfirmRegisterTextField = new BetterTextField();
+        BetterInputField pinConfirmRegisterTextField = new BetterInputField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
@@ -162,18 +162,16 @@ public class MainWindow{
     }
 
     void createMainPage(){
-        StackedPane mainPage = new StackedPane(layerManager, new Dimension(450, 220));
+        StackedPane mainPage = new StackedPane(layerManager, new Dimension(550, 320));
         layerManager.registerPane(mainPage, PAGES.MAIN_PAGE);
 
         BetterButton settingsButton = new BetterButton();
         settingsButton.setBounds(mainPage.getWidth()-75, 10, 45, 45);
         settingsButton.setIcon(new ImageIcon("src/main/resources/icons/settings.png"));
-
         mainPage.registerComponent(settingsButton, COMPONENTS.SETTINGS_BUTTON);
 
         String[] optionsToChoose = {"OPT_1","OPT_2","OPT_3"};
         BetterComboBox kontowechselBox = new BetterComboBox(optionsToChoose);
-
         kontowechselBox.setBounds(settingsButton.getX()-210, 10, 200, 45);
         kontowechselBox.addMethod(new UIComboBoxMethod() {
             @Override
@@ -181,28 +179,53 @@ public class MainWindow{
                 System.out.println(data);
             }
         });
-
         mainPage.registerComponent(kontowechselBox, COMPONENTS.KONTO_WECHSEL_BOX);
 
-        JLabel moneyLabel = new JLabel(formatLabelString(""), JLabel.CENTER);
-        int LabelHeight = moneyLabel.getPreferredSize().height;
-        moneyLabel.setBounds(10, 15, 140, LabelHeight);
-        mainPage.registerComponent(moneyLabel, COMPONENTS.NAME_LABEL);
+        BetterTextField nameLabelFix = new BetterTextField("Name:", JLabel.LEFT);
+        int LabelHeightFix = nameLabelFix.getPreferredSize().height;
+        nameLabelFix.setBounds(30, 15, 80, LabelHeightFix);
+        mainPage.registerComponent(nameLabelFix, COMPONENTS.NAME_LABEL_FIX);
+
+        BetterTextField nameLabelParam = new BetterTextField("Thomas Müller", JLabel.LEFT);
+        int LabelHeightParam = nameLabelParam.getPreferredSize().height;
+        nameLabelParam.setBounds(90, 15, 190, LabelHeightParam);
+        mainPage.registerComponent(nameLabelParam, COMPONENTS.NAME_LABEL_PARAM);
+
+        BetterTextField kontonummerFix = new BetterTextField("Kontonummer: ", JLabel.LEFT);
+        int LabelHeightKontonummerFix = kontonummerFix.getPreferredSize().height;
+        kontonummerFix.setBounds(30, 75, 150, LabelHeightKontonummerFix);
+        mainPage.registerComponent(kontonummerFix, COMPONENTS.KONTONUMMER_FIX);
+
+        BetterTextField kontonummerParam = new BetterTextField("NUMMER", JLabel.LEFT);
+        int LabelHeightKontonummerParam = kontonummerParam.getPreferredSize().height;
+        kontonummerParam.setBounds(190, 75, 100, LabelHeightKontonummerParam);
+        mainPage.registerComponent(kontonummerParam, COMPONENTS.KONTONUMMER_PARAM);
+
+        BetterTextField kontostandFix = new BetterTextField("Kontostand: ", JLabel.LEFT);
+        int LabelHeightKontostandFix = kontostandFix.getPreferredSize().height;
+        kontostandFix.setBounds(30, 105, 150, LabelHeightKontostandFix);
+        mainPage.registerComponent(kontostandFix, COMPONENTS.KONTOSTAND_FIX);
+
+        BetterTextField kontostandParam = new BetterTextField("1234567,89€", JLabel.LEFT);
+        int LabelHeightKontostandParam = kontostandParam.getPreferredSize().height;
+        kontostandParam.setBounds(190, 105, 300, LabelHeightKontonummerParam);
+        mainPage.registerComponent(kontostandParam, COMPONENTS.KONTOSTAND_PARAM);
+
 
         BetterButton freeMoneyButton = new BetterButton();
         freeMoneyButton.setText("Einzahlen");
-        freeMoneyButton.setBounds(25,60,390,30);
+        freeMoneyButton.setBounds(25,160,490,30);
 
         mainPage.registerComponent(freeMoneyButton, COMPONENTS.DEPOSIT_BUTTON);
 
         BetterButton transactionButton = new BetterButton();
         transactionButton.setText("Überweisen");
-        transactionButton.setBounds(25,100,390,30);
+        transactionButton.setBounds(25,200,490,30);
         mainPage.registerComponent(transactionButton, COMPONENTS.TRANSACTION_BUTTON);
 
         BetterButton deleteMoneyButton = new BetterButton();
         deleteMoneyButton.setText("Abheben");
-        deleteMoneyButton.setBounds(25,140,390,30);
+        deleteMoneyButton.setBounds(25,240,490,30);
         mainPage.registerComponent(deleteMoneyButton, COMPONENTS.WITHDRAW_BUTTON);
 
     }
@@ -228,7 +251,7 @@ public class MainWindow{
         accountDelete.setText("DELETE?");
         registerPage.registerComponent(accountDelete,COMPONENTS.ACCOUNT_DELETE_BUTTON);
         //Account create
-        BetterTextField accountCreateField = new BetterTextField();
+        BetterInputField accountCreateField = new BetterInputField();
         accountCreateField.setEchoChar((char) 0);
         accountCreateField.putClientProperty("JTextField.placeholderText","Account name");
         accountCreateField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
@@ -239,7 +262,7 @@ public class MainWindow{
         accountCreateButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
         registerPage.registerComponent(accountCreateButton,COMPONENTS.ACCOUNT_CREATE_BUTTON);
         //Confirm Pin Text Field
-        BetterTextField pinConfirmRegisterTextField = new BetterTextField();
+        BetterInputField pinConfirmRegisterTextField = new BetterInputField();
         pinConfirmRegisterTextField.setEchoChar('*');
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Neue PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
@@ -316,7 +339,7 @@ public class MainWindow{
         infoLabel.setBounds(0, 60, 300, LabelHeight);
         adminControls.registerComponent(infoLabel, COMPONENTS.PRIVATE);
 
-        BetterTextField accountName = new BetterTextField();
+        BetterInputField accountName = new BetterInputField();
         accountName.setEchoChar((char) 0);
         accountName.putClientProperty("JTextField.placeholderText","Account Email");
         accountName.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 90, 250, 30);
@@ -351,35 +374,35 @@ public class MainWindow{
 
 
         //Vorname Text Field
-        BetterTextField vornameTextField = new BetterTextField();
+        BetterInputField vornameTextField = new BetterInputField();
         vornameTextField.setEchoChar((char) 0);
         vornameTextField.putClientProperty("JTextField.placeholderText", "Vorname");
         vornameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
         registerPage.registerComponent(vornameTextField, COMPONENTS.VORNAME_INPUT);
 
         //Nachname Text Field
-        BetterTextField nachnameTextField = new BetterTextField();
+        BetterInputField nachnameTextField = new BetterInputField();
         nachnameTextField.setEchoChar((char) 0);
         nachnameTextField.putClientProperty("JTextField.placeholderText", "Nachname");
         nachnameTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
         registerPage.registerComponent(nachnameTextField, COMPONENTS.NACHNAME_INPUT);
 
         //Email Text Field
-        BetterTextField emailTextField = new BetterTextField();
+        BetterInputField emailTextField = new BetterInputField();
         emailTextField.setEchoChar((char) 0);
         emailTextField.putClientProperty("JTextField.placeholderText", "Email");
         emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
         registerPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
         //Pin Text Field
-        BetterTextField pinTextField = new BetterTextField();
+        BetterInputField pinTextField = new BetterInputField();
         pinTextField.setEchoChar((char) 0);
         pinTextField.putClientProperty("JTextField.placeholderText", "PIN");
         pinTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
         registerPage.registerComponent(pinTextField, COMPONENTS.PIN_INPUT);
 
         //Confirm Pin Text Field
-        BetterTextField pinConfirmRegisterTextField = new BetterTextField();
+        BetterInputField pinConfirmRegisterTextField = new BetterInputField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
         pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);

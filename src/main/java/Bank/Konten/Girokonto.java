@@ -3,45 +3,38 @@ package Bank.Konten;
 import Bank.Nutzer.Kunde;
 
 public class Girokonto extends Konto{
-    double überziehungsrahmen = 0.0;
+    double nettoeinkommen = 0.0;
 
     public Girokonto(){
         super();
     }
 
-    public Girokonto(double kontostand, Kunde besitzer, double überziehungsrahmen) {
+    public Girokonto(double kontostand, Kunde besitzer, double nettoeinkommen) {
         super(kontostand, besitzer);
-        this.überziehungsrahmen = überziehungsrahmen;
+        this.nettoeinkommen = nettoeinkommen;
     }
 
-    public Girokonto(int kontonummer, double kontostand, Kunde besitzer, double überziehungsrahmen) {
+    public Girokonto(int kontonummer, double kontostand, Kunde besitzer, double nettoeinkommen) {
         super(kontonummer, kontostand, besitzer);
-        this.überziehungsrahmen = überziehungsrahmen;
+        this.nettoeinkommen = nettoeinkommen;
     }
+
 
     @Override
-    public boolean Abheben(double abhebebetrag){
-        if (KontostandGeben()+ÜberziehungsrahmenGeben() - abhebebetrag < 0)
-        {
-            kontostand = kontostand - abhebebetrag;
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean AbhebenErlaubt(double abhebebetrag){
+        return KontostandGeben() - abhebebetrag >= -ÜberziehungsrahmenGeben();
     }
     private double ÜberziehungsrahmenBerechnen(double nettoeinkommen){
-        überziehungsrahmen = nettoeinkommen*3;
+        double überziehungsrahmen = nettoeinkommen*3;
         return überziehungsrahmen;
     }
     public double ÜberziehungsrahmenGeben(){
-        double nettoeinkommen = 0.0; //pop up fenster mit eingabe feld für nettoeinkommen
         return ÜberziehungsrahmenBerechnen(nettoeinkommen);
     }
 
     @Override
     public double getSpecialDouble() {
-        return überziehungsrahmen;
+        return nettoeinkommen;
     }
 
     @Override
@@ -52,7 +45,7 @@ public class Girokonto extends Konto{
     @Override
     public String toString() {
         return "Girokonto{" +
-                "überziehungsrahmen=" + überziehungsrahmen +
+                "überziehungsrahmen=" + nettoeinkommen +
                 ", kontostand=" + kontostand +
                 ", kontonummer=" + kontonummer +
                 ", besitzer=" + besitzer +

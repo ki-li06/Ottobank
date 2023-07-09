@@ -41,16 +41,6 @@ public class MainPage {
     public static void setName(Kunde k){
         TMNA.setText(k.getName());
     }
-
-    public static void setAktuellesKonto(int i){
-        aktuellesKonto = i;
-        setKontonummer();
-        setKontostand();
-        if(getKontenListe().size() == 0){
-            aktuellesKonto = -1;
-        }
-    }
-
     public static void setKontenListe(){
         String[] kontenNamen;
 
@@ -76,6 +66,93 @@ public class MainPage {
         }
     }
 
+    public static void setAktuellesKonto(int i){
+        aktuellesKonto = i;
+        setKontonummer();
+        setKontostand();
+        if(getKontenListe().size() == 0){
+            aktuellesKonto = -1;
+        }
+    }
+    private static void setKontonummer() {
+        if(getAktuellesKonto() == null){
+            TMNU.setText("------");
+        }
+        else {
+            TMNU.setText(String.valueOf(getAktuellesKonto().KontonummerGeben()));
+        }
+    }
+    private static void setKontostand() {
+        if(getAktuellesKonto() == null){
+            TMS.setText("------");
+        }
+        else {
+            TMS.setText(String.valueOf(getAktuellesKonto().KontostandAlsStringGeben()));
+        }
+    }
+
+    public static void setEinzahlenButtonVoid(){
+        BME.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                if(getAktuellesKonto() != null){
+                    String s = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)).get(0);
+                    double d = Double.parseDouble(s.replace(",", "."));
+                    //System.out.println("double: " + d);
+                    Konto konto = getAktuellesKonto();
+                    konto.Einzahlen(d);
+                    kontenDB.KontoÄndern(konto.KontonummerGeben(), konto);
+                    setKontostand();
+                }
+            }
+        });
+    }
+    public static void setAbhebenButtonVoid() {
+        BMA.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                if(getAktuellesKonto() != null){
+                    String s = mw.abhebenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)).get(0);
+                    double d = Double.parseDouble(s.replace(",", "."));
+                    Konto konto = getAktuellesKonto();
+                    boolean erlaubt = konto.AbhebenErlaubt(d);
+                    if(!erlaubt){
+                        PopUp.showError("Dieser Betrag darf nicht abgehoben werden.");
+                    }
+                    else{
+                        konto.Abheben(d);
+                        kontenDB.KontoÄndern(konto.KontonummerGeben(), konto);
+                        setKontostand();
+                    }
+                }
+            }
+        });
+    }
+    public static void setAbmeldenButtonVoid(){
+        BMO.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                if(nutzer instanceof Angestellter){
+                    mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
+                }
+                else{
+                    mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
+                }
+            }
+        });
+    }
+
+
+    public static Konto getAktuellesKonto(){
+        if(aktuellesKonto == -1){
+            return null;
+        }
+        List<Konto> konten = new ArrayList<>(getKontenListe());
+        if(aktuellesKonto >= konten.size()){
+            System.out.println("FEHLER - MainPage - DIESER KUNDE HAT KEINE KONTOS");
+        }
+        return konten.get(aktuellesKonto);
+    }
     private static List<Konto> getKontenListe(){
         //System.out.println(kontenDB.KontenVonUserGeben(kunde.getEMail()));
         List<Konto> konten = new ArrayList<>(kontenDB.KontenVonUserGeben(kunde.getEMail()));
@@ -90,67 +167,5 @@ public class MainPage {
         });
         return konten;
     }
-
-    private static void setKontonummer() {
-        if(getAktuellesKonto() == null){
-            TMNU.setText("------");
-        }
-        else {
-            TMNU.setText(String.valueOf(getAktuellesKonto().KontonummerGeben()));
-        }
-    }
-
-    private static void setKontostand() {
-        if(getAktuellesKonto() == null){
-            TMS.setText("------");
-        }
-        else {
-            TMS.setText(String.valueOf(getAktuellesKonto().KontostandAlsStringGeben()));
-        }
-    }
-
-    public static Konto getAktuellesKonto(){
-        if(aktuellesKonto == -1){
-            return null;
-        }
-        List<Konto> konten = new ArrayList<>(getKontenListe());
-        if(aktuellesKonto >= konten.size()){
-            System.out.println("FEHLER - MainPage - DIESER KUNDE HAT KEINE KONTOS");
-        }
-        return konten.get(aktuellesKonto);
-    }
-
-    public static void setEinzahlenButtonVoid(){
-        BME.addMethod(new UIButtonMethod() {
-            @Override
-            public void performMethod() {
-                if(getAktuellesKonto() != null){
-                    String s = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)).get(0);
-                    double d = Double.parseDouble(s.replace(",", "."));
-                    System.out.println("double: " + d);
-                    Konto k = getAktuellesKonto();
-                    k.Einzahlen(d);
-                    kontenDB.KontoÄndern(k.KontonummerGeben(), k);
-                    setKontostand();
-                }
-            }
-        });
-    }
-
-    public static void setAbmeldenButtonVoid(){
-        BMO.addMethod(new UIButtonMethod() {
-            @Override
-            public void performMethod() {
-                if(nutzer instanceof Angestellter){
-                    mw.getWindow().showPlane(PAGES.MAIN_PAGE);
-                }
-                else{
-                    mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
-                }
-            }
-        });
-    }
-
-
 
 }

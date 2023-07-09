@@ -26,6 +26,7 @@ public class Sparkonto extends Konto{
     }
 
     private void startTimerZinsen(){
+        int period = 60000;
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             @Override
@@ -34,21 +35,14 @@ public class Sparkonto extends Konto{
                 //System.out.println("neuer Kontostand des Sparkonto " +kontonummer + " : " + kontostand);
 
             }
-        }, 0, 5000);
+        }, period, period);
     }
 
     public double ZinssatzGeben(){return zinssatz;}
 
     @Override
-    public boolean Abheben(double abhebebetrag) {
-        boolean result;
-        if (KontostandGeben() - abhebebetrag < 0) {
-            kontostand = kontostand - abhebebetrag;
-            result = true;
-        } else {
-            result = false;
-        }
-        return result;
+    public boolean AbhebenErlaubt(double abhebebetrag) {
+        return KontostandGeben() - abhebebetrag > 0;
     }
 
     @Override

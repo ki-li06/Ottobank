@@ -40,8 +40,12 @@ public abstract class Konto {
         this.besitzer = besitzer;
     }
 
-    public boolean Abheben(double betrag)
-    {return false;} //wird in den Kontos überschrieben
+    public abstract boolean AbhebenErlaubt(double betrag);
+
+    public void Abheben(double betrag){
+        kontostand -= betrag;
+        System.out.println("Es wurden " + betrag + " vom Konto " + kontonummer + " abgehoben");
+    }
 
     public int KontonummerGeben (){
         return kontonummer;
@@ -57,10 +61,10 @@ public abstract class Konto {
     public Kunde EigentümerGeben(){
         return besitzer;
     }
-    public void Einzahlen(double einzahlbetrag)
+    public void Einzahlen(double betrag)
     {
-        kontostand=kontostand+einzahlbetrag;
-        System.out.println("Neuer Kontostand:"+kontostand);
+        kontostand=kontostand+betrag;
+        System.out.println("Es wurden " + betrag + " in das Konto " + kontonummer + " eingezahlt");
     }
 
 

@@ -24,6 +24,10 @@ public class LoginPage {
                 //System.out.println("text : '" + TLP.getText() + "'");
                 if (nutzerDB.PasswortRichtig(ILE.getText(), ILP.getText())) {
                     nutzer = nutzerDB.NutzerZuMail(ILE.getText());
+
+                    ILE.setText("");
+                    ILP.setText("");
+
                     if (nutzer.getType().equals(Nutzer.TYPE.KUNDE)) {
                         mw.getWindow().showPlane(PAGES.MAIN_PAGE);
                         kunde = (Kunde) nutzer;
@@ -32,13 +36,16 @@ public class LoginPage {
                         ILP.setText("");
 
                         MainPage.setName(kunde);
-                        MainPage.setAktuellesKonto(0);
                         MainPage.setKontenListe();
-                        MainPage.setAbmeldenButtonVoid();
+                        MainPage.setAktuellesKonto(0);
                         MainPage.setEinzahlenButtonVoid();
+                        MainPage.setAbhebenButtonVoid();
+                        MainPage.setAbmeldenButtonVoid();
+
 
                     } else {
                         mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
+                        AdminMainPage.setAbmeldenButtonVoid();
                     }
                 } else {
                     PopUp.showError("Passwort falsch!");

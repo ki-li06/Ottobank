@@ -44,7 +44,7 @@ public class MainWindow{
 
         createAdminSettingsPage();
 
-        layerManager.showPlane(0);
+        layerManager.showPlane(PAGES.LOGIN_PAGE);
         mainFrame.add(layerManager);
         mainFrame.setVisible(true);
 
@@ -96,7 +96,7 @@ public class MainWindow{
         registerButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(1);
+                layerManager.showPlane(PAGES.REGISTER_PAGE);
             }
         });
         loginPage.registerComponent(registerButton, COMPONENTS.PRIVATE);
@@ -161,7 +161,7 @@ public class MainWindow{
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(0);
+                layerManager.showPlane(PAGES.LOGIN_PAGE);
             }
         });
         registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
@@ -195,7 +195,7 @@ public class MainWindow{
 
         BetterTextField nameLabelParam = new BetterTextField("Thomas Müller", JLabel.LEFT);
         int LabelHeightParam = nameLabelParam.getPreferredSize().height;
-        nameLabelParam.setBounds(90, 15, 190, LabelHeightParam);
+        nameLabelParam.setBounds(95, 15, 190, LabelHeightParam);
         mainPage.registerComponent(nameLabelParam, COMPONENTS.NAME_LABEL_PARAM);
 
         BetterTextField kontonummerFix = new BetterTextField("Kontonummer: ", JLabel.LEFT);
@@ -287,7 +287,7 @@ public class MainWindow{
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(2);
+                layerManager.showPlane(PAGES.MAIN_PAGE);
             }
         });
         registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
@@ -307,36 +307,15 @@ public class MainWindow{
         return cb.displayPopup(page, "Einzahlen");
     }
 
-    /*
-    public ArrayList<String> ueberweisenPopUp(StackedPane page){
-        CustomPopup cb = new CustomPopup();
-        JLabel infoLabel = new JLabel("Betrag zum Überweisen eingeben");
-        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
-        JTextField betragEntry = new JTextField();
-        betragEntry.addKeyListener(new IntegerInputKeyListener());
-        betragEntry.setHorizontalAlignment(JTextField.CENTER);
-        betragEntry.setPreferredSize(new Dimension(400, 35)); // Adjust the height here
-        cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
-        JLabel kontonummerLabel = new JLabel("Kontonummer des anderen Kontos eingeben");
-        cb.addWidget(kontonummerLabel, cb.createConstraints(0,2,GridBagConstraints.VERTICAL, 2));
-        JTextField kontonummerTextField = new JTextField();
-        //kontonummerTextField.addKeyListener(new IntegerInputKeyListener());
-        kontonummerTextField.setHorizontalAlignment(JTextField.CENTER);
-        kontonummerTextField.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(kontonummerTextField, cb.createConstraints(0,3,GridBagConstraints.HORIZONTAL, 1));
-        return cb.displayPopup(page, "Überweisen");
-    }
-    */
-
     public ArrayList<String> abhebenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
         JLabel infoLabel = new JLabel("Betrag (€) zum Abheben eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
         BetterInputField abhebenEntry = new BetterInputField();
         abhebenEntry.setEchoChar((char) 0);
+        abhebenEntry.putClientProperty("JTextField.placeholderText", "00,00");
         abhebenEntry.setHorizontalAlignment(JTextField.LEFT);
         abhebenEntry.addKeyListener(new MoneyKeyListener(abhebenEntry));
-        abhebenEntry.setHorizontalAlignment(JTextField.CENTER);
         abhebenEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
         cb.addWidget(abhebenEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Abheben");
@@ -359,9 +338,14 @@ public class MainWindow{
         adminControls.registerComponent(accountName, COMPONENTS.USER_NAME);
 
         BetterButton accountLogin = new BetterButton();
-        accountLogin.setText("Login as User");
+        accountLogin.setText("als Kunde anmelden");
         accountLogin.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
         adminControls.registerComponent(accountLogin, COMPONENTS.LOGIN_BUTTON);
+
+        BetterButton logout = new BetterButton();
+        logout.setText("Abmelden");
+        logout.setBounds(adminControls.getWidth()/2 - 250/2 - 8, 180, 250, 30);
+        adminControls.registerComponent(logout, COMPONENTS.LOGOUT_BUTTON);
 
         BetterButton settingsButton = new BetterButton();
         settingsButton.setBounds(adminControls.getWidth()-75, 10, 45, 45);
@@ -369,9 +353,10 @@ public class MainWindow{
         settingsButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(5);
+                layerManager.showPlane(PAGES.ADMIN_MAIN_PAGE);
             }
         });
+
 
         adminControls.registerComponent(settingsButton, COMPONENTS.PRIVATE);
     }
@@ -434,7 +419,7 @@ public class MainWindow{
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(4);
+                layerManager.showPlane(PAGES.MAIN_PAGE);
             }
         });
         registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
@@ -445,19 +430,19 @@ public class MainWindow{
         ((BetterButton) (mw.getWindow().getElement(PAGES.LOGIN_PAGE, COMPONENTS.LOGIN_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.getWindow().showPlane(1);
+                mw.getWindow().showPlane(PAGES.REGISTER_PAGE);
             }
         });
         ((BetterButton) (mw.getWindow().getElement(PAGES.REGISTER_PAGE, COMPONENTS.REGISTER_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.getWindow().showPlane(2);
+                mw.getWindow().showPlane(PAGES.MAIN_PAGE);
             }
         });
         ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.SETTINGS_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.getWindow().showPlane(3);
+                mw.getWindow().showPlane(PAGES.SETTINGS_PAGE);
             }
         });
         ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.EINZAHLEN_BUTTON))).addMethod(new UIButtonMethod() {
@@ -476,7 +461,7 @@ public class MainWindow{
         ((BetterButton) (mw.getWindow().getElement(PAGES.SETTINGS_PAGE, COMPONENTS.ACCOUNT_DELETE_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.getWindow().showPlane(4);
+                mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
             }
         });
     }

@@ -6,13 +6,16 @@ import java.util.ArrayList;
 
 
 public class CustomPopup {
+
     JPanel mainPanel = new JPanel();
+
+
     CustomPopup(){
         mainPanel.setLayout(new GridBagLayout());
     }
 
-
     ArrayList<JComponent> widgets = new ArrayList<>();
+
     public void addWidget(JComponent widget, GridBagConstraints constraints){
         mainPanel.add(widget, constraints);
         widgets.add(widget);

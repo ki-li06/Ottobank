@@ -14,7 +14,6 @@ import static GUI.StackedPane.COMPONENTS;
 
 public class Main {
     public static MainWindow mw;
-
     public static NutzerDB nutzerDB;
     public static KontenDB kontenDB;
 

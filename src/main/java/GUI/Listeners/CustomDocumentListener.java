@@ -1,11 +1,13 @@
-package GUI;
+package GUI.Listeners;
+
+import GUI.BetterComponents.BetterInputField;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-class CustomDocumentListener implements DocumentListener {
+public class CustomDocumentListener implements DocumentListener {
     private final BetterInputField t;
-    CustomDocumentListener(BetterInputField parent) {
+    public CustomDocumentListener(BetterInputField parent) {
         this.t = parent;
     }
     @Override

@@ -1,8 +1,10 @@
-package GUI;
+package GUI.BetterComponents;
+
+import GUI.Listeners.CustomActionListener;
+import GUI.Listeners.CustomDocumentListener;
+import GUI.UIs.UITextFieldMethod;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class BetterInputField extends JPasswordField {
     private UITextFieldMethod method;

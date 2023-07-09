@@ -1,6 +1,9 @@
 package Schnitstelle;
 
 import GUI.*;
+import GUI.BetterComponents.BetterButton;
+import GUI.BetterComponents.BetterInputField;
+import GUI.UIs.UIButtonMethod;
 
 import static Schnitstelle.Main.mw;
 import static GUI.StackedWidget.PAGES;

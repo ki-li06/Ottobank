@@ -1,5 +1,6 @@
 package Bank.Konten;
 import Bank.Nutzer.Kunde;
+import Datenbank.LiteSQL.KontenDB;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,10 +30,11 @@ public class Sparkonto extends Konto{
         t.schedule(new TimerTask() {
             @Override
             public void run() {
-                kontostand = kontostand*(1+zinssatz);
-                System.out.println("neuer Kontostand des Kontos " +kontonummer + " : " + kontostand);
+                kontostand *= (1+zinssatz);
+                //System.out.println("neuer Kontostand des Sparkonto " +kontonummer + " : " + kontostand);
+
             }
-        }, 0, 60000);
+        }, 0, 5000);
     }
 
     public double ZinssatzGeben(){return zinssatz;}

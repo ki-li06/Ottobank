@@ -1,15 +1,18 @@
-package GUI;
+package GUI.Listeners;
+
+import GUI.BetterComponents.BetterButton;
+import GUI.BetterComponents.BetterComboBox;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class CustomActionListener implements ActionListener {
+public class CustomActionListener implements ActionListener {
     private final JComponent parent;
-    CustomActionListener(BetterButton parent) {
+    public CustomActionListener(BetterButton parent) {
         this.parent = parent;
     }
-    CustomActionListener(BetterComboBox parent) {
+    public CustomActionListener(BetterComboBox parent) {
         this.parent = parent;
     }
     @Override

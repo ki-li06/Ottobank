@@ -1,4 +1,7 @@
-package GUI;
+package GUI.BetterComponents;
+
+import GUI.Listeners.CustomActionListener;
+import GUI.UIs.UIButtonMethod;
 
 import javax.swing.JButton;
 

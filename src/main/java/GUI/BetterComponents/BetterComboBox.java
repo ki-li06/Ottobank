@@ -1,4 +1,7 @@
-package GUI;
+package GUI.BetterComponents;
+import GUI.Listeners.CustomActionListener;
+import GUI.UIs.UIComboBoxMethod;
+
 import javax.swing.*;
 
 public class BetterComboBox extends JComboBox<String> {

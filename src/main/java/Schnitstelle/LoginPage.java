@@ -3,6 +3,9 @@ package Schnitstelle;
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
 import GUI.*;
+import GUI.BetterComponents.BetterButton;
+import GUI.BetterComponents.BetterInputField;
+import GUI.UIs.UIButtonMethod;
 
 import static Schnitstelle.Main.*;
 import static GUI.StackedWidget.PAGES;
@@ -25,11 +28,14 @@ public class LoginPage {
                         mw.getWindow().showPlane(PAGES.MAIN_PAGE);
                         kunde = (Kunde) nutzer;
 
+                        ILE.setText("");
+                        ILP.setText("");
+
                         MainPage.setName(kunde);
                         MainPage.setAktuellesKonto(0);
                         MainPage.setKontenListe();
-
-
+                        MainPage.setAbmeldenButtonVoid();
+                        MainPage.setEinzahlenButtonVoid();
 
                     } else {
                         mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);

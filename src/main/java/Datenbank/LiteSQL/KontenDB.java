@@ -154,11 +154,11 @@ public class KontenDB extends LiteSQL{
                 .replace("PARAM_BesitzerMail", neuesKonto.EigentümerGeben().getEMail())
                 .replace("PARAM_Type", type)
                 .replace("PARAM_SpecialDouble", String.valueOf(specialDouble));
-        System.out.println("cmd: '" + cmd + "'");
+        //System.out.println("cmd: '" + cmd + "'");
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Konto mit der " + nummer + " wurde geändert");
+        System.out.println("Konto mit der Nummer " + nummer + " wurde geändert");
     }
 
     /**

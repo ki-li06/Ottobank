@@ -1,4 +1,4 @@
-package GUI;
+package GUI.UIs;
 
 public interface UIButtonMethod {
     public void performMethod();

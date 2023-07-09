@@ -1,4 +1,11 @@
 package GUI;
+import GUI.BetterComponents.BetterButton;
+import GUI.BetterComponents.BetterComboBox;
+import GUI.BetterComponents.BetterInputField;
+import GUI.BetterComponents.BetterTextField;
+import GUI.Listeners.MoneyKeyListener;
+import GUI.UIs.UIButtonMethod;
+import GUI.UIs.UIComboBoxMethod;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatDarkLaf;
 
@@ -162,7 +169,7 @@ public class MainWindow{
     }
 
     void createMainPage(){
-        StackedPane mainPage = new StackedPane(layerManager, new Dimension(550, 320));
+        StackedPane mainPage = new StackedPane(layerManager, new Dimension(550, 350));
         layerManager.registerPane(mainPage, PAGES.MAIN_PAGE);
 
         BetterButton settingsButton = new BetterButton();
@@ -215,18 +222,17 @@ public class MainWindow{
         BetterButton freeMoneyButton = new BetterButton();
         freeMoneyButton.setText("Einzahlen");
         freeMoneyButton.setBounds(25,160,490,30);
-
-        mainPage.registerComponent(freeMoneyButton, COMPONENTS.DEPOSIT_BUTTON);
-
-        BetterButton transactionButton = new BetterButton();
-        transactionButton.setText("Überweisen");
-        transactionButton.setBounds(25,200,490,30);
-        mainPage.registerComponent(transactionButton, COMPONENTS.TRANSACTION_BUTTON);
+        mainPage.registerComponent(freeMoneyButton, COMPONENTS.EINZAHLEN_BUTTON);
 
         BetterButton deleteMoneyButton = new BetterButton();
         deleteMoneyButton.setText("Abheben");
-        deleteMoneyButton.setBounds(25,240,490,30);
-        mainPage.registerComponent(deleteMoneyButton, COMPONENTS.WITHDRAW_BUTTON);
+        deleteMoneyButton.setBounds(25,200,490,30);
+        mainPage.registerComponent(deleteMoneyButton, COMPONENTS.ABHEBEN_BUTTON);
+
+        BetterButton logoutButton = new BetterButton();
+        logoutButton.setText("Abmelden");
+        logoutButton.setBounds(25, 260, 490, 30);
+        mainPage.registerComponent(logoutButton, COMPONENTS.LOGOUT_BUTTON);
 
     }
 
@@ -289,16 +295,19 @@ public class MainWindow{
 
     public ArrayList<String> einzahlenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
-        JLabel infoLabel = new JLabel("Betrag zum Einzahlen eingeben");
+        JLabel infoLabel = new JLabel("Betrag (€) zum Einzahlen eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
-        JTextField betragEntry = new JTextField();
-        betragEntry.addKeyListener(new IntegerInputKeyListener());
-        betragEntry.setHorizontalAlignment(JTextField.CENTER);
+        BetterInputField betragEntry = new BetterInputField();
+        betragEntry.setEchoChar((char) 0);
+        betragEntry.putClientProperty("JTextField.placeholderText", "00,00");
+        betragEntry.setHorizontalAlignment(JTextField.LEFT);
+        betragEntry.addKeyListener(new MoneyKeyListener(betragEntry));
         betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
         cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Einzahlen");
     }
 
+    /*
     public ArrayList<String> ueberweisenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
         JLabel infoLabel = new JLabel("Betrag zum Überweisen eingeben");
@@ -317,12 +326,16 @@ public class MainWindow{
         cb.addWidget(kontonummerTextField, cb.createConstraints(0,3,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Überweisen");
     }
+    */
+
     public ArrayList<String> abhebenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
-        JLabel infoLabel = new JLabel("Betrag zum Abheben eingeben");
+        JLabel infoLabel = new JLabel("Betrag (€) zum Abheben eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
-        JTextField abhebenEntry = new JTextField();
-        abhebenEntry.addKeyListener(new IntegerInputKeyListener());
+        BetterInputField abhebenEntry = new BetterInputField();
+        abhebenEntry.setEchoChar((char) 0);
+        abhebenEntry.setHorizontalAlignment(JTextField.LEFT);
+        abhebenEntry.addKeyListener(new MoneyKeyListener(abhebenEntry));
         abhebenEntry.setHorizontalAlignment(JTextField.CENTER);
         abhebenEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
         cb.addWidget(abhebenEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
@@ -447,19 +460,14 @@ public class MainWindow{
                 mw.getWindow().showPlane(3);
             }
         });
-        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.DEPOSIT_BUTTON))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.EINZAHLEN_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                System.out.println("eingabe: " + mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)));
             }
         });
-        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.TRANSACTION_BUTTON))).addMethod(new UIButtonMethod() {
-            @Override
-            public void performMethod() {
-                mw.ueberweisenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
-            }
-        });
-        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.WITHDRAW_BUTTON))).addMethod(new UIButtonMethod() {
+        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.ABHEBEN_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 mw.abhebenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));

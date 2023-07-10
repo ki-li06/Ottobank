@@ -12,7 +12,7 @@ import static GUI.StackedPane.COMPONENTS;
 import static Schnitstelle.Main.*;
 
 public class AdminMainPage {
-    public static final BetterInputField IMAN = (BetterInputField) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.USER_NAME);
+    public static final BetterInputField IMAN = (BetterInputField) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.USER_NAME_INPUT);
     public static final BetterButton BMI = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGIN_BUTTON);
     public static final BetterButton BMO = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGOUT_BUTTON);
 

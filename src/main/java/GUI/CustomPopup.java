@@ -18,6 +18,7 @@ public class CustomPopup {
 
     public void addWidget(JComponent widget, GridBagConstraints constraints){
         mainPanel.add(widget, constraints);
+
         widgets.add(widget);
     }
 
@@ -31,6 +32,7 @@ public class CustomPopup {
         if (options == JOptionPane.OK_OPTION){
             for (JComponent object : widgets){
                 if (object instanceof JTextField){
+                    //System.out.println("Text: " + ((JTextField) object).getText());
                     result.add(((JTextField) object).getText());
                 }
 

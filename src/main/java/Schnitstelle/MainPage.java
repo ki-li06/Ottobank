@@ -96,13 +96,16 @@ public class MainPage {
             @Override
             public void performMethod() {
                 if(getAktuellesKonto() != null){
-                    String s = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)).get(0);
-                    double d = Double.parseDouble(s.replace(",", "."));
-                    //System.out.println("double: " + d);
-                    Konto konto = getAktuellesKonto();
-                    konto.Einzahlen(d);
-                    kontenDB.KontoÄndern(konto.KontonummerGeben(), konto);
-                    setKontostand();
+                    List<String> eingabe = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                    if(eingabe.size() != 0) {
+                        String s = eingabe.get(0);
+                        double d = Double.parseDouble(s.replace(",", "."));
+                        //System.out.println("double: " + d);
+                        Konto konto = getAktuellesKonto();
+                        konto.Einzahlen(d);
+                        kontenDB.KontoÄndern(konto.KontonummerGeben(), konto);
+                        setKontostand();
+                    }
                 }
             }
         });
@@ -112,17 +115,19 @@ public class MainPage {
             @Override
             public void performMethod() {
                 if(getAktuellesKonto() != null){
-                    String s = mw.abhebenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)).get(0);
-                    double d = Double.parseDouble(s.replace(",", "."));
-                    Konto konto = getAktuellesKonto();
-                    boolean erlaubt = konto.AbhebenErlaubt(d);
-                    if(!erlaubt){
-                        PopUp.showError("Dieser Betrag darf nicht abgehoben werden.");
-                    }
-                    else{
-                        konto.Abheben(d);
-                        kontenDB.KontoÄndern(konto.KontonummerGeben(), konto);
-                        setKontostand();
+                    List<String> eingabe = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                    if(eingabe.size() != 0) {
+                        String s = eingabe.get(0);
+                        double d = Double.parseDouble(s.replace(",", "."));
+                        Konto konto = getAktuellesKonto();
+                        boolean erlaubt = konto.AbhebenErlaubt(d);
+                        if (!erlaubt) {
+                            PopUp.showError("Dieser Betrag darf nicht abgehoben werden.");
+                        } else {
+                            konto.Abheben(d);
+                            kontenDB.KontoÄndern(konto.KontonummerGeben(), konto);
+                            setKontostand();
+                        }
                     }
                 }
             }
@@ -156,7 +161,7 @@ public class MainPage {
     private static List<Konto> getKontenListe(){
         //System.out.println(kontenDB.KontenVonUserGeben(kunde.getEMail()));
         List<Konto> konten = new ArrayList<>(kontenDB.KontenVonUserGeben(kunde.getEMail()));
-        konten.sort(new Comparator<Konto>() {
+        konten.sort(new Comparator<>() {
             @Override
             public int compare(Konto o1, Konto o2) {
                 if(o1.getType() == o2.getType()){

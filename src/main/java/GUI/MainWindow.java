@@ -59,7 +59,7 @@ public class MainWindow{
         layerManager.registerPane(loginPage, PAGES.LOGIN_PAGE);
 
         //Info Label
-        JLabel infoLabel = new JLabel("<html><center>Welcome to<br>Ottobank</center></html>", JLabel.CENTER);
+        BetterTextField infoLabel = new BetterTextField("<html><center>Willkommen bei der<br>Ottobank</center></html>", JLabel.CENTER);
         int LabelHeight = infoLabel.getPreferredSize().height;
         infoLabel.setBounds(0, 40, 400, LabelHeight);
         loginPage.registerComponent(infoLabel, COMPONENTS.PRIVATE);
@@ -80,7 +80,7 @@ public class MainWindow{
 
         //Login Button
         BetterButton loginButton = new BetterButton();
-        loginButton.setText("Log in");
+        loginButton.setText("Anmelden");
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
@@ -91,7 +91,7 @@ public class MainWindow{
         loginPage.registerComponent(loginButton, COMPONENTS.LOGIN_BUTTON);
 
         BetterButton registerButton = new BetterButton();
-        registerButton.setText("Register");
+        registerButton.setText("Registrieren");
         registerButton.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 270, 250, 30);
         registerButton.addMethod(new UIButtonMethod() {
             @Override
@@ -107,7 +107,7 @@ public class MainWindow{
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
         layerManager.registerPane(registerPage, PAGES.REGISTER_PAGE);
 
-        JLabel registerInfoLabel = new JLabel("Register your account", JLabel.CENTER);
+        BetterTextField registerInfoLabel = new BetterTextField("Register your account", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
         registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
@@ -144,19 +144,19 @@ public class MainWindow{
         //Confirm Pin Text Field
         BetterInputField pinConfirmRegisterTextField = new BetterInputField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
-        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
+        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "PIN Bestätigen");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
         registerPage.registerComponent(pinConfirmRegisterTextField, COMPONENTS.CONFIRM_PIN_INPUT);
 
         //Register Button
         BetterButton registerButton = new BetterButton();
-        registerButton.setText("Register");
+        registerButton.setText("Registrieren");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
         registerPage.registerComponent(registerButton, COMPONENTS.REGISTER_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
-        loginButton.setText("Back to log in");
+        loginButton.setText("Zurück zur Startseite");
         loginButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 390, 250, 30);
         loginButton.addMethod(new UIButtonMethod() {
             @Override
@@ -191,7 +191,7 @@ public class MainWindow{
         BetterTextField nameLabelFix = new BetterTextField("Name:", JLabel.LEFT);
         int LabelHeightFix = nameLabelFix.getPreferredSize().height;
         nameLabelFix.setBounds(30, 15, 80, LabelHeightFix);
-        mainPage.registerComponent(nameLabelFix, COMPONENTS.NAME_LABEL_FIX);
+        mainPage.registerComponent(nameLabelFix, COMPONENTS.PRIVATE);
 
         BetterTextField nameLabelParam = new BetterTextField("Thomas Müller", JLabel.LEFT);
         int LabelHeightParam = nameLabelParam.getPreferredSize().height;
@@ -201,7 +201,7 @@ public class MainWindow{
         BetterTextField kontonummerFix = new BetterTextField("Kontonummer: ", JLabel.LEFT);
         int LabelHeightKontonummerFix = kontonummerFix.getPreferredSize().height;
         kontonummerFix.setBounds(30, 75, 150, LabelHeightKontonummerFix);
-        mainPage.registerComponent(kontonummerFix, COMPONENTS.KONTONUMMER_FIX);
+        mainPage.registerComponent(kontonummerFix, COMPONENTS.PRIVATE);
 
         BetterTextField kontonummerParam = new BetterTextField("NUMMER", JLabel.LEFT);
         int LabelHeightKontonummerParam = kontonummerParam.getPreferredSize().height;
@@ -241,48 +241,36 @@ public class MainWindow{
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
         layerManager.registerPane(registerPage, PAGES.SETTINGS_PAGE);
 
-        JLabel registerInfoLabel = new JLabel("Edit your account", JLabel.CENTER);
+        BetterTextField registerInfoLabel = new BetterTextField("Account-Daten ändern", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
         registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
 
 
-        //Account delete choice
-        BetterComboBox accountDeleteChoice = new BetterComboBox(new String[] {"K1","K2","K3"});
-        accountDeleteChoice.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
-        registerPage.registerComponent(accountDeleteChoice, COMPONENTS.ACCOUNT_DELETE_CHOICE);
+        //Konto delete button
+        BetterButton kontoDelete = new BetterButton();
+        kontoDelete.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 175, 250, 30);
+        kontoDelete.setText("Konto löschen");
+        registerPage.registerComponent(kontoDelete,COMPONENTS.KONTO_DELETE_BUTTON);
+        //Account create
+        BetterButton accountCreate = new BetterButton();
+        accountCreate.setBounds(registerPage.getWidth()/2 - 250/2 - 8, 130, 250, 30);
+        accountCreate.setText("Konto erstellen");
+        registerPage.registerComponent(accountCreate, COMPONENTS.ACCOUNT_CREATE_BUTTON);
+        //Change PIN
+        BetterButton changePIN = new BetterButton();
+        changePIN.setBounds(registerPage.getWidth()/2 - 250/2 - 8, 220, 250, 30);
+        changePIN.setText("PIN Ändern");
+        registerPage.registerComponent(changePIN, COMPONENTS.ACCOUNT_CHANGE_PIN);
         //Account delete button
         BetterButton accountDelete = new BetterButton();
-        accountDelete.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 170, 250, 30);
-        accountDelete.setText("DELETE?");
-        registerPage.registerComponent(accountDelete,COMPONENTS.ACCOUNT_DELETE_BUTTON);
-        //Account create
-        BetterInputField accountCreateField = new BetterInputField();
-        accountCreateField.setEchoChar((char) 0);
-        accountCreateField.putClientProperty("JTextField.placeholderText","Account name");
-        accountCreateField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
-        registerPage.registerComponent(accountCreateField,COMPONENTS.ACCOUNT_CREATE_INPUT);
-        //Create Button
-        BetterButton accountCreateButton = new BetterButton();
-        accountCreateButton.setText("Create new Account");
-        accountCreateButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 250, 250, 30);
-        registerPage.registerComponent(accountCreateButton,COMPONENTS.ACCOUNT_CREATE_BUTTON);
-        //Confirm Pin Text Field
-        BetterInputField pinConfirmRegisterTextField = new BetterInputField();
-        pinConfirmRegisterTextField.setEchoChar('*');
-        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Neue PIN");
-        pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
-        registerPage.registerComponent(pinConfirmRegisterTextField, COMPONENTS.NEW_PIN_INPUT);
-
-        //Register Button
-        BetterButton registerButton = new BetterButton();
-        registerButton.setText("Save Changes");
-        registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
-        registerPage.registerComponent(registerButton, COMPONENTS.SAVE_BUTTON);
+        accountDelete.setBounds(registerPage.getWidth()/2 - 250/2 - 8, 265, 250, 30);
+        accountDelete.setText("Account löschen");
+        registerPage.registerComponent(accountDelete, COMPONENTS.ACCOUNT_DELETE_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
-        loginButton.setText("Back to main Page");
+        loginButton.setText("Zurück");
         loginButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 390, 250, 30);
         loginButton.addMethod(new UIButtonMethod() {
             @Override
@@ -295,7 +283,7 @@ public class MainWindow{
 
     public ArrayList<String> einzahlenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
-        JLabel infoLabel = new JLabel("Betrag (€) zum Einzahlen eingeben");
+        BetterTextField infoLabel = new BetterTextField("Betrag (€) zum Einzahlen eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
         BetterInputField betragEntry = new BetterInputField();
         betragEntry.setEchoChar((char) 0);
@@ -309,7 +297,7 @@ public class MainWindow{
 
     public ArrayList<String> abhebenPopUp(StackedPane page){
         CustomPopup cb = new CustomPopup();
-        JLabel infoLabel = new JLabel("Betrag (€) zum Abheben eingeben");
+        BetterTextField infoLabel = new BetterTextField("Betrag (€) zum Abheben eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
         BetterInputField abhebenEntry = new BetterInputField();
         abhebenEntry.setEchoChar((char) 0);
@@ -326,16 +314,16 @@ public class MainWindow{
         StackedPane adminControls = new StackedPane(layerManager, new Dimension(300,260));
         layerManager.registerPane(adminControls, PAGES.ADMIN_MAIN_PAGE);
 
-        JLabel infoLabel = new JLabel("<html><center>Access user accounts:</center></html>", JLabel.CENTER);
+        BetterTextField infoLabel = new BetterTextField("<html><center>Auf Kunden zugreifen</center></html>", JLabel.CENTER);
         int LabelHeight = infoLabel.getPreferredSize().height;
         infoLabel.setBounds(0, 60, 300, LabelHeight);
         adminControls.registerComponent(infoLabel, COMPONENTS.PRIVATE);
 
         BetterInputField accountName = new BetterInputField();
         accountName.setEchoChar((char) 0);
-        accountName.putClientProperty("JTextField.placeholderText","Account Email");
+        accountName.putClientProperty("JTextField.placeholderText","EMail");
         accountName.setBounds(adminControls.getWidth() / 2 - 250 / 2 - 8, 90, 250, 30);
-        adminControls.registerComponent(accountName, COMPONENTS.USER_NAME);
+        adminControls.registerComponent(accountName, COMPONENTS.USER_NAME_INPUT);
 
         BetterButton accountLogin = new BetterButton();
         accountLogin.setText("als Kunde anmelden");
@@ -365,7 +353,7 @@ public class MainWindow{
         StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
         layerManager.registerPane(registerPage, PAGES.ADMIN_REGISTER_PAGE);
 
-        JLabel registerInfoLabel = new JLabel("Register new admin", JLabel.CENTER);
+        BetterTextField registerInfoLabel = new BetterTextField("Register new admin", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
         registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
@@ -402,19 +390,19 @@ public class MainWindow{
         //Confirm Pin Text Field
         BetterInputField pinConfirmRegisterTextField = new BetterInputField();
         pinConfirmRegisterTextField.setEchoChar((char) 0);
-        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "Confirm PIN");
+        pinConfirmRegisterTextField.putClientProperty("JTextField.placeholderText", "PIN Bestätigen");
         pinConfirmRegisterTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 290, 250, 30);
         registerPage.registerComponent(pinConfirmRegisterTextField, COMPONENTS.CONFIRM_PIN_INPUT);
 
         //Register Button
         BetterButton registerButton = new BetterButton();
-        registerButton.setText("Register");
+        registerButton.setText("Registrieren");
         registerButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 330, 250, 30);
         registerPage.registerComponent(registerButton, COMPONENTS.REGISTER_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
-        loginButton.setText("Back to main Page");
+        loginButton.setText("Zurück");
         loginButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 390, 250, 30);
         loginButton.addMethod(new UIButtonMethod() {
             @Override

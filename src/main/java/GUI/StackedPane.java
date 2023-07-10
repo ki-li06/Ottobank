@@ -12,12 +12,12 @@ public class StackedPane extends JPanel{
         ANONYMOUS, PRIVATE,
         EMAIL_INPUT, PIN_INPUT, LOGIN_BUTTON,
         VORNAME_INPUT, NACHNAME_INPUT, CONFIRM_PIN_INPUT, REGISTER_BUTTON,
-        SETTINGS_BUTTON, KONTO_WECHSEL_BOX, NAME_LABEL_FIX, NAME_LABEL_PARAM, KONTONUMMER_FIX,
+        SETTINGS_BUTTON, KONTO_WECHSEL_BOX, NAME_LABEL_PARAM,
             KONTONUMMER_PARAM, KONTOSTAND_FIX, KONTOSTAND_PARAM,
             EINZAHLEN_BUTTON, ABHEBEN_BUTTON, LOGOUT_BUTTON,
-        ACCOUNT_DELETE_CHOICE, ACCOUNT_DELETE_BUTTON, ACCOUNT_CREATE_BUTTON,
-            ACCOUNT_CREATE_INPUT, NEW_PIN_INPUT, SAVE_BUTTON,
-        USER_NAME
+        KONTO_DELETE_BUTTON, ACCOUNT_CREATE_BUTTON, ACCOUNT_CHANGE_PIN, ACCOUNT_DELETE_BUTTON,
+
+        USER_NAME_INPUT
     }
 
     private final ArrayList<JComponent> comps;
@@ -27,7 +27,7 @@ public class StackedPane extends JPanel{
     private boolean shown;
     public StackedPane(StackedWidget parent) {
         super();
-        comps = new ArrayList<JComponent>();
+        comps = new ArrayList<>();
         keys = new ArrayList<>();
         this.size = parent.getSize();
         this.parent = parent;
@@ -37,7 +37,7 @@ public class StackedPane extends JPanel{
     }
     public StackedPane(StackedWidget parent, Dimension size) {
         super();
-        comps = new ArrayList<JComponent>();
+        comps = new ArrayList<>();
         keys = new ArrayList<>();
         this.size = size;
         this.parent = parent;

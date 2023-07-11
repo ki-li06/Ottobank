@@ -44,10 +44,10 @@ public class SettingsPage {
                     }
                     else if(type.equals(String.valueOf(Konto.TYPE.GIROKONTO))){
                         List<String> nettoeinkommen  = mw.PopUpNettoeinkommen(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
-                        System.out.println("list einkommen: " + nettoeinkommen + "(" + nettoeinkommen.size() + ")");
-                        if(nettoeinkommen.size() == 1){
+                        //System.out.println("list einkommen: " + nettoeinkommen + "(" + nettoeinkommen.size() + ")");
+                        if(nettoeinkommen.size() == 1 && !nettoeinkommen.get(0).equals("")){
                             double einkommen = Double.parseDouble(nettoeinkommen.get(0).replace(",", "."));
-                            System.out.println("einkommen: " + einkommen);
+                            //System.out.println("einkommen: " + einkommen);
                             Girokonto gk = new Girokonto(0, kunde, einkommen);
                             kontenDB.KontoHinzufügen(gk);
                             PopUp.showInfo("<html>Der Nutzer \"" + kunde.getEMail() + "\"<br>hat ein neues Girokonto eingerichtet.</html>");
@@ -69,7 +69,11 @@ public class SettingsPage {
             public void performMethod() {
                 String[] kontos = MainPage.getKontenListeString();
                 List<String> eingabe = mw.PopUpKontoAuswahl(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE), kontos);
-
+                if(eingabe.size() == 1){
+                    int nummer = Integer.parseInt(eingabe.get(0).split(" ")[2]);
+                    Konto k = kontenDB.getKontoVonKontonummer(nummer);
+                    System.out.println("k: " + k);
+                }
             }
         });
     }

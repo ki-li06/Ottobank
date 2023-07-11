@@ -440,7 +440,7 @@ public class MainWindow{
         settingsButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(PAGES.ADMIN_MAIN_PAGE);
+                layerManager.showPlane(PAGES.ADMIN_REGISTER_PAGE);
             }
         });
 
@@ -506,7 +506,7 @@ public class MainWindow{
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                layerManager.showPlane(PAGES.MAIN_PAGE);
+                layerManager.showPlane(PAGES.ADMIN_MAIN_PAGE);
             }
         });
         registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);

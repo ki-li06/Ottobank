@@ -16,6 +16,8 @@ public class AdminMainPage {
     public static final BetterButton BMI = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGIN_BUTTON);
     public static final BetterButton BMO = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGOUT_BUTTON);
 
+    //public static final BetterButton BMS = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.SETTINGS_BUTTON);
+
     public static void InitializeLoginButton(){
         BMI.addMethod(new UIButtonMethod() {
             @Override

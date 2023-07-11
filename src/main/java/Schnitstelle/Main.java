@@ -38,5 +38,8 @@ public class Main {
 
         //ADMIN MAIN PAGE
         AdminMainPage.InitializeLoginButton();
+
+        //ADMIN SETTINGS PAGE
+        AdminSettingsPage.__init__();
     }
 }

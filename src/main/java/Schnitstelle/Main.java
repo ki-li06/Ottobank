@@ -33,11 +33,8 @@ public class Main {
         //REGISTER PAGE
         RegisterPage.InitializeRegisterButton();
 
-        //MAIN PAGE USER
-        MainPage.InitializeSettingsButton();
-
         //SETTINGS PAGE
-        SettingsPage.InitializeSaveButton();
+        //SettingsPage.InitializeSaveButton();
 
         //ADMIN MAIN PAGE
         AdminMainPage.InitializeLoginButton();

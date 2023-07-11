@@ -11,7 +11,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 
 import static GUI.StackedWidget.PAGES;
 import static GUI.StackedPane.COMPONENTS;
@@ -67,7 +67,7 @@ public class MainWindow{
         //Email Text Field
         BetterInputField emailTextField = new BetterInputField();
         emailTextField.setEchoChar((char) 0);
-        emailTextField.putClientProperty("JTextField.placeholderText", "Email");
+        emailTextField.putClientProperty("JTextField.placeholderText", "E-Mail");
         emailTextField.setBounds(loginPage.getWidth() / 2 - 250 / 2 - 8, 130, 250, 30);
         loginPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
@@ -130,7 +130,7 @@ public class MainWindow{
         //Email Text Field
         BetterInputField emailTextField = new BetterInputField();
         emailTextField.setEchoChar((char) 0);
-        emailTextField.putClientProperty("JTextField.placeholderText", "Email");
+        emailTextField.putClientProperty("JTextField.placeholderText", "E-Mail");
         emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
         registerPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
@@ -175,6 +175,12 @@ public class MainWindow{
         BetterButton settingsButton = new BetterButton();
         settingsButton.setBounds(mainPage.getWidth()-75, 10, 45, 45);
         settingsButton.setIcon(new ImageIcon("src/main/resources/icons/settings.png"));
+        settingsButton.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                layerManager.showPlane(PAGES.SETTINGS_PAGE);
+            }
+        });
         mainPage.registerComponent(settingsButton, COMPONENTS.SETTINGS_BUTTON);
 
         String[] optionsToChoose = {"OPT_1","OPT_2","OPT_3"};
@@ -183,7 +189,7 @@ public class MainWindow{
         kontowechselBox.addMethod(new UIComboBoxMethod() {
             @Override
             public void performMethod(String data) {
-                System.out.println(data);
+                //System.out.println(data);
             }
         });
         mainPage.registerComponent(kontowechselBox, COMPONENTS.KONTO_WECHSEL_BOX);
@@ -211,13 +217,12 @@ public class MainWindow{
         BetterTextField kontostandFix = new BetterTextField("Kontostand: ", JLabel.LEFT);
         int LabelHeightKontostandFix = kontostandFix.getPreferredSize().height;
         kontostandFix.setBounds(30, 105, 150, LabelHeightKontostandFix);
-        mainPage.registerComponent(kontostandFix, COMPONENTS.KONTOSTAND_FIX);
+        mainPage.registerComponent(kontostandFix, COMPONENTS.PRIVATE);
 
         BetterTextField kontostandParam = new BetterTextField("1234567,89€", JLabel.LEFT);
         int LabelHeightKontostandParam = kontostandParam.getPreferredSize().height;
         kontostandParam.setBounds(190, 105, 300, LabelHeightKontonummerParam);
         mainPage.registerComponent(kontostandParam, COMPONENTS.KONTOSTAND_PARAM);
-
 
         BetterButton freeMoneyButton = new BetterButton();
         freeMoneyButton.setText("Einzahlen");
@@ -238,50 +243,54 @@ public class MainWindow{
 
     void createSettingsPage() {
         //register Page
-        StackedPane registerPage = new StackedPane(layerManager, new Dimension(400,500));
-        layerManager.registerPane(registerPage, PAGES.SETTINGS_PAGE);
+        StackedPane settingsPage = new StackedPane(layerManager, new Dimension(400,500));
+        layerManager.registerPane(settingsPage, PAGES.SETTINGS_PAGE);
 
         BetterTextField registerInfoLabel = new BetterTextField("Account-Daten ändern", JLabel.CENTER);
         int LabelHeight = registerInfoLabel.getPreferredSize().height;
         registerInfoLabel.setBounds(0, 40, 400, LabelHeight);
-        registerPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
+        settingsPage.registerComponent(registerInfoLabel, COMPONENTS.PRIVATE);
 
-
-        //Konto delete button
-        BetterButton kontoDelete = new BetterButton();
-        kontoDelete.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 175, 250, 30);
-        kontoDelete.setText("Konto löschen");
-        registerPage.registerComponent(kontoDelete,COMPONENTS.KONTO_DELETE_BUTTON);
         //Account create
         BetterButton accountCreate = new BetterButton();
-        accountCreate.setBounds(registerPage.getWidth()/2 - 250/2 - 8, 130, 250, 30);
+        accountCreate.setBounds(settingsPage.getWidth()/2 - 250/2 - 8, 130, 250, 30);
         accountCreate.setText("Konto erstellen");
-        registerPage.registerComponent(accountCreate, COMPONENTS.ACCOUNT_CREATE_BUTTON);
+        settingsPage.registerComponent(accountCreate, COMPONENTS.KONTO_CREATE_BUTTON);
+        //Konto delete button
+        BetterButton kontoDelete = new BetterButton();
+        kontoDelete.setBounds(settingsPage.getWidth() / 2 - 250 / 2 - 8, 175, 250, 30);
+        kontoDelete.setText("Konto löschen");
+        settingsPage.registerComponent(kontoDelete,COMPONENTS.KONTO_DELETE_BUTTON);
+        //Change Name
+        BetterButton changeName = new BetterButton();
+        changeName.setBounds(settingsPage.getWidth()/2 - 250/2 - 8, 220, 250, 30);
+        changeName.setText("Name ändern");
+        settingsPage.registerComponent(changeName, COMPONENTS.ACCOUNT_CHANGE_NAME_BUTTON);
         //Change PIN
         BetterButton changePIN = new BetterButton();
-        changePIN.setBounds(registerPage.getWidth()/2 - 250/2 - 8, 220, 250, 30);
-        changePIN.setText("PIN Ändern");
-        registerPage.registerComponent(changePIN, COMPONENTS.ACCOUNT_CHANGE_PIN);
+        changePIN.setBounds(settingsPage.getWidth()/2 - 250/2 - 8, 265, 250, 30);
+        changePIN.setText("PIN ändern");
+        settingsPage.registerComponent(changePIN, COMPONENTS.ACCOUNT_CHANGE_PIN_BUTTON);
         //Account delete button
         BetterButton accountDelete = new BetterButton();
-        accountDelete.setBounds(registerPage.getWidth()/2 - 250/2 - 8, 265, 250, 30);
+        accountDelete.setBounds(settingsPage.getWidth()/2 - 250/2 - 8, 310, 250, 30);
         accountDelete.setText("Account löschen");
-        registerPage.registerComponent(accountDelete, COMPONENTS.ACCOUNT_DELETE_BUTTON);
+        settingsPage.registerComponent(accountDelete, COMPONENTS.ACCOUNT_DELETE_BUTTON);
 
         //Back to Login-Window Button
         BetterButton loginButton = new BetterButton();
         loginButton.setText("Zurück");
-        loginButton.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 390, 250, 30);
+        loginButton.setBounds(settingsPage.getWidth() / 2 - 250 / 2 - 8, 415, 250, 30);
         loginButton.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
                 layerManager.showPlane(PAGES.MAIN_PAGE);
             }
         });
-        registerPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
+        settingsPage.registerComponent(loginButton, COMPONENTS.PRIVATE);
     }
 
-    public ArrayList<String> einzahlenPopUp(StackedPane page){
+    public List<String> PopUpEinzahlen(StackedPane page){
         CustomPopup cb = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Betrag (€) zum Einzahlen eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
@@ -294,8 +303,7 @@ public class MainWindow{
         cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Einzahlen");
     }
-
-    public ArrayList<String> abhebenPopUp(StackedPane page){
+    public List<String> PopUpAbheben(StackedPane page){
         CustomPopup cb = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Betrag (€) zum Abheben eingeben");
         cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
@@ -308,6 +316,43 @@ public class MainWindow{
         cb.addWidget(abhebenEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cb.displayPopup(page, "Abheben");
     }
+    public List<String> PopUpKontoType(StackedPane page, String[] kontoTypes){
+        CustomPopup cb = new CustomPopup();
+        BetterTextField infoLabel = new BetterTextField("Was für ein Konto möchtest du erstellen?");
+        cb.addWidget(infoLabel, cb.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        BetterComboBox typesBox = new BetterComboBox(kontoTypes);
+        cb.addWidget(typesBox, cb.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
+        return cb.displayPopup(page, "Konto-Typ wählen");
+    }
+    public List<String> PopUpNettoeinkommen(StackedPane page){
+        CustomPopup cb = new CustomPopup();
+        BetterTextField infoLabel = new BetterTextField("Bitte gib dein Netto-Einkommen ein!");
+        cb.addWidget(infoLabel, cb.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        BetterInputField betragEntry = new BetterInputField();
+        betragEntry.setEchoChar((char) 0);
+        betragEntry.putClientProperty("JTextField.placeholderText", "00,00");
+        betragEntry.setHorizontalAlignment(JTextField.LEFT);
+        betragEntry.addKeyListener(new MoneyKeyListener(betragEntry));
+        betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cb.displayPopup(page, "Girokonto - Nettoeinkommen");
+    }
+    public List<String> PopUpKontoAuswahl(StackedPane page, String[] kontos){
+        return null;
+    }
+    public List<String> PopUpNameÄndern(StackedPane page){
+        return null;
+    }
+    public List<String> PopUpPinÄndern(StackedPane page){
+        return null;
+    }
+    public List<String> PopUpAccountLöschen(StackedPane page){
+        return null;
+    }
+
+
+
+
 
 
     void createAdminMainPage() {
@@ -376,7 +421,7 @@ public class MainWindow{
         //Email Text Field
         BetterInputField emailTextField = new BetterInputField();
         emailTextField.setEchoChar((char) 0);
-        emailTextField.putClientProperty("JTextField.placeholderText", "Email");
+        emailTextField.putClientProperty("JTextField.placeholderText", "E-Mail");
         emailTextField.setBounds(registerPage.getWidth() / 2 - 250 / 2 - 8, 210, 250, 30);
         registerPage.registerComponent(emailTextField, COMPONENTS.EMAIL_INPUT);
 
@@ -427,23 +472,23 @@ public class MainWindow{
                 mw.getWindow().showPlane(PAGES.MAIN_PAGE);
             }
         });
-        ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.SETTINGS_BUTTON))).addMethod(new UIButtonMethod() {
-            @Override
-            public void performMethod() {
-                mw.getWindow().showPlane(PAGES.SETTINGS_PAGE);
-            }
-        });
         ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.EINZAHLEN_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
-                System.out.println("eingabe: " + mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE)));
+                mw.PopUpEinzahlen(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                //System.out.println("eingabe: " + mw.PopUpEinzahlen(mw.getWindow().getFrame(PAGES.MAIN_PAGE)));
             }
         });
         ((BetterButton) (mw.getWindow().getElement(PAGES.MAIN_PAGE, COMPONENTS.ABHEBEN_BUTTON))).addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                mw.abhebenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                mw.PopUpAbheben(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+            }
+        });
+        ((BetterButton) (mw.getWindow().getElement(PAGES.SETTINGS_PAGE, COMPONENTS.KONTO_CREATE_BUTTON))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.PopUpKontoType(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE), new String[]{"-1-", "-2-", "-3"});
             }
         });
         ((BetterButton) (mw.getWindow().getElement(PAGES.SETTINGS_PAGE, COMPONENTS.ACCOUNT_DELETE_BUTTON))).addMethod(new UIButtonMethod() {
@@ -452,6 +497,13 @@ public class MainWindow{
                 mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
             }
         });
+        /*
+        ((BetterButton) (mw.getWindow().getElement(PAGES.ADMIN_MAIN_PAGE, COMPONENTS.SETTINGS_BUTTON))).addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                mw.getWindow().showPlane();
+            }
+        });*/
     }
 
     public static String formatLabelString(String original) {

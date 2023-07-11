@@ -1,5 +1,8 @@
 package GUI;
 
+import GUI.BetterComponents.BetterComboBox;
+import GUI.BetterComponents.BetterInputField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,9 +34,13 @@ public class CustomPopup {
                 JOptionPane.PLAIN_MESSAGE);
         if (options == JOptionPane.OK_OPTION){
             for (JComponent object : widgets){
-                if (object instanceof JTextField){
+                if (object instanceof BetterInputField){
                     //System.out.println("Text: " + ((JTextField) object).getText());
                     result.add(((JTextField) object).getText());
+                }
+                else if(object instanceof BetterComboBox){
+                    String s = ((BetterComboBox) object).getSelectedValue();
+                    result.add(s);
                 }
 
             }

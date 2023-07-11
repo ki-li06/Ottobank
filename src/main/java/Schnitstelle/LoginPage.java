@@ -42,6 +42,7 @@ public class LoginPage {
                         MainPage.setAbhebenButtonVoid();
                         MainPage.setAbmeldenButtonVoid();
 
+                        SettingsPage.InitializeButtons();
 
                     } else {
                         mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);

@@ -32,7 +32,7 @@ public class MainPage {
         BMS.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                System.out.println("Main Page User PRESSED BUTTON SETTINGS");
+                //System.out.println("Main Page User PRESSED BUTTON SETTINGS");
                 mw.getWindow().showPlane(StackedWidget.PAGES.SETTINGS_PAGE);
             }
         });
@@ -45,29 +45,30 @@ public class MainPage {
         String[] kontenNamen;
 
         if(getKontenListe().size() > 0) {
-            kontenNamen = getKontenListe().stream().map(
-                    i -> i.getType().toString().charAt(0) + "K - " + i.KontonummerGeben()
-            ).toArray(String[]::new);
+            kontenNamen = getKontenListeString();
         }
         else{
             kontenNamen = new String[]{"------"};
         }
         CMK.setElements(kontenNamen);
 
-        CMK.addMethod(new UIComboBoxMethod() {
-            @Override
-            public void performMethod(String data) {
-                int i = Arrays.stream(kontenNamen).toList().indexOf(data);
-                setAktuellesKonto(i);
-            }
-        });
-        if(getKontenListe().size() == 0){
+        if(getKontenListe().size() > 0) {
+            CMK.addMethod(new UIComboBoxMethod() {
+                @Override
+                public void performMethod(String data) {
+                    int i = Arrays.stream(kontenNamen).toList().indexOf(data);
+                    setAktuellesKonto(i);
+                }
+            });
+        }
+        else{
             PopUp.showWarning("Dieser Kunde besitzt keine Kontos. Bitte erst ein Konto anlegen.");
         }
     }
 
     public static void setAktuellesKonto(int i){
         aktuellesKonto = i;
+        CMK.setSelectedIndex(i);
         setKontonummer();
         setKontostand();
         if(getKontenListe().size() == 0){
@@ -96,7 +97,7 @@ public class MainPage {
             @Override
             public void performMethod() {
                 if(getAktuellesKonto() != null){
-                    List<String> eingabe = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                    List<String> eingabe = mw.PopUpEinzahlen(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
                     if(eingabe.size() != 0) {
                         String s = eingabe.get(0);
                         double d = Double.parseDouble(s.replace(",", "."));
@@ -115,7 +116,7 @@ public class MainPage {
             @Override
             public void performMethod() {
                 if(getAktuellesKonto() != null){
-                    List<String> eingabe = mw.einzahlenPopUp(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                    List<String> eingabe = mw.PopUpAbheben(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
                     if(eingabe.size() != 0) {
                         String s = eingabe.get(0);
                         double d = Double.parseDouble(s.replace(",", "."));
@@ -158,7 +159,7 @@ public class MainPage {
         }
         return konten.get(aktuellesKonto);
     }
-    private static List<Konto> getKontenListe(){
+    public static List<Konto> getKontenListe(){
         //System.out.println(kontenDB.KontenVonUserGeben(kunde.getEMail()));
         List<Konto> konten = new ArrayList<>(kontenDB.KontenVonUserGeben(kunde.getEMail()));
         konten.sort(new Comparator<>() {
@@ -171,6 +172,11 @@ public class MainPage {
             }
         });
         return konten;
+    }
+    public static String[] getKontenListeString(){
+        return getKontenListe().stream().map(
+                i -> i.getAsStringKurz()
+        ).toArray(String[]::new);
     }
 
 }

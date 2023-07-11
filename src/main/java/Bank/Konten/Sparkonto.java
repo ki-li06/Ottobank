@@ -1,17 +1,23 @@
 package Bank.Konten;
 import Bank.Nutzer.Kunde;
 import Datenbank.LiteSQL.KontenDB;
+import util.Round;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static Bank.Konten.Konto.TYPE.SPARKONTO;
+import static util.Round.round;
 
 public class Sparkonto extends Konto{
     double zinssatz = 0.03;
 
     public Sparkonto(){
         super();
+    }
+
+    public Sparkonto(double kontostand, Kunde besitzer){
+        super(kontostand, besitzer);
     }
 
     public Sparkonto(double kontostand, Kunde besitzer, double zinssatz) {
@@ -32,6 +38,7 @@ public class Sparkonto extends Konto{
             @Override
             public void run() {
                 kontostand *= (1+zinssatz);
+                kontostand = round(kontostand, 4);
                 //System.out.println("neuer Kontostand des Sparkonto " +kontonummer + " : " + kontostand);
 
             }

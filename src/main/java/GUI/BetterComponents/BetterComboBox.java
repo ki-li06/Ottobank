@@ -41,4 +41,7 @@ public class BetterComboBox extends JComboBox<String> {
     public UIComboBoxMethod getMethod() {
         return this.method;
     }
+    public String getSelectedValue(){
+        return getItemAt(getSelectedIndex());
+    }
 }

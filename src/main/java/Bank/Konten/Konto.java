@@ -3,6 +3,9 @@ package Bank.Konten;
 import Bank.Nutzer.Kunde;
 import util.Round;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static util.Round.round;
 import static util.StringFormat.formatDouble;
 
@@ -75,6 +78,15 @@ public abstract class Konto {
      */
     public abstract double getSpecialDouble();
     public abstract TYPE getType();
+
+    public String getAsStringKurz(){
+        return getType().toString().charAt(0) + "K - " + KontonummerGeben();
+    }
+
+    public static List<String> getAllTypes(){
+        return Arrays.stream(TYPE.values()).toList().stream().map(i->
+                i.toString().charAt(0) + i.toString().toLowerCase().substring(1)).toList();
+    }
 
     @Override
     public String toString() {

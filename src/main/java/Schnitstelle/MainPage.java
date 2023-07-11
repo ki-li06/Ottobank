@@ -157,7 +157,11 @@ public class MainPage {
         if(aktuellesKonto >= konten.size()){
             System.out.println("FEHLER - MainPage - DIESER KUNDE HAT KEINE KONTOS");
         }
-        return konten.get(aktuellesKonto);
+        try {
+            return konten.get(aktuellesKonto);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
     public static List<Konto> getKontenListe(){
         //System.out.println(kontenDB.KontenVonUserGeben(kunde.getEMail()));

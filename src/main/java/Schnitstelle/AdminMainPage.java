@@ -5,6 +5,7 @@ import Bank.Nutzer.Kunde;
 import GUI.*;
 import GUI.BetterComponents.BetterButton;
 import GUI.BetterComponents.BetterInputField;
+import GUI.BetterComponents.BetterTextField;
 import GUI.UIs.UIButtonMethod;
 
 import static GUI.StackedWidget.PAGES;
@@ -12,17 +13,18 @@ import static GUI.StackedPane.COMPONENTS;
 import static Schnitstelle.Main.*;
 
 public class AdminMainPage {
-    public static final BetterInputField IMAN = (BetterInputField) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.USER_NAME_INPUT);
-    public static final BetterButton BMI = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGIN_BUTTON);
-    public static final BetterButton BMO = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGOUT_BUTTON);
+    public static final BetterTextField TMaN = (BetterTextField) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.NAME_LABEL_PARAM);
+    public static final BetterInputField IMaM = (BetterInputField) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.USER_NAME_INPUT);
+    public static final BetterButton BMaI = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGIN_BUTTON);
+    public static final BetterButton BMaO = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.LOGOUT_BUTTON);
 
     //public static final BetterButton BMS = (BetterButton) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.SETTINGS_BUTTON);
 
     public static void InitializeLoginButton(){
-        BMI.addMethod(new UIButtonMethod() {
+        BMaI.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                String text = IMAN.getText();
+                String text = IMaM.getText();
                 if(text.equals("")){
                     PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
                 }
@@ -36,6 +38,8 @@ public class AdminMainPage {
                     kunde = (Kunde) nutzerDB.NutzerZuMail(text);
                     mw.getWindow().showPlane(PAGES.MAIN_PAGE);
 
+                    PopUp.showInfo("Die PIN dieses Nutzers lautet: '" + kunde.getPin() + "'");
+
                     MainPage.setName(kunde);
                     MainPage.setKontenListe();
                     MainPage.setAktuellesKonto(0);
@@ -47,11 +51,15 @@ public class AdminMainPage {
         });
     }
 
+    public static void setNameParam(){
+        TMaN.setText(nutzer.getName());
+    }
+
     public static void setAbmeldenButtonVoid() {
-        BMO.addMethod(new UIButtonMethod() {
+        BMaO.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                IMAN.setText("");
+                IMaM.setText("");
 
                 mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
             }

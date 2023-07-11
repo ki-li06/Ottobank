@@ -46,7 +46,11 @@ public class LoginPage {
 
                     } else {
                         mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
+
+                        AdminMainPage.setNameParam();
                         AdminMainPage.setAbmeldenButtonVoid();
+
+                        AdminSettingsPage.InitializeButtons();
                     }
                 } else {
                     PopUp.showError("Passwort falsch!");

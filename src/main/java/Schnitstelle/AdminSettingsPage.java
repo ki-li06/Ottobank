@@ -1,98 +1,121 @@
 package Schnitstelle;
 
+import Bank.Konten.Konto;
 import Bank.Nutzer.Angestellter;
+import Bank.Nutzer.Kunde;
 import GUI.*;
 import GUI.BetterComponents.BetterButton;
 import GUI.BetterComponents.BetterInputField;
 import GUI.UIs.UIButtonMethod;
 import GUI.StackedWidget.PAGES;
 import GUI.StackedPane.COMPONENTS;
-import static Schnitstelle.Main.nutzerDB;
+
+import java.util.List;
+
+import static Schnitstelle.Main.*;
+import static Schnitstelle.Main.kunde;
+
 public class AdminSettingsPage {
-    private static BetterInputField parseTextField(COMPONENTS c) {
-        return (BetterInputField) widget.getElement(PAGES.ADMIN_REGISTER_PAGE,c);
-    }
-    private static final MainWindow mw = WindowManager.getWindow();
-    private static final StackedWidget widget = mw.getWindow();
+    public static final BetterButton BSaCA = (BetterButton) mw.getWindow().getElement(PAGES.ADMIN_SETTINGS_PAGE, COMPONENTS.ADMIN_CREATE_BUTTON);
+    public static final BetterButton BSaAN = (BetterButton) mw.getWindow().getElement(PAGES.ADMIN_SETTINGS_PAGE, COMPONENTS.ACCOUNT_CHANGE_NAME_BUTTON);
+    public static final BetterButton BSaAP = (BetterButton) mw.getWindow().getElement(PAGES.ADMIN_SETTINGS_PAGE, COMPONENTS.ACCOUNT_CHANGE_PIN_BUTTON);
+    public static final BetterButton BSaAD = (BetterButton) mw.getWindow().getElement(PAGES.ADMIN_SETTINGS_PAGE, COMPONENTS.ACCOUNT_DELETE_BUTTON);
 
-    private static final BetterInputField vornameInputField = parseTextField(COMPONENTS.VORNAME_INPUT);
-    private static final BetterInputField nachNameInputField = parseTextField(COMPONENTS.NACHNAME_INPUT);
-    private static final BetterInputField emailInputField = parseTextField(COMPONENTS.EMAIL_INPUT);
-    private static final BetterInputField pinInputField = parseTextField(COMPONENTS.PIN_INPUT);
-    private static final BetterInputField confirmPinInputField = parseTextField(COMPONENTS.CONFIRM_PIN_INPUT);
-    private static final BetterButton confirmButton = (BetterButton) widget.getElement(PAGES.ADMIN_REGISTER_PAGE,COMPONENTS.REGISTER_BUTTON);
-
-    public static void __init__() {
-        confirmButton.addMethod(new UIButtonMethod() {
+    public static void InitializeButtons(){
+        BSaCA.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                String vorname = vornameInputField.getText();
-                String nachname = vornameInputField.getText();
-                String email = emailInputField.getText();
-                String pin = pinInputField.getText();
-                String cpin = confirmPinInputField.getText();
-                if (vorname.equals("")||nachname.equals("")||email.equals("")||pin.equals("")||cpin.equals("")) {
-                    PopUp.showError("Alle Daten müssen ausgefüllt sein!");
-                    return;
-                }
-                if (!pin.equals(cpin)) {
-                    PopUp.showError("Pin stimmt nicht überein");
-                    return;
-                }
-                set s = validatePin(pin);
-                if (!s.response) {
-                    PopUp.showError(s.message);
-                    return;
-                }
-                Angestellter a = new Angestellter(vorname+" "+nachname,email,pin);
-                nutzerDB.NutzerHinzufügen(a);
-                PopUp.showInfo("Neuer Account wurde erstellt.");
-            }
-            private static set validatePin(String pin) {
-                boolean valid = true;
-                String message = "";
-                if (pin.length() < 8) {
-                    valid = false;
-                    message = "PIN muss mindestens 8 Zeichen lang sein.";
-                    return new set(valid, message);
-                }
-                valid = false;
-                message = "PIN muss einen Großbuchstaben enthalten.";
-                for (int i=0;i<pin.length();i++) {
-                    if ("ABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖ".contains(""+pin.charAt(i))) {
-                        valid = true;
+                List<String> eingabe = mw.PopUpAdminRegisterPage(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
+                if(eingabe.size() == 4 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("") && !eingabe.get(2).equals("") && !eingabe.get(3).equals("")){
+                    String username = eingabe.get(0);
+                    String mail = eingabe.get(1);
+                    String pin = eingabe.get(2);
+                    String pinConfirm = eingabe.get(3);
+                    if(pin.equals(pinConfirm)){
+                        if(!nutzerDB.MailBelegt(mail)){
+                            Angestellter angestellter = new Angestellter(username, mail, pin);
+                            nutzerDB.NutzerHinzufügen(angestellter);
+
+                            PopUp.showInfo("<html>Du hast einen neuen Angestellten<br> EMail: '" + mail + "' - Pin: '" + pin + "'<br>erstellt</html>");
+                        }
+                        else{
+                            PopUp.showError("Diese Mail ist bereits belegt.");
+                        }
+                    }
+                    else{
+                        PopUp.showError("Die PINs stimmen nicht überein.");
                     }
                 }
-                if (!valid) {
-                    return new set(valid, message);
-                }
-                valid = false;
-                message = "PIN muss eine Zahl enthalten";
-                for (int i=0;i<pin.length();i++) {
-                    if ("0123456789".contains(""+pin.charAt(i))) {
-                        valid = true;
-                    }
-                }
-                if (!valid) {
-                    return new set(valid, message);
-                }
-                valid = false;
-                message = "PIN muss eine Sonderzeichen ( !§$%&/()=,.-;:_#*+~@€ ) enthalten";
-                for (int i=0;i<pin.length();i++) {
-                    if ("!§$%&/()=,.-;:_#*+~@€".contains(""+pin.charAt(i))) {
-                        valid = true;
-                    }
-                }
-                return new set(valid, message);
             }
         });
-    }
-}
-class set {
-    public boolean response;
-    public String message;
-    public set(boolean response, String message) {
-        this.response = response;
-        this.message = message;
+        BSaAN.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                List<String> eingabe = mw.PopUpNameÄndern(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
+                if(eingabe.size() == 2 && !eingabe.get(0).equals("")){
+                    String newName = eingabe.get(0);
+                    //System.out.println("newName: " + newName);
+                    String passwort = eingabe.get(1);
+                    //System.out.println("passwort: " + passwort);
+                    if (nutzer.getPin().equals(passwort)) {
+                        nutzer.NameÄndern(newName);
+
+                        nutzerDB.NameÄndern(nutzer.getEMail(), newName);
+
+                        AdminMainPage.setNameParam();
+
+                        PopUp.showInfo("Du hast deinen Namen auf '" + newName + "' geändert.");
+                    } else {
+                        PopUp.showError("<html><center>Zugriff nicht gewährt.<br>Die PIN ist falsch.</center></html>");
+                    }
+                }
+            }
+        });
+        BSaAP.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                List<String> eingabe = mw.PopUpPinÄndern(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
+                if(eingabe.size() == 3 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("") && !eingabe.get(2).equals("")){
+                    String oldPin = eingabe.get(0);
+                    String newPin = eingabe.get(1);
+                    String confirmPin = eingabe.get(2);
+                    if(oldPin.equals(nutzer.getPin())){
+                        if(newPin.equals(confirmPin)){
+                            nutzer.PinÄndern(newPin);
+                            nutzerDB.PinÄndern(nutzer.getEMail(), nutzer.getPin());
+
+                            PopUp.showInfo("Du hast deine PIN geändert.");
+                        }
+                        else{
+                            PopUp.showError("Die neue PIN wurde falsch bestätigt.");
+                        }
+                    }
+                    else{
+                        PopUp.showError("Die alte PIN ist falsch.");
+                    }
+                }
+            }
+        });
+        BSaAD.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                List<String> eingabe = mw.PopUpAccountLöschen(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
+                if(eingabe.size() == 2 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("")){
+                    String pin1 = eingabe.get(0);
+                    String pin2 = eingabe.get(1);
+                    if(nutzer.getPin().equals(pin1) && pin1.equals(pin2)){
+                        System.out.println("Der Angestellte '" + nutzer.getEMail() + "' wird gelöscht.");
+                        nutzerDB.NutzerLöschen(nutzer.getEMail());
+                        PopUp.showInfo("Du hast deinen Account (" + nutzer.getEMail() + ") gelöscht.");
+
+                        mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
+                    }
+                    else{
+                        PopUp.showError("<html><center>Eine der PINs ist falsch.</center></html>");
+                    }
+                }
+
+            }
+        });
     }
 }

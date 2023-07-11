@@ -101,9 +101,9 @@ public class SettingsPage {
                 List<String> eingabe = mw.PopUpNameÄndern(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
                 if(eingabe.size() == 2 && !eingabe.get(0).equals("")){
                     String newName = eingabe.get(0);
-                    System.out.println("newName: " + newName);
+                    //System.out.println("newName: " + newName);
                     String passwort = eingabe.get(1);
-                    System.out.println("passwort: " + passwort);
+                    //System.out.println("passwort: " + passwort);
                     if (kunde.getPin().equals(passwort)) {
                         kunde.NameÄndern(newName);
 
@@ -146,7 +146,7 @@ public class SettingsPage {
         BSAD.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
-                List<String> eingabe = mw.PopUpAccountLöschen(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                List<String> eingabe = mw.PopUpAccountLöschen(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
                 if(eingabe.size() == 2 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("")){
                     String pin1 = eingabe.get(0);
                     String pin2 = eingabe.get(1);

@@ -40,6 +40,6 @@ public class Main {
         AdminMainPage.InitializeLoginButton();
 
         //ADMIN SETTINGS PAGE
-        AdminSettingsPage.__init__();
+        //AdminSettingsPage.__init__();
     }
 }

@@ -17,8 +17,8 @@ public class StackedPane extends JPanel{
             EINZAHLEN_BUTTON, ABHEBEN_BUTTON, LOGOUT_BUTTON,
         KONTO_DELETE_BUTTON, KONTO_CREATE_BUTTON, ACCOUNT_CHANGE_NAME_BUTTON,
             ACCOUNT_CHANGE_PIN_BUTTON, ACCOUNT_DELETE_BUTTON,
-
-        USER_NAME_INPUT
+        USER_NAME_INPUT,
+        ADMIN_CREATE_BUTTON
     }
 
     private final ArrayList<JComponent> comps;

@@ -32,10 +32,15 @@ public class RegisterPage {
                     }
                     String name = IRV.getText() + " " + IRN.getText();
                     String mail = IRE.getText();
-                    Kunde k = new Kunde(name, mail, IRP.getText());
-                    nutzerDB.NutzerHinzufügen(k);
-                    PopUp.showInfo("Neuer Account wurde erstellt.");
-                    mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
+                    if(!nutzerDB.MailBelegt(mail)) {
+                        Kunde k = new Kunde(name, mail, IRP.getText());
+                        nutzerDB.NutzerHinzufügen(k);
+                        PopUp.showInfo("Neuer Account wurde erstellt.");
+                        mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
+                    }
+                    else{
+                        PopUp.showError("Diese Mail ist bereits belegt.");
+                    }
                 } else {
                     PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
                 }

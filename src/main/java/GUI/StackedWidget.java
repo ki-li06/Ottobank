@@ -13,8 +13,8 @@ public class StackedWidget extends JLayeredPane{
         REGISTER_PAGE,
         SETTINGS_PAGE,
         MAIN_PAGE,
-        ADMIN_REGISTER_PAGE,
         ADMIN_MAIN_PAGE,
+        ADMIN_SETTINGS_PAGE,
         PRIVATE
     }
 

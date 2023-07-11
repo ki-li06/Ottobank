@@ -31,13 +31,15 @@ public abstract class Nutzer {
     public String getEMail() {
         return email;
     }
-    /*
-    public String NutzerIDGeben(){
-        NutzerDB ndb = new NutzerDB();
-        return ndb.NutzerIDGeben(name);
-    }*/
 
     public abstract TYPE getType();
+
+    public void NameÄndern(String newName){
+        name = newName;
+    }
+    public void PinÄndern(String newPin){
+        pin = newPin;
+    }
 
     @Override
     public String toString() {

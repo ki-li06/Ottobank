@@ -186,17 +186,17 @@ public class NutzerDB extends LiteSQL{
     }
 
     /**
-     * ändert den Typ (Nutzer/Angestellter) des Nutzers
+     * ändert den Namen (Nutzer/Angestellter) des Nutzers
      */
-    public void TypeÄndern(String mail, String typeNeu){
-        String cmd = "UPDATE TABLE SET Type = 'PARAM_Type' WHERE Mail = 'PARAM_Mail'";
+    public void NameÄndern(String mail, String nameNeu){
+        String cmd = "UPDATE TABLE SET Name = 'PARAM_Name' WHERE Mail = 'PARAM_Mail'";
         cmd = cmd
-                .replace("PARAM_Type", typeNeu)
+                .replace("PARAM_Name", nameNeu)
                 .replace("PARAM_Mail", mail);
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Type des Nutzers mit der Mail '" + mail + "' auf '" + typeNeu + "' geändert");
+        System.out.println("Name des Nutzers mit der Mail '" + mail + "' auf '" + nameNeu + "' geändert");
     }
 
     /**

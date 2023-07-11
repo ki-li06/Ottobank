@@ -291,75 +291,117 @@ public class MainWindow{
     }
 
     public List<String> PopUpEinzahlen(StackedPane page){
-        CustomPopup cb = new CustomPopup();
+        CustomPopup cp = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Betrag (€) zum Einzahlen eingeben");
-        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        cp.addWidget(infoLabel, cp.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
         BetterInputField betragEntry = new BetterInputField();
         betragEntry.setEchoChar((char) 0);
         betragEntry.putClientProperty("JTextField.placeholderText", "00,00");
         betragEntry.setHorizontalAlignment(JTextField.LEFT);
         betragEntry.addKeyListener(new MoneyKeyListener(betragEntry));
         betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
-        return cb.displayPopup(page, "Einzahlen");
+        cp.addWidget(betragEntry, cp.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cp.displayPopup(page, "Einzahlen");
     }
     public List<String> PopUpAbheben(StackedPane page){
-        CustomPopup cb = new CustomPopup();
+        CustomPopup cp = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Betrag (€) zum Abheben eingeben");
-        cb.addWidget(infoLabel, cb.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        cp.addWidget(infoLabel, cp.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
         BetterInputField abhebenEntry = new BetterInputField();
         abhebenEntry.setEchoChar((char) 0);
         abhebenEntry.putClientProperty("JTextField.placeholderText", "00,00");
         abhebenEntry.setHorizontalAlignment(JTextField.LEFT);
         abhebenEntry.addKeyListener(new MoneyKeyListener(abhebenEntry));
         abhebenEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(abhebenEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
-        return cb.displayPopup(page, "Abheben");
+        cp.addWidget(abhebenEntry, cp.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cp.displayPopup(page, "Abheben");
     }
     public List<String> PopUpKontoType(StackedPane page, String[] kontoTypes){
-        CustomPopup cb = new CustomPopup();
+        CustomPopup cp = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Was für ein Konto möchtest du erstellen?");
-        cb.addWidget(infoLabel, cb.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        cp.addWidget(infoLabel, cp.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
         BetterComboBox typesBox = new BetterComboBox(kontoTypes);
         typesBox.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(typesBox, cb.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
-        return cb.displayPopup(page, "Konto-Typ wählen");
+        cp.addWidget(typesBox, cp.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
+        return cp.displayPopup(page, "Konto-Typ wählen");
     }
     public List<String> PopUpNettoeinkommen(StackedPane page){
-        CustomPopup cb = new CustomPopup();
+        CustomPopup cp = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Bitte gib dein Netto-Einkommen ein!");
-        cb.addWidget(infoLabel, cb.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        cp.addWidget(infoLabel, cp.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
         BetterInputField betragEntry = new BetterInputField();
         betragEntry.setEchoChar((char) 0);
         betragEntry.putClientProperty("JTextField.placeholderText", "00,00");
         betragEntry.setHorizontalAlignment(JTextField.LEFT);
         betragEntry.addKeyListener(new MoneyKeyListener(betragEntry));
         betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(betragEntry, cb.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
-        return cb.displayPopup(page, "Girokonto - Nettoeinkommen");
+        cp.addWidget(betragEntry, cp.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
+        return cp.displayPopup(page, "Girokonto - Nettoeinkommen");
     }
     public List<String> PopUpKontoAuswahl(StackedPane page, String[] kontos){
-        CustomPopup cb = new CustomPopup();
+        CustomPopup cp = new CustomPopup();
         BetterTextField infoLabel = new BetterTextField("Welches Konto möchtest du löschen?");
-        cb.addWidget(infoLabel, cb.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        cp.addWidget(infoLabel, cp.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
         BetterComboBox typesBox = new BetterComboBox(kontos);
         typesBox.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
-        cb.addWidget(typesBox, cb.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
+        cp.addWidget(typesBox, cp.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
         BetterInputField pinField = new BetterInputField();
-        pinField.putClientProperty("JTextField.placeholderText", "PIN eingeben");
+        pinField.putClientProperty("JTextField.placeholderText", "PIN zum Bestätigen");
         pinField.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
         pinField.putClientProperty(FlatClientProperties.STYLE, "showRevealButton:true");
-        cb.addWidget(pinField, cb.createConstraints(0, 2, GridBagConstraints.VERTICAL, 2));
-        return cb.displayPopup(page, "Konto auswählen");
+        cp.addWidget(pinField, cp.createConstraints(0, 2, GridBagConstraints.VERTICAL, 2));
+        return cp.displayPopup(page, "Konto auswählen");
     }
     public List<String> PopUpNameÄndern(StackedPane page){
-        return null;
+        CustomPopup cp = new CustomPopup();
+        BetterTextField infoLabel = new BetterTextField("Ändere deinen Nutzernamen");
+        cp.addWidget(infoLabel, cp.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        BetterInputField newName = new BetterInputField();
+        newName.setEchoChar((char) 0);
+        newName.putClientProperty("JTextField.placeholderText", "Neuer Nutzername");
+        newName.setHorizontalAlignment(JTextField.LEFT);
+        newName.setPreferredSize(new Dimension(300, 35));
+        cp.addWidget(newName, cp.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
+        BetterInputField pinField = new BetterInputField();
+        pinField.putClientProperty("JTextField.placeholderText", "PIN zum Bestätigen");
+        pinField.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        pinField.putClientProperty(FlatClientProperties.STYLE, "showRevealButton:true");
+        cp.addWidget(pinField, cp.createConstraints(0, 2, GridBagConstraints.VERTICAL, 2));
+        return cp.displayPopup(page, "Account-Name ändern");
     }
     public List<String> PopUpPinÄndern(StackedPane page){
-        return null;
+        CustomPopup cp = new CustomPopup();
+        BetterTextField infoLabel = new BetterTextField("<html><center>Ändere dein Passwort</center></html>");
+        cp.addWidget(infoLabel, cp.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        BetterInputField pinOld = new BetterInputField();
+        pinOld.putClientProperty("JTextField.placeholderText", "Alte PIN");
+        pinOld.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        pinOld.putClientProperty(FlatClientProperties.STYLE, "showRevealButton:true");
+        cp.addWidget(pinOld, cp.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
+        BetterInputField pinNew = new BetterInputField();
+        pinNew.putClientProperty("JTextField.placeholderText", "Neue PIN");
+        pinNew.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cp.addWidget(pinNew, cp.createConstraints(0, 2, GridBagConstraints.VERTICAL, 2));
+        BetterInputField pinConfirm = new BetterInputField();
+        pinConfirm.putClientProperty("JTextField.placeholderText", "Neue PIN bestätigen");
+        pinConfirm.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cp.addWidget(pinConfirm, cp.createConstraints(0, 3, GridBagConstraints.VERTICAL, 2));
+        return cp.displayPopup(page, "Passwort ändern");
     }
     public List<String> PopUpAccountLöschen(StackedPane page){
-        return null;
+        CustomPopup cp = new CustomPopup();
+        BetterTextField infoLabel = new BetterTextField("<html><center>Lösche deinen Account. (2-FA benötigt)<br>Alle deine Kontos werden auch gelöscht.</center></html>");
+        cp.addWidget(infoLabel, cp.createConstraints(0, 0, GridBagConstraints.VERTICAL, 2));
+        BetterInputField pin1 = new BetterInputField();
+        pin1.putClientProperty("JTextField.placeholderText", "PIN eingeben");
+        pin1.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cp.addWidget(pin1, cp.createConstraints(0, 1, GridBagConstraints.VERTICAL, 2));
+        BetterInputField pin2 = new BetterInputField();
+        pin2.putClientProperty("JTextField.placeholderText", "PIN bestätigen");
+        pin2.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cp.addWidget(pin2, cp.createConstraints(0, 2, GridBagConstraints.VERTICAL, 2));
+        return cp.displayPopup(page, "Account löschen");
+
     }
 
 

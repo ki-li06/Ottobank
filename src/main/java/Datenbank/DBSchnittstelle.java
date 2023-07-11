@@ -6,6 +6,8 @@ import Datenbank.LiteSQL.KontenDB;
 import Datenbank.LiteSQL.NutzerDB;
 import util.StringFormat;
 
+import java.util.List;
+
 
 public class DBSchnittstelle {
     public static void main(String[] args) {
@@ -19,7 +21,10 @@ public class DBSchnittstelle {
         System.out.println("Alle Konten:");
         kontenDB.AlleKontenAusgeben();
 
-
+        List<Konto> list = kontenDB.KontenVonUserGeben("mustermann@gmx.de");
+        for (Konto k : list) {
+            System.out.println(k.getAsStringKurz());
+        }
 
 
 

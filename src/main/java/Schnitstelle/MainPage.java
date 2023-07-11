@@ -62,18 +62,18 @@ public class MainPage {
             });
         }
         else{
-            PopUp.showWarning("Dieser Kunde besitzt keine Kontos. Bitte erst ein Konto anlegen.");
+            PopUp.showWarning("Du besitzt keine Kontos. Bitte ein Konto anlegen.");
         }
     }
 
     public static void setAktuellesKonto(int i){
         aktuellesKonto = i;
         CMK.setSelectedIndex(i);
-        setKontonummer();
-        setKontostand();
         if(getKontenListe().size() == 0){
             aktuellesKonto = -1;
         }
+        setKontonummer();
+        setKontostand();
     }
     private static void setKontonummer() {
         if(getAktuellesKonto() == null){

@@ -24,7 +24,8 @@ public class RegisterPage {
         BRR.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod () {
-                if (!IRV.getText().equals("") && !IRN.getText().equals("") && !IRE.getText().equals("") && !IRP.getText().equals("")) {
+                //Nachname darf leer sein, Vorname wird sozusagen mehr als Nutzername verstanden
+                if (!IRV.getText().equals("") && !IRE.getText().equals("") && !IRP.getText().equals("")) {
                     if (!IRP.getText().equals(IRC.getText())) {
                         PopUp.showError("PIN stimmt nicht überein!");
                         return;

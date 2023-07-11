@@ -3,6 +3,8 @@ package Schnitstelle;
 import Bank.Konten.Girokonto;
 import Bank.Konten.Konto;
 import Bank.Konten.Sparkonto;
+import Bank.Nutzer.Angestellter;
+import Bank.Nutzer.Kunde;
 import GUI.BetterComponents.BetterButton;
 import GUI.PopUp;
 import GUI.UIs.UIButtonMethod;
@@ -40,7 +42,7 @@ public class SettingsPage {
                         MainPage.setKontenListe();
                         MainPage.setAktuellesKonto(MainPage.getKontenListe().stream().map(Konto::KontonummerGeben).toList().indexOf(sk.KontonummerGeben()));
 
-                        PopUp.showInfo("<html>Der Nutzer \"" + kunde.getEMail() + "\"<br>hat ein neues Sparkonto eingerichtet.</html>");
+                        PopUp.showInfo("<html>Du hast ein neues Sparkonto eingerichtet.</html>");
                     }
                     else if(type.equals(String.valueOf(Konto.TYPE.GIROKONTO))){
                         List<String> nettoeinkommen  = mw.PopUpNettoeinkommen(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
@@ -50,15 +52,15 @@ public class SettingsPage {
                             //System.out.println("einkommen: " + einkommen);
                             Girokonto gk = new Girokonto(0, kunde, einkommen);
                             kontenDB.KontoHinzufügen(gk);
-                            PopUp.showInfo("<html>Der Nutzer \"" + kunde.getEMail() + "\"<br>hat ein neues Girokonto eingerichtet.</html>");
+                            PopUp.showInfo("<html>Du hast ein neues Girokonto eingerichtet.</html>");
 
                             MainPage.setKontenListe();
                             MainPage.setAktuellesKonto(MainPage.getKontenListe().stream().map(Konto::KontonummerGeben).toList().indexOf(gk.KontonummerGeben()));
 
-                            PopUp.showInfo("<html>Der Nutzer \"" + kunde.getEMail() + "\"<br>hat ein neues Sparkonto eingerichtet.</html>");
+                            PopUp.showInfo("<html>Du hast ein neues Sparkonto eingerichtet.</html>");
                         }
                         else{
-                            PopUp.showError("<html>Es muss ein Einkommen eingegeben werden.<br>Konto bitte neu erstellen.</html>");
+                            PopUp.showError("<html>Du musst ein Einkommen angeben.<br>Konto bitte neu erstellen.</html>");
                         }
                     }
                 }
@@ -68,11 +70,105 @@ public class SettingsPage {
             @Override
             public void performMethod() {
                 String[] kontos = MainPage.getKontenListeString();
-                List<String> eingabe = mw.PopUpKontoAuswahl(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE), kontos);
-                if(eingabe.size() == 1){
-                    int nummer = Integer.parseInt(eingabe.get(0).split(" ")[2]);
-                    Konto k = kontenDB.getKontoVonKontonummer(nummer);
-                    System.out.println("k: " + k);
+                if(kontos.length != 0) {
+                    List<String> eingabe = mw.PopUpKontoAuswahl(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE), kontos);
+                    if (eingabe.size() == 2) {
+                        int nummer = Integer.parseInt(eingabe.get(0).split(" ")[2]);
+                        Konto k = kontenDB.getKontoVonKontonummer(nummer);
+                        System.out.println("k: " + k);
+                        String passwort = eingabe.get(1);
+                        System.out.println("passwort: " + passwort);
+                        if (kunde.getPin().equals(passwort)) {
+                            kontenDB.KontoLöschen(nummer);
+
+                            PopUp.showInfo("Du hast dein Konto " + k.getAsStringKurz() + " gelöscht.");
+
+                            MainPage.setKontenListe();
+                            MainPage.setAktuellesKonto(0);
+                        } else {
+                            PopUp.showError("<html><center>Zugriff nicht gewährt.<br>Die PIN ist falsch.</center></html>");
+                        }
+                    }
+                }
+                else{
+                    PopUp.showError("<html><center>Du besitzt kein Konto.");
+                }
+            }
+        });
+        BSAN.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                List<String> eingabe = mw.PopUpNameÄndern(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
+                if(eingabe.size() == 2 && !eingabe.get(0).equals("")){
+                    String newName = eingabe.get(0);
+                    System.out.println("newName: " + newName);
+                    String passwort = eingabe.get(1);
+                    System.out.println("passwort: " + passwort);
+                    if (kunde.getPin().equals(passwort)) {
+                        kunde.NameÄndern(newName);
+
+                        nutzerDB.NameÄndern(kunde.getEMail(), newName);
+
+                        MainPage.setName(kunde);
+
+                        PopUp.showInfo("Du hast deinen Namen auf '" + newName + "' geändert.");
+                    } else {
+                        PopUp.showError("<html><center>Zugriff nicht gewährt.<br>Die PIN ist falsch.</center></html>");
+                    }
+                }
+            }
+        });
+        BSAP.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                List<String> eingabe = mw.PopUpPinÄndern(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
+                if(eingabe.size() == 3 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("") && !eingabe.get(2).equals("")){
+                    String oldPin = eingabe.get(0);
+                    String newPin = eingabe.get(1);
+                    String confirmPin = eingabe.get(2);
+                    if(oldPin.equals(kunde.getPin())){
+                        if(newPin.equals(confirmPin)){
+                            kunde.PinÄndern(newPin);
+                            nutzerDB.PinÄndern(kunde.getEMail(), kunde.getPin());
+
+                            PopUp.showInfo("Du hast deine PIN geändert.");
+                        }
+                        else{
+                            PopUp.showError("Die neue PIN wurde falsch bestätigt.");
+                        }
+                    }
+                    else{
+                        PopUp.showError("Die alte PIN ist falsch.");
+                    }
+                }
+            }
+        });
+        BSAD.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                List<String> eingabe = mw.PopUpAccountLöschen(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                if(eingabe.size() == 2 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("")){
+                    String pin1 = eingabe.get(0);
+                    String pin2 = eingabe.get(1);
+                    if(kunde.getPin().equals(pin1) && pin1.equals(pin2)){
+                        System.out.println("Der Kunde '" + kunde.getEMail() + "' wird gelöscht.");
+                        List<Konto> kontos = kontenDB.KontenVonUserGeben(kunde.getEMail());
+                        for (Konto k : kontos) {
+                            kontenDB.KontoLöschen(k.KontonummerGeben());
+                        }
+                        nutzerDB.NutzerLöschen(kunde.getEMail());
+                        PopUp.showInfo("Du hast deinen Account (" + kunde.getEMail() + ") gelöscht.");
+
+                        if(nutzer instanceof Kunde){
+                            mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
+                        }
+                        else if(nutzer instanceof Angestellter){
+                            mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
+                        }
+                    }
+                    else{
+                        PopUp.showError("<html><center>Eine der PINs ist falsch.</center></html>");
+                    }
                 }
             }
         });

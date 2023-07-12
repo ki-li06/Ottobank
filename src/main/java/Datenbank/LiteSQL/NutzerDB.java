@@ -46,6 +46,7 @@ public class NutzerDB extends LiteSQL{
         }
         connect();
         String cmd = "INSERT INTO TABLE (Name, Mail, PIN, Type) VALUES ('PARAM_NAME', 'PARAM_MAIL', 'PARAM_PIN', 'PARAM_TYPE');";
+        assert type != null;
         cmd = cmd
                 .replace("PARAM_NAME", name)
                 .replace("PARAM_MAIL", String.valueOf(mail))
@@ -53,7 +54,7 @@ public class NutzerDB extends LiteSQL{
                 .replace("PARAM_TYPE", type);
         onUpdate(cmd);
         disconnect();
-        System.out.println(nutzer + " hinzugefügt");
+        System.out.println("NutzerDB - " + nutzer + " hinzugefügt");
     }
 
     /**
@@ -182,7 +183,7 @@ public class NutzerDB extends LiteSQL{
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Pin des Nutzers mit der Mail '" + mail + "' auf '" + pinNeu + "' geändert");
+        System.out.println("NutzerDB - Pin des Nutzers mit der Mail '" + mail + "' auf '" + pinNeu + "' geändert");
     }
 
     /**
@@ -196,7 +197,7 @@ public class NutzerDB extends LiteSQL{
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Name des Nutzers mit der Mail '" + mail + "' auf '" + nameNeu + "' geändert");
+        System.out.println("NutzerDB - Name des Nutzers mit der Mail '" + mail + "' auf '" + nameNeu + "' geändert");
     }
 
     /**
@@ -210,7 +211,7 @@ public class NutzerDB extends LiteSQL{
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Nutzers mit der Mail '" + mail + "' gelöscht");
+        System.out.println("NutzerDB - Nutzer mit der Mail '" + mail + "' gelöscht");
 
     }
 

@@ -4,11 +4,13 @@ import javax.swing.*;
 
 public class PopUp {
     private static void showMessage(String message,int type) {
-        String[] errors = new String[] {"ERROR","NULL","WARNING"};
+        String[] errors = new String[] {"ERROR","INFO","WARNING"};
         String title = "???";
         try {
             title = errors[type];
-        } catch (ArrayIndexOutOfBoundsException e) {}
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
 
         JOptionPane.showMessageDialog(null, message, title, type);
     }

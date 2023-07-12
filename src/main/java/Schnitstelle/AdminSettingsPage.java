@@ -26,25 +26,23 @@ public class AdminSettingsPage {
             @Override
             public void performMethod() {
                 List<String> eingabe = mw.PopUpAdminRegisterPage(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
-                if(eingabe.size() == 4 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("") && !eingabe.get(2).equals("") && !eingabe.get(3).equals("")){
+                if(eingabe.size() == 4 && !eingabe.contains("")){
                     String username = eingabe.get(0);
                     String mail = eingabe.get(1);
                     String pin = eingabe.get(2);
                     String pinConfirm = eingabe.get(3);
-                    if(pin.equals(pinConfirm)){
-                        if(!nutzerDB.MailBelegt(mail)){
-                            Angestellter angestellter = new Angestellter(username, mail, pin);
-                            nutzerDB.NutzerHinzufügen(angestellter);
-
-                            PopUp.showInfo("<html>Du hast einen neuen Angestellten<br> EMail: '" + mail + "' - Pin: '" + pin + "'<br>erstellt</html>");
-                        }
-                        else{
-                            PopUp.showError("Diese Mail ist bereits belegt.");
-                        }
-                    }
-                    else{
+                    if(!pin.equals(pinConfirm)){
                         PopUp.showError("Die PINs stimmen nicht überein.");
+                        return;
                     }
+                    if(nutzerDB.MailBelegt(mail)){
+                        PopUp.showError("Diese Mail ist bereits belegt.");
+                        return;
+                    }
+                    Angestellter angestellter = new Angestellter(username, mail, pin);
+                    nutzerDB.NutzerHinzufügen(angestellter);
+
+                    PopUp.showInfo("<html>Du hast einen neuen Angestellten erstellt:<br> E-Mail: '" + mail + "' - PIN: '" + pin + "'</html>");
                 }
             }
         });
@@ -57,17 +55,17 @@ public class AdminSettingsPage {
                     //System.out.println("newName: " + newName);
                     String passwort = eingabe.get(1);
                     //System.out.println("passwort: " + passwort);
-                    if (nutzer.getPin().equals(passwort)) {
-                        nutzer.NameÄndern(newName);
-
-                        nutzerDB.NameÄndern(nutzer.getEMail(), newName);
-
-                        AdminMainPage.setNameParam();
-
-                        PopUp.showInfo("Du hast deinen Namen auf '" + newName + "' geändert.");
-                    } else {
+                    if(!nutzer.getPin().equals(passwort)){
                         PopUp.showError("<html><center>Zugriff nicht gewährt.<br>Die PIN ist falsch.</center></html>");
+                        return;
                     }
+                    nutzer.NameÄndern(newName);
+
+                    nutzerDB.NameÄndern(nutzer.getEMail(), newName);
+
+                    AdminMainPage.setNameParam();
+
+                    PopUp.showInfo("Du hast deinen Namen auf '" + newName + "' geändert.");
                 }
             }
         });
@@ -75,24 +73,22 @@ public class AdminSettingsPage {
             @Override
             public void performMethod() {
                 List<String> eingabe = mw.PopUpPinÄndern(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
-                if(eingabe.size() == 3 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("") && !eingabe.get(2).equals("")){
+                if(eingabe.size() == 3 && !eingabe.contains("")){
                     String oldPin = eingabe.get(0);
                     String newPin = eingabe.get(1);
                     String confirmPin = eingabe.get(2);
-                    if(oldPin.equals(nutzer.getPin())){
-                        if(newPin.equals(confirmPin)){
-                            nutzer.PinÄndern(newPin);
-                            nutzerDB.PinÄndern(nutzer.getEMail(), nutzer.getPin());
-
-                            PopUp.showInfo("Du hast deine PIN geändert.");
-                        }
-                        else{
-                            PopUp.showError("Die neue PIN wurde falsch bestätigt.");
-                        }
-                    }
-                    else{
+                    if(!oldPin.equals(nutzer.getPin())){
                         PopUp.showError("Die alte PIN ist falsch.");
+                        return;
                     }
+                    if(!newPin.equals(confirmPin)){
+                        PopUp.showError("Die neue PIN wurde falsch bestätigt.");
+                        return;
+                    }
+                    nutzer.PinÄndern(newPin);
+                    nutzerDB.PinÄndern(nutzer.getEMail(), nutzer.getPin());
+
+                    PopUp.showInfo("Du hast deine PIN geändert.");
                 }
             }
         });
@@ -100,19 +96,22 @@ public class AdminSettingsPage {
             @Override
             public void performMethod() {
                 List<String> eingabe = mw.PopUpAccountLöschen(mw.getWindow().getFrame(PAGES.ADMIN_SETTINGS_PAGE));
-                if(eingabe.size() == 2 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("")){
+                if(eingabe.size() == 2 && !eingabe.contains("")){
                     String pin1 = eingabe.get(0);
                     String pin2 = eingabe.get(1);
-                    if(nutzer.getPin().equals(pin1) && pin1.equals(pin2)){
-                        System.out.println("Der Angestellte '" + nutzer.getEMail() + "' wird gelöscht.");
-                        nutzerDB.NutzerLöschen(nutzer.getEMail());
-                        PopUp.showInfo("Du hast deinen Account (" + nutzer.getEMail() + ") gelöscht.");
-
-                        mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
-                    }
-                    else{
+                    if(!nutzer.getPin().equals(pin1) && pin1.equals(pin2)){
                         PopUp.showError("<html><center>Eine der PINs ist falsch.</center></html>");
+                        return;
                     }
+                    if(nutzerDB.alleNutzerGeben().stream().mapToInt(i->(i instanceof Angestellter)?1:0).sum() == 1){
+                        PopUp.showError("<html><center>Du bist der einzige Angestellte,<br>du kannst dich nicht löschen.");
+                        return;
+                    }
+                    System.out.println("Der Angestellte '" + nutzer.getEMail() + "' wird gelöscht.");
+                    nutzerDB.NutzerLöschen(nutzer.getEMail());
+                    PopUp.showInfo("Du hast deinen Account (" + nutzer.getEMail() + ") gelöscht.");
+
+                    mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
                 }
 
             }

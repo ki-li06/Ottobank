@@ -25,8 +25,7 @@ public class Girokonto extends Konto{
         return KontostandGeben() - abhebebetrag >= -ÜberziehungsrahmenGeben();
     }
     private double ÜberziehungsrahmenBerechnen(double nettoeinkommen){
-        double überziehungsrahmen = nettoeinkommen*3;
-        return überziehungsrahmen;
+        return nettoeinkommen*3;
     }
     public double ÜberziehungsrahmenGeben(){
         return ÜberziehungsrahmenBerechnen(nettoeinkommen);
@@ -48,7 +47,8 @@ public class Girokonto extends Konto{
                 "überziehungsrahmen=" + nettoeinkommen +
                 ", kontostand=" + kontostand +
                 ", kontonummer=" + kontonummer +
-                ", besitzer=" + besitzer +
+                ", besitzer=" + besitzer.getEMail() +
+                ", einkommen=" + nettoeinkommen +
                 '}';
     }
 }

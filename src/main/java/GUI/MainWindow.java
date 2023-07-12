@@ -171,7 +171,7 @@ public class MainWindow{
     }
 
     void createMainPage(){
-        StackedPane mainPage = new StackedPane(layerManager, new Dimension(550, 350));
+        StackedPane mainPage = new StackedPane(layerManager, new Dimension(550, 390));
         layerManager.registerPane(mainPage, PAGES.MAIN_PAGE);
 
         BetterButton settingsButton = new BetterButton();
@@ -226,19 +226,24 @@ public class MainWindow{
         kontostandParam.setBounds(190, 105, 300, LabelHeightKontonummerParam);
         mainPage.registerComponent(kontostandParam, COMPONENTS.KONTOSTAND_PARAM);
 
-        BetterButton freeMoneyButton = new BetterButton();
-        freeMoneyButton.setText("Einzahlen");
-        freeMoneyButton.setBounds(25,160,490,30);
-        mainPage.registerComponent(freeMoneyButton, COMPONENTS.EINZAHLEN_BUTTON);
+        BetterButton depositButton = new BetterButton();
+        depositButton.setText("Einzahlen");
+        depositButton.setBounds(25,160,490,30);
+        mainPage.registerComponent(depositButton, COMPONENTS.EINZAHLEN_BUTTON);
+
+        BetterButton transferButton = new BetterButton();
+        transferButton.setText("Überweisen");
+        transferButton.setBounds(25, 200, 490, 30);
+        mainPage.registerComponent(transferButton, COMPONENTS.ÜBERWEISEN_BUTTON);
 
         BetterButton deleteMoneyButton = new BetterButton();
         deleteMoneyButton.setText("Abheben");
-        deleteMoneyButton.setBounds(25,200,490,30);
+        deleteMoneyButton.setBounds(25,240,490,30);
         mainPage.registerComponent(deleteMoneyButton, COMPONENTS.ABHEBEN_BUTTON);
 
         BetterButton logoutButton = new BetterButton();
         logoutButton.setText("Abmelden");
-        logoutButton.setBounds(25, 260, 490, 30);
+        logoutButton.setBounds(25, 300, 490, 30);
         mainPage.registerComponent(logoutButton, COMPONENTS.LOGOUT_BUTTON);
 
     }
@@ -306,19 +311,18 @@ public class MainWindow{
         nameLabelParam.setBounds(95, 20, 190, LabelHeightParam);
         adminControls.registerComponent(nameLabelParam, COMPONENTS.NAME_LABEL_PARAM);
 
-        BetterTextField infoLabel = new BetterTextField("<html><center>Admin-Zugang:<br>auf Kunden zugreifen</center></html>", JLabel.CENTER);
+        BetterTextField infoLabel = new BetterTextField("<html>Admin-Zugang</html>", JLabel.CENTER);
         int LabelHeight = infoLabel.getPreferredSize().height;
-        infoLabel.setBounds(adminControls.getWidth()/2 - 300/2 + 2, 70, 300, LabelHeight);
+        infoLabel.setBounds(adminControls.getWidth()/2 - 300/2 + 2, 80, 300, LabelHeight);
         adminControls.registerComponent(infoLabel, COMPONENTS.PRIVATE);
 
-        BetterInputField accountName = new BetterInputField();
-        accountName.setEchoChar((char) 0);
-        accountName.putClientProperty("JTextField.placeholderText","EMail des Kunden");
-        accountName.setBounds(adminControls.getWidth() / 2 - 270 / 2, 140, 270, 30);
-        adminControls.registerComponent(accountName, COMPONENTS.USER_NAME_INPUT);
+        String[] content = new String[]{"opt1", "opt2", "opt3"};
+        BetterComboBox accountNames = new BetterComboBox(content);
+        accountNames.setBounds(adminControls.getWidth() / 2 - 270 / 2, 140, 270, 30);
+        adminControls.registerComponent(accountNames, COMPONENTS.USER_NAME_INPUT);
 
         BetterButton accountLogin = new BetterButton();
-        accountLogin.setText("als Kunde anmelden");
+        accountLogin.setText("als dieser Kunde anmelden");
         accountLogin.setBounds(adminControls.getWidth() / 2 - 270 / 2, 180, 270, 30);
         adminControls.registerComponent(accountLogin, COMPONENTS.LOGIN_BUTTON);
 
@@ -448,6 +452,27 @@ public class MainWindow{
         betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
         cp.addWidget(betragEntry, cp.createConstraints(0,1,GridBagConstraints.HORIZONTAL, 1));
         return cp.displayPopup(page, "Einzahlen");
+    }
+
+    public List<String> PopUpÜberweisen(StackedPane page){
+        CustomPopup cp = new CustomPopup();
+        BetterTextField infoLabel = new BetterTextField("Daten zum Überweisen eingeben");
+        cp.addWidget(infoLabel, cp.createConstraints(0,0,GridBagConstraints.VERTICAL, 2));
+        BetterInputField addressEntry = new BetterInputField();
+        addressEntry.setEchoChar((char) 0);
+        addressEntry.putClientProperty("JTextField.placeholderText", "Kontonummer des Empfängers");
+        addressEntry.setHorizontalAlignment(JTextField.LEFT);
+        addressEntry.addKeyListener(new IntegerInputKeyListener());
+        addressEntry.setPreferredSize(new Dimension(300, 35));
+        cp.addWidget(addressEntry, cp.createConstraints(0,1, GridBagConstraints.HORIZONTAL, 1));
+        BetterInputField betragEntry = new BetterInputField();
+        betragEntry.setEchoChar((char) 0);
+        betragEntry.putClientProperty("JTextField.placeholderText", "00,00 (Betrag)");
+        betragEntry.setHorizontalAlignment(JTextField.LEFT);
+        betragEntry.addKeyListener(new MoneyKeyListener(betragEntry));
+        betragEntry.setPreferredSize(new Dimension(300, 35)); // Adjust the height here
+        cp.addWidget(betragEntry, cp.createConstraints(0,2,GridBagConstraints.HORIZONTAL, 1));
+        return cp.displayPopup(page, "Überweisen");
     }
 
     public List<String> PopUpAbheben(StackedPane page){

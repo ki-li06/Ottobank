@@ -122,24 +122,22 @@ public class SettingsPage {
             @Override
             public void performMethod() {
                 List<String> eingabe = mw.PopUpPinÄndern(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
-                if(eingabe.size() == 3 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("") && !eingabe.get(2).equals("")){
+                if(eingabe.size() == 3 && !eingabe.contains("")){
                     String oldPin = eingabe.get(0);
                     String newPin = eingabe.get(1);
                     String confirmPin = eingabe.get(2);
-                    if(oldPin.equals(kunde.getPin())){
-                        if(newPin.equals(confirmPin)){
-                            kunde.PinÄndern(newPin);
-                            nutzerDB.PinÄndern(kunde.getEMail(), kunde.getPin());
-
-                            PopUp.showInfo("Du hast deine PIN geändert.");
-                        }
-                        else{
-                            PopUp.showError("Die neue PIN wurde falsch bestätigt.");
-                        }
-                    }
-                    else{
+                    if(!oldPin.equals(kunde.getPin())){
                         PopUp.showError("Die alte PIN ist falsch.");
+                        return;
                     }
+                    if(!newPin.equals(confirmPin)){
+                        PopUp.showError("Die neue PIN wurde falsch bestätigt.");
+                        return;
+                    }
+                    kunde.PinÄndern(newPin);
+                    nutzerDB.PinÄndern(kunde.getEMail(), kunde.getPin());
+
+                    PopUp.showInfo("Du hast deine PIN geändert.");
                 }
             }
         });
@@ -147,7 +145,7 @@ public class SettingsPage {
             @Override
             public void performMethod() {
                 List<String> eingabe = mw.PopUpAccountLöschen(mw.getWindow().getFrame(PAGES.SETTINGS_PAGE));
-                if(eingabe.size() == 2 && !eingabe.get(0).equals("") && !eingabe.get(1).equals("")){
+                if(eingabe.size() == 2 && !eingabe.contains("")){
                     String pin1 = eingabe.get(0);
                     String pin2 = eingabe.get(1);
                     if(kunde.getPin().equals(pin1) && pin1.equals(pin2)){

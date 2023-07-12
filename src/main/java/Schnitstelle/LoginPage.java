@@ -38,9 +38,7 @@ public class LoginPage {
                         MainPage.setName(kunde);
                         MainPage.setKontenListe();
                         MainPage.setAktuellesKonto(0);
-                        MainPage.setEinzahlenButtonVoid();
-                        MainPage.setAbhebenButtonVoid();
-                        MainPage.setAbmeldenButtonVoid();
+                        MainPage.setButtonsVoid();
 
                         SettingsPage.InitializeButtons();
 
@@ -48,6 +46,7 @@ public class LoginPage {
                         mw.getWindow().showPlane(PAGES.ADMIN_MAIN_PAGE);
 
                         AdminMainPage.setNameParam();
+                        AdminMainPage.setKundenList();
                         AdminMainPage.setAbmeldenButtonVoid();
 
                         AdminSettingsPage.InitializeButtons();

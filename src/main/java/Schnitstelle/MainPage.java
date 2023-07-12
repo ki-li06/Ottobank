@@ -23,6 +23,7 @@ public class MainPage {
     public static final BetterComboBox CMK = (BetterComboBox) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.KONTO_WECHSEL_BOX);
     public static final BetterButton BMS = (BetterButton) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.SETTINGS_BUTTON);
     public static final BetterButton BME = (BetterButton) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.EINZAHLEN_BUTTON);
+    public static final BetterButton BMÜ = (BetterButton) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.ÜBERWEISEN_BUTTON);
     public static final BetterButton BMA = (BetterButton) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.ABHEBEN_BUTTON);
     public static final BetterButton BMO = (BetterButton) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.LOGOUT_BUTTON);
 
@@ -61,7 +62,7 @@ public class MainPage {
                 }
             });
         }
-        else{
+        else if(!(nutzer instanceof Angestellter)){
             PopUp.showWarning("Du besitzt keine Kontos. Bitte ein Konto anlegen.");
         }
     }
@@ -92,7 +93,14 @@ public class MainPage {
         }
     }
 
-    public static void setEinzahlenButtonVoid(){
+    public static void setButtonsVoid(){
+        setEinzahlenButtonVoid();
+        setÜberweisenButtonVoid();
+        setAbhebenButtonVoid();
+        setAbmeldenButtonVoid();
+    }
+
+    private static void setEinzahlenButtonVoid(){
         BME.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
@@ -111,7 +119,49 @@ public class MainPage {
             }
         });
     }
-    public static void setAbhebenButtonVoid() {
+    private static void setÜberweisenButtonVoid(){
+        BMÜ.addMethod(new UIButtonMethod() {
+            @Override
+            public void performMethod() {
+                if(getAktuellesKonto() != null){
+                    List<String> eingabe = mw.PopUpÜberweisen(mw.getWindow().getFrame(PAGES.MAIN_PAGE));
+                    System.out.println("eingabe: " + eingabe + "(" + eingabe.size() + ")");
+                    if(eingabe.size() == 2 && !eingabe.contains("")){
+                        int nummer = Integer.parseInt(eingabe.get(0));
+                        double betrag = Double.parseDouble(eingabe.get(1).replace(",", "."));
+                        if(kontenDB.NummerSchonBelegt(nummer)){
+                            if(getAktuellesKonto().KontonummerGeben() != nummer){
+                                System.out.println("aktKonto: " + getAktuellesKonto());
+                                if(getAktuellesKonto().AbhebenErlaubt(betrag)){
+                                    Konto from = getAktuellesKonto();
+                                    from.Abheben(betrag);
+                                    kontenDB.KontoÄndern(from.KontonummerGeben(), from);
+
+                                    Konto address = kontenDB.getKontoVonKontonummer(nummer);
+                                    address.Einzahlen(betrag);
+                                    kontenDB.KontoÄndern(address.KontonummerGeben(), address);
+
+                                    MainPage.setKontostand();
+
+                                    PopUp.showInfo("Du hast " + betrag + " € an das Konto " + nummer + " überwiesen.");
+                                }
+                                else{
+                                    PopUp.showError("<html>Du besitzt zu wenig Geld,<br>um diesen Betrag zu überweisen.</html>");
+                                }
+                            }
+                            else{
+                                PopUp.showError("<html>Du kannst nichts an dieses Konto überweisen,<br>da du es gerade selbst ausgewählt hast.</html>");
+                            }
+                        }
+                        else{
+                            PopUp.showError("Diese Kontonummer ist nicht belegt.");
+                        }
+                    }
+                }
+            }
+        });
+    }
+    private static void setAbhebenButtonVoid() {
         BMA.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
@@ -134,7 +184,7 @@ public class MainPage {
             }
         });
     }
-    public static void setAbmeldenButtonVoid(){
+    private static void setAbmeldenButtonVoid(){
         BMO.addMethod(new UIButtonMethod() {
             @Override
             public void performMethod() {
@@ -179,7 +229,7 @@ public class MainPage {
     }
     public static String[] getKontenListeString(){
         return getKontenListe().stream().map(
-                i -> i.getAsStringKurz()
+                Konto::getAsStringKurz
         ).toArray(String[]::new);
     }
 

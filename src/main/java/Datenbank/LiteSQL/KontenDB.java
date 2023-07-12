@@ -55,6 +55,7 @@ public class KontenDB extends LiteSQL{
         String cmd =
                 "INSERT INTO TABLE (Nummer, Stand, BesitzerMail, Type, SpecialDouble) " +
                         "VALUES ('PARAM_Nummer', 'PARAM_Stand', 'PARAM_BesitzerMail', 'PARAM_Type', 'PARAM_SpecialDouble');";
+        assert type != null;
         cmd = cmd
                 .replace("PARAM_Nummer", String.valueOf(konto.KontonummerGeben()))
                 .replace("PARAM_Stand", String.valueOf(konto.KontostandGeben()))
@@ -65,7 +66,7 @@ public class KontenDB extends LiteSQL{
         onUpdate(cmd);
         disconnect();
 
-        System.out.println("Konto " + konto + " hinzugefügt");
+        System.out.println("KontenDB - Konto " + konto + " hinzugefügt");
     }
 
     /**
@@ -148,6 +149,7 @@ public class KontenDB extends LiteSQL{
                 + "Type = 'PARAM_Type', "
                 + "SpecialDouble = PARAM_SpecialDouble "
                 + "WHERE Nummer = PARAM_Nummer";
+        assert type != null;
         cmd = cmd
                 .replace("PARAM_Nummer", String.valueOf(nummer))
                 .replace("PARAM_Stand", String.valueOf(neuesKonto.KontostandGeben()))
@@ -158,7 +160,7 @@ public class KontenDB extends LiteSQL{
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Konto mit der Nummer " + nummer + " wurde geändert");
+        System.out.println("KontenDB - Konto mit der Nummer " + nummer + " wurde geändert");
     }
 
     /**
@@ -172,7 +174,7 @@ public class KontenDB extends LiteSQL{
         connect();
         onUpdate(cmd);
         disconnect();
-        System.out.println("Konto mit der Kontonummer '" + nummer + "' gelöscht");
+        System.out.println("KontenDB - Konto mit der Kontonummer '" + nummer + "' gelöscht");
     }
 
 

@@ -1,4 +1,4 @@
-package Schnitstelle;
+package Schnittstelle;
 
 import Bank.Konten.Konto;
 import Bank.Nutzer.Angestellter;
@@ -14,7 +14,7 @@ import java.util.*;
 
 import static GUI.StackedWidget.PAGES;
 import static GUI.StackedPane.COMPONENTS;
-import static Schnitstelle.Main.*;
+import static Schnittstelle.Main.*;
 
 public class MainPage {
     public static final BetterTextField TMNA = (BetterTextField) mw.getWindow().getFrame(PAGES.MAIN_PAGE).getElement(COMPONENTS.NAME_LABEL_PARAM);

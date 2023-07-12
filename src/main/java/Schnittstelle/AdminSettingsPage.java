@@ -1,19 +1,15 @@
-package Schnitstelle;
+package Schnittstelle;
 
-import Bank.Konten.Konto;
 import Bank.Nutzer.Angestellter;
-import Bank.Nutzer.Kunde;
 import GUI.*;
 import GUI.BetterComponents.BetterButton;
-import GUI.BetterComponents.BetterInputField;
 import GUI.UIs.UIButtonMethod;
 import GUI.StackedWidget.PAGES;
 import GUI.StackedPane.COMPONENTS;
 
 import java.util.List;
 
-import static Schnitstelle.Main.*;
-import static Schnitstelle.Main.kunde;
+import static Schnittstelle.Main.*;
 
 public class AdminSettingsPage {
     public static final BetterButton BSaCA = (BetterButton) mw.getWindow().getElement(PAGES.ADMIN_SETTINGS_PAGE, COMPONENTS.ADMIN_CREATE_BUTTON);

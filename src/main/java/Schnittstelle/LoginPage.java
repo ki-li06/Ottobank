@@ -1,4 +1,4 @@
-package Schnitstelle;
+package Schnittstelle;
 
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
@@ -7,7 +7,7 @@ import GUI.BetterComponents.BetterButton;
 import GUI.BetterComponents.BetterInputField;
 import GUI.UIs.UIButtonMethod;
 
-import static Schnitstelle.Main.*;
+import static Schnittstelle.Main.*;
 import static GUI.StackedWidget.PAGES;
 import static GUI.StackedPane.COMPONENTS;
 

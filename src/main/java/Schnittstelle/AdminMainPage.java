@@ -1,4 +1,4 @@
-package Schnitstelle;
+package Schnittstelle;
 
 import Bank.Nutzer.Angestellter;
 import Bank.Nutzer.Kunde;
@@ -6,7 +6,6 @@ import Bank.Nutzer.Nutzer;
 import GUI.*;
 import GUI.BetterComponents.BetterButton;
 import GUI.BetterComponents.BetterComboBox;
-import GUI.BetterComponents.BetterInputField;
 import GUI.BetterComponents.BetterTextField;
 import GUI.UIs.UIButtonMethod;
 
@@ -15,7 +14,7 @@ import java.util.List;
 
 import static GUI.StackedWidget.PAGES;
 import static GUI.StackedPane.COMPONENTS;
-import static Schnitstelle.Main.*;
+import static Schnittstelle.Main.*;
 
 public class AdminMainPage {
     public static final BetterTextField TMaN = (BetterTextField) mw.getWindow().getFrame(PAGES.ADMIN_MAIN_PAGE).getElement(COMPONENTS.NAME_LABEL_PARAM);

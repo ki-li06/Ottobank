@@ -1,4 +1,4 @@
-package Schnitstelle;
+package Schnittstelle;
 
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
@@ -6,11 +6,7 @@ import Datenbank.LiteSQL.KontenDB;
 import Datenbank.LiteSQL.NutzerDB;
 import GUI.*;
 
-import static Bank.Nutzer.Nutzer.*;
-import static Bank.Konten.Konto.*;
-import static util.Delay.delay;
 import static GUI.StackedWidget.PAGES;
-import static GUI.StackedPane.COMPONENTS;
 
 public class Main {
     public static MainWindow mw;

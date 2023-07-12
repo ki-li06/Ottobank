@@ -1,4 +1,4 @@
-package Schnitstelle;
+package Schnittstelle;
 
 import Bank.Konten.Girokonto;
 import Bank.Konten.Konto;
@@ -9,14 +9,11 @@ import GUI.BetterComponents.BetterButton;
 import GUI.PopUp;
 import GUI.UIs.UIButtonMethod;
 
-import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static GUI.StackedWidget.PAGES;
 import static GUI.StackedPane.COMPONENTS;
-import static Schnitstelle.Main.*;
+import static Schnittstelle.Main.*;
 
 public class SettingsPage {
     public static final BetterButton BSKC = (BetterButton) mw.getWindow().getElement(PAGES.SETTINGS_PAGE, COMPONENTS.KONTO_CREATE_BUTTON);

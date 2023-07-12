@@ -3,6 +3,7 @@ package Datenbank.LiteSQL;
 import Bank.Nutzer.Angestellter;
 import Bank.Nutzer.Kunde;
 import Bank.Nutzer.Nutzer;
+import GUI.PopUp;
 
 import javax.print.DocFlavor;
 import java.sql.ResultSet;
@@ -39,7 +40,10 @@ public class NutzerDB extends LiteSQL{
         String mail = nutzer.getEMail();
         String pin = nutzer.getPin();
         String type = getConstOfType(nutzer.getType());
-
+        if (pin.contains("'")||name.contains("'")||mail.contains("'")) {
+            PopUp.showError("You are not allowed to use '");
+            return;
+        }
         if(MailBelegt(mail)){
             System.out.println("FEHLER - MailAdresse '" + mail + "' schon belegt");
             return;

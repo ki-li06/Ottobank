@@ -40,14 +40,6 @@ public class NutzerDB extends LiteSQL{
         String mail = nutzer.getEMail();
         String pin = nutzer.getPin();
         String type = getConstOfType(nutzer.getType());
-        if (pin.contains("'")||name.contains("'")||mail.contains("'")) {
-            PopUp.showError("You are not allowed to use '");
-            return;
-        }
-        if(MailBelegt(mail)){
-            System.out.println("FEHLER - MailAdresse '" + mail + "' schon belegt");
-            return;
-        }
         connect();
         String cmd = "INSERT INTO TABLE (Name, Mail, PIN, Type) VALUES ('PARAM_NAME', 'PARAM_MAIL', 'PARAM_PIN', 'PARAM_TYPE');";
         assert type != null;

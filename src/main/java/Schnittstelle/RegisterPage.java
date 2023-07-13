@@ -25,25 +25,26 @@ public class RegisterPage {
             @Override
             public void performMethod () {
                 //Nachname darf leer sein, Vorname wird sozusagen mehr als Nutzername verstanden
-                if (!IRV.getText().equals("") && !IRE.getText().equals("") && !IRP.getText().equals("")) {
-                    if (!IRP.getText().equals(IRC.getText())) {
-                        PopUp.showError("PIN stimmt nicht überein!");
-                        return;
-                    }
-                    String name = IRV.getText() + " " + IRN.getText();
-                    String mail = IRE.getText();
-                    if(!nutzerDB.MailBelegt(mail)) {
-                        Kunde k = new Kunde(name, mail, IRP.getText());
-                        nutzerDB.NutzerHinzufügen(k);
-                        PopUp.showInfo("Neuer Account wurde erstellt.");
-                        mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
-                    }
-                    else{
-                        PopUp.showError("Diese Mail ist bereits belegt.");
-                    }
-                } else {
+                if (IRP.getToolTipText().contains("'") || IRE.getText().contains("'")  || IRV.getText().contains("'")) {
+                    PopUp.showError("Das Zeichen \"'\" darf nicht verwendet werden.");
+                    return;
+                }
+                if(IRV.getText().equals("") || IRE.getText().equals("") || IRP.getText().equals("")){
                     PopUp.showError("Alle Eingaben müssen ausgefüllt sein!");
                 }
+                if (!IRP.getText().equals(IRC.getText())) {
+                    PopUp.showError("PIN stimmt nicht überein!");
+                    return;
+                }
+                String name = IRV.getText() + " " + IRN.getText();
+                String mail = IRE.getText();
+                if(nutzerDB.MailBelegt(mail)){
+                    PopUp.showError("Diese Mail ist bereits belegt.");
+                }
+                Kunde k = new Kunde(name, mail, IRP.getText());
+                nutzerDB.NutzerHinzufügen(k);
+                PopUp.showInfo("Neuer Account wurde erstellt.");
+                mw.getWindow().showPlane(PAGES.LOGIN_PAGE);
             }
         });
     }
